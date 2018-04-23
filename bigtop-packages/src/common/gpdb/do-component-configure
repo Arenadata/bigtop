@@ -54,4 +54,5 @@ export BUILDNUMBER="${3}-arenadata-${4}"
             --with-openssl \
             --with-libxml \
             --with-libxslt \
+            --with-zstd \
             --prefix=$1 --with-includes=$2/$1/include --with-libraries=$2/$1/lib --with-python --with-perl
