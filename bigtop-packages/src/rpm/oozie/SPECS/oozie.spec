@@ -154,9 +154,9 @@ env DO_MAVEN_DEPLOY="" FULL_VERSION=%{oozie_base_version} bash -x %{SOURCE1}
 %__rm -rf $RPM_BUILD_ROOT
     sh %{SOURCE2} --extra-dir=$RPM_SOURCE_DIR --build-dir=$PWD --server-dir=$RPM_BUILD_ROOT --client-dir=$RPM_BUILD_ROOT --docs-dir=$RPM_BUILD_ROOT%{doc_oozie} --initd-dir=$RPM_BUILD_ROOT%{initd_dir} --conf-dir=$RPM_BUILD_ROOT%{conf_oozie_dist}
 
-%__ln_s -f %{data_oozie}/ext-2.2 $RPM_BUILD_ROOT/%{lib_oozie}/webapps/oozie/ext-2.2
-%__rm  -rf              $RPM_BUILD_ROOT/%{lib_oozie}/webapps/oozie/docs
-%__ln_s -f %{doc_oozie} $RPM_BUILD_ROOT/%{lib_oozie}/webapps/oozie/docs
+#%__ln_s -f %{data_oozie}/ext-2.2 $RPM_BUILD_ROOT/%{lib_oozie}/webapps/oozie/ext-2.2
+#%__rm  -rf              $RPM_BUILD_ROOT/%{lib_oozie}/webapps/oozie/docs
+#%__ln_s -f %{doc_oozie} $RPM_BUILD_ROOT/%{lib_oozie}/webapps/oozie/docs
 
 # Oozie server
 %__rm  -rf $RPM_BUILD_ROOT/%{lib_oozie}/lib/hadoop-*.jar
@@ -209,20 +209,21 @@ fi
 %files
 %defattr(-,root,root)
 %config(noreplace) %{conf_oozie_dist}
-%config(noreplace) %{tomcat_conf_oozie}.*
+#%config(noreplace) %{tomcat_conf_oozie}.*
 %{usr_bin}/oozie-setup
 %{lib_oozie}/bin/oozie-sys.sh
 %{lib_oozie}/bin/oozie-env.sh
 %{lib_oozie}/bin/oozied.sh
 %{lib_oozie}/bin/ooziedb.sh
 %{lib_oozie}/bin/oozie-setup.sh
-%{lib_oozie}/webapps
-%{lib_oozie}/oozie.war
+#%{lib_oozie}/webapps
+%{lib_oozie}/embedded-oozie-server
+#%{lib_oozie}/oozie.war
 %{lib_oozie}/libtools
 %{lib_oozie}/lib
 %{lib_oozie}/oozie-sharelib.tar.gz
 %{lib_oozie}/libext
-%{lib_oozie}/tomcat-deployment.sh
+#%{lib_oozie}/tomcat-deployment.sh
 %{initd_dir}/oozie
 %defattr(-, oozie, oozie)
 %dir %{_sysconfdir}/%{name}
