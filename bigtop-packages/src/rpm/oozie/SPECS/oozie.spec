@@ -144,7 +144,7 @@ AutoReq: no
 #BIGTOP_PATCH_COMMANDS
 
 %build
-patch --ignore-whitespace < %{SOURCE12}
+patch --ignore-whitespace < %{SOURCE11}
 mkdir -p distro/downloads
 env DO_MAVEN_DEPLOY="" FULL_VERSION=%{oozie_base_version} bash -x %{SOURCE1}
 
