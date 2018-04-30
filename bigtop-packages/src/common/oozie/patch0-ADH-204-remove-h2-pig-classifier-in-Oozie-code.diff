@@ -1,27 +1,16 @@
-From a9591e083a6c5a63a38e46792fd65687764bdf64 Mon Sep 17 00:00:00 2001
-From: Anton Chevychalov <cab@arenadata.io>
-Date: Fri, 29 Sep 2017 19:06:01 +0300
-Subject: [PATCH] ADH-204 remove h2 pig classifier in Oozie code
-
-There is a regression in Pig relase 0.17
-After PIG-4923 they drop h2 classifer.
-There is only one jar now and it suports Hadoop 2
----
- pom.xml | 1 -
- 1 file changed, 1 deletion(-)
+ pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/pom.xml b/pom.xml
-index 9daf6b1..5d92d77 100644
+index 6e00a8cf..58a97f36 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -1902,7 +1902,6 @@
-             <properties>
-                 <hadoop.version>2.4.0</hadoop.version>
-                 <hadoop.majorversion>2</hadoop.majorversion>
--                <pig.classifier>h2</pig.classifier>
-                 <sqoop.classifier>hadoop200</sqoop.classifier>
-                 <jackson.version>1.9.13</jackson.version>
-             </properties>
--- 
-2.7.4
-
+@@ -93,7 +93,7 @@
+          <hive.version>1.2.0</hive.version>
+          <hive.jline.version>2.12</hive.jline.version>
+          <pig.version>0.16.0</pig.version>
+-         <pig.classifier>h2</pig.classifier>
++         <pig.classifier></pig.classifier>
+          <hive.classifier>core</hive.classifier>
+          <sqoop.version>1.4.3</sqoop.version>
+          <spark.version>1.6.1</spark.version>
