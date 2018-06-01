@@ -1,0 +1,49 @@
+ core/pom.xml |  5 +++++
+ pom.xml      | 11 +++++++++--
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/core/pom.xml b/core/pom.xml
+index 2f635845..947249fb 100644
+--- a/core/pom.xml
++++ b/core/pom.xml
+@@ -35,6 +35,11 @@
+     </properties>
+ 
+     <dependencies>
++        <dependency>
++             <groupId>org.apache.directory.api</groupId>
++             <artifactId>api-util</artifactId>
++        </dependency>
++
+         <dependency>
+             <groupId>org.apache.curator</groupId>
+              <artifactId>curator-client</artifactId>
+diff --git a/pom.xml b/pom.xml
+index 6e00a8cf..f6fd7a4b 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -93,7 +93,7 @@
+          <hive.version>1.2.0</hive.version>
+          <hive.jline.version>2.12</hive.jline.version>
+          <pig.version>0.16.0</pig.version>
+-         <pig.classifier>h2</pig.classifier>
++         <pig.classifier></pig.classifier>
+          <hive.classifier>core</hive.classifier>
+          <sqoop.version>1.4.3</sqoop.version>
+          <spark.version>1.6.1</spark.version>
+@@ -1451,7 +1451,14 @@
+                 <version>${hive.version}</version>
+                 <classifier>${hive.classifier}</classifier>
+             </dependency>
+-
++			
++			 <dependency>
++				<groupId>org.apache.directory.api</groupId>
++				<artifactId>api-util</artifactId>
++				<version>1.0.0</version>
++			</dependency>
++			
++			
+             <!-- examples -->
+             <dependency>
+                 <groupId>org.apache.httpcomponents</groupId>
