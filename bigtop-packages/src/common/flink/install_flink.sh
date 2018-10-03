@@ -120,7 +120,6 @@ cp -a ${BUILD_DIR}/conf/* $PREFIX/$CONF_DIR
 ln -s /etc/flink/conf $PREFIX/$LIB_DIR/conf
 
 cp -ra ${BUILD_DIR}/examples/* $PREFIX/${LIB_DIR}/examples/
-cp -ra ${BUILD_DIR}/resources/* $PREFIX/${LIB_DIR}/resources/
 
 cp ${BUILD_DIR}/{LICENSE,NOTICE,README.txt} ${PREFIX}/${LIB_DIR}/
 
