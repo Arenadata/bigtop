@@ -88,7 +88,7 @@ mkdir -p "$PREFIX/usr/lib"
 cd $PREFIX/usr/lib
 tar xf "${BUILD_DIR}/apache-hive-${VERSION}-src/packaging/target/apache-hive-${VERSION}-bin.tar.gz"
 
-mv apache-hive-2.3.0-bin hive
+mv apache-hive-${VERSION}-bin hive
 
 CONF_DIR=/etc/hive
 CONF_DIST_DIR=/etc/hive/conf.dist
