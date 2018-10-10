@@ -495,7 +495,7 @@ bigtop {
     'atlas' {
       name    = 'atlas'
       relNotes = 'Apache Atlas'
-      version { base = '0.8.1'; pkg = base; release = 1 }
+      version { base = '0.8.2'; pkg = base; release = 1 }
       tarball { source      = "apache-$name-${version.base}-sources.tar.gz"
                 destination = "$name-${version.base}.tar.gz" }
       url     { download_path = "/$name/${version.base}/"
