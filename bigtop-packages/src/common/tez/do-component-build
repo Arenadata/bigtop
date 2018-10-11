@@ -34,6 +34,4 @@ BUILD_TEZ_OPTS="clean package \
 -Phadoop26 \
 -DskipTests"
 
-#mvn versions:set -DnewVersion=${TEZ_VERSION}
-
 mvn ${BUILD_TEZ_OPTS} "$@"
