@@ -1,0 +1,15 @@
+*** zeppelin-0.8.0/zeppelin-zengine/pom.xml.old	Fri Oct 12 11:38:31 2018
+--- zeppelin-0.8.0/zeppelin-zengine/pom.xml	Fri Oct 12 11:52:07 2018
+***************
+*** 761,766 ****
+--- 761,770 ----
+                <artifactId>aws-java-sdk</artifactId>
+              </exclusion>
+              <exclusion>
++               <groupId>com.amazonaws</groupId>
++               <artifactId>aws-java-sdk-s3</artifactId>
++             </exclusion>
++             <exclusion>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+              </exclusion>
