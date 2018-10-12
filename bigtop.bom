@@ -516,7 +516,7 @@ bigtop {
 	'knox' {
       name    = 'knox'
       relNotes = 'Apache Knox'
-      version { base = '1.0.0'; pkg = base; release = 1 }
+      version { base = '0.14.0'; pkg = base; release = 1 }
       tarball { source      = "$name-${version.base}-src.zip"
                 destination = "$name-${version.base}.tar.gz" }
       url     { download_path = "/$name/${version.base}/"
