@@ -56,6 +56,7 @@ Source6: init.d.tmpl
 Source7: spark-history-server.svc
 Source8: spark-thriftserver.svc
 Source9: bigtop.bom
+#BIGTOP_PATCH_FILES
 Requires: bigtop-utils >= 0.7, hadoop-client, hadoop-yarn
 Requires(preun): /sbin/service
 
@@ -143,8 +144,17 @@ Group: Development/Libraries
 %description -n spark-yarn-shuffle
 Spark YARN Shuffle Service
 
+%package -n spark-sparkr
+Summary: R package for Apache Spark
+Group: Development/Libraries
+
+%description -n spark-sparkr
+SparkR is an R package that provides a light-weight frontend to use Apache Spark from R.
+
 %prep
 %setup -n %{spark_name}-%{spark_base_version}
+
+#BIGTOP_PATCH_COMMANDS
 
 %build
 bash $RPM_SOURCE_DIR/do-component-build
@@ -165,7 +175,6 @@ bash $RPM_SOURCE_DIR/install_spark.sh \
 %__ln_s  %{lib_hadoop_client}/hadoop-client.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-common.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-hdfs.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
-%__ln_s  %{lib_hadoop_client}/hadoop-hdfs-client.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-mapreduce-client-app.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-mapreduce-client-common.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
 %__ln_s  %{lib_hadoop_client}/hadoop-mapreduce-client-core.jar $RPM_BUILD_ROOT/%{lib_spark}/jars/
@@ -230,6 +239,9 @@ done
 %attr(0755,spark,spark) %{var_log_spark}
 %{bin}/spark-*
 %{bin}/find-spark-home
+%exclude %{lib_spark}/R
+%exclude %{lib_spark}/bin/sparkR
+%exclude %{bin}/sparkR
 
 %files -n spark-python
 %defattr(-,root,root,755)
@@ -250,6 +262,12 @@ done
 %defattr(-,root,root,755)
 %{lib_spark}/yarn/spark-*-yarn-shuffle.jar
 %{lib_spark}/yarn/lib/spark-yarn-shuffle.jar
+
+%files -n spark-sparkr
+%defattr(-,root,root,755)
+%{lib_spark}/R
+%{lib_spark}/bin/sparkR
+%{bin}/sparkR
 
 %define service_macro() \
 %files -n %1 \
