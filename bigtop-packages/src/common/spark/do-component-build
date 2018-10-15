@@ -23,7 +23,7 @@ BUILD_OPTS="-Divy.home=${HOME}/.ivy2 -Dsbt.ivy.home=${HOME}/.ivy2 -Duser.home=${
             -Drepo.maven.org=$IVY_MIRROR_PROP \
             -Dreactor.repo=file://${HOME}/.m2/repository \
             -Dhadoop.version=$HADOOP_VERSION \
-            -Dyarn.version=$HADOOP_VERSION
+            -Dyarn.version=$HADOOP_VERSION \
             -Dprotobuf.version=2.5.0 \
             -DrecompileMode=all \
             -Pyarn -Phadoop-2.7 \
