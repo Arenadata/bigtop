@@ -70,7 +70,6 @@ Source8: hive.xml
 Source9: tomcat-deployment.sh
 Source10: oozie-site.xml
 Source11: bigtop.bom
-Source12: OOZIE-2396.patch
 #BIGTOP_PATCH_FILES
 Requires(pre): /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): /sbin/chkconfig
@@ -146,7 +145,6 @@ AutoReq: no
 #BIGTOP_PATCH_COMMANDS
 
 %build
-patch --ignore-whitespace < %{SOURCE12}
 mkdir -p distro/downloads
 env DO_MAVEN_DEPLOY="" FULL_VERSION=%{oozie_base_version} bash -x %{SOURCE1}
 
