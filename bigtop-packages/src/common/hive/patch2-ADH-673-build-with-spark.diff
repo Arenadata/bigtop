@@ -1,0 +1,19 @@
+*** apache-hive-2.3.3-src/ql/src/java/org/apache/hadoop/hive/ql/exec/spark/LocalHiveSparkClient.java.orig	Thu Oct 18 11:44:18 2018
+--- apache-hive-2.3.3-src/ql/src/java/org/apache/hadoop/hive/ql/exec/spark/LocalHiveSparkClient.java	Thu Oct 18 13:09:14 2018
+***************
+*** 84,90 ****
+    private LocalHiveSparkClient(SparkConf sparkConf) {
+      sc = new JavaSparkContext(sparkConf);
+      jobMetricsListener = new JobMetricsListener();
+!     sc.sc().listenerBus().addListener(jobMetricsListener);
+    }
+  
+    @Override
+--- 84,90 ----
+    private LocalHiveSparkClient(SparkConf sparkConf) {
+      sc = new JavaSparkContext(sparkConf);
+      jobMetricsListener = new JobMetricsListener();
+!     sc.sc().addSparkListener(jobMetricsListener);
+    }
+  
+    @Override
