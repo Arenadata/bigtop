@@ -422,6 +422,15 @@ bigtop {
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
+    'confluent-common' {
+      name    = "confluent-common"
+      relNotes = "Confluent common utilities library containing metrics, config and utils"
+      version { base = '5.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/common/archive/"
+                archive = site }
+    }
     'ycsb' {
       name    = 'ycsb'
       relNotes = 'Yahoo! Cloud Serving Benchmark'
