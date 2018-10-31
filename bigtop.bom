@@ -106,25 +106,12 @@ bigtop {
            dependsOn := [list of dependents]
       So, below phoenix and giraph ought to be build after the hbase has been built
 
-	confluent-common:['confluent-rest-utils'],
-	zookeeper:['hadoop', 'hbase'],
-    hadoop:['ignite-hadoop', 'hbase', 'crunch', 'pig', 'hive', 'tez', 'sqoop', 'sqoop2',
-      'oozie', 'extjs', 'mahout', 'flume', 'giraph', 'solr', 'spark','spark1',
-      'phoenix', 'alluxio', 'kafka', 'ycsb', 'kite', 'hama', 'zeppelin',
-      'tajo', 'apex', 'atlas'
-    ],
-    hbase:['phoenix','giraph','ycsb','hive'],
-    pig:['datafu', 'oozie'],
-    hive:['oozie', 'pig','zeppelin'],
-    'ignite-hadoop':['zeppelin'],
-    spark:['zeppelin']
-
 
       To build a component with its dependencies, run build with -Dbuildwithdeps=true
   */
   dependencies = [
 	'confluent-common':['confluent-rest-utils'],
-    spark:['zeppelin']
+	'confluent-rest-utils':['confluent-schema-registry'],
   ]
 
   components {
@@ -456,6 +443,17 @@ bigtop {
       url     { site = "https://github.com/confluentinc/rest-utils/archive/"
                 archive = site }
     }
+
+    'confluent-schema-registry' {
+      name    = "confluent-schema-registry"
+      relNotes = "Сonfluent rest utils is  Utilities and a small framework for building REST services with Jersey, Jackson, and Jetty."
+      version { base = '5.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+      source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/schema-registry/archive/"
+                archive = site }
+    }
+        
     'ycsb' {
       name    = 'ycsb'
       relNotes = 'Yahoo! Cloud Serving Benchmark'

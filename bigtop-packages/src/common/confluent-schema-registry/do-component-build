@@ -17,8 +17,4 @@
 . `dirname $0`/bigtop.bom
 
 export MAVEN_OPTS="-Xmx512m"
-#yum localinstall /code/output/confluent-common/noarch/confluent-common-5.0.0-607.el7.noarch.rpm
-
-sleep 10
-
 mvn clean install -DskipTests

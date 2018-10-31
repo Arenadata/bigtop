@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,11 +15,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-. `dirname $0`/bigtop.bom
+set -e
+set -x
 
-export MAVEN_OPTS="-Xmx512m"
-#yum localinstall /code/output/confluent-common/noarch/confluent-common-5.0.0-607.el7.noarch.rpm
+prefix=$1
+version=$2
 
-sleep 10
 
-mvn clean install -DskipTests
+install -d -m 0755 "${prefix}/usr/share/"
+
+cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/share "${prefix}/usr/"
+cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/bin "${prefix}/usr/"
+cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/etc "${prefix}/"
