@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,7 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-. `dirname $0`/bigtop.bom
+set -e
+set -x
 
-export MAVEN_OPTS="-Xmx512m"
-mvn clean install -DskipTests -Dkafka.version=$KAFKA_VERSION
+prefix=$1
+version=$2
+
+
+install -d -m 0755 "${prefix}/usr/share/"
+
+cp -R package/target/rest-utils-package-${version}-package/share "${prefix}/usr/"
+
