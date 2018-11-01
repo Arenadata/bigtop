@@ -106,9 +106,12 @@ bigtop {
            dependsOn := [list of dependents]
       So, below phoenix and giraph ought to be build after the hbase has been built
 
+
       To build a component with its dependencies, run build with -Dbuildwithdeps=true
   */
   dependencies = [
+	'confluent-common':['confluent-rest-utils'],
+	'confluent-rest-utils':['confluent-schema-registry','confluent-kafka-rest']
   ]
 
   components {
@@ -422,6 +425,45 @@ bigtop {
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
+    'confluent-common' {
+      name    = "confluent-common"
+      relNotes = "Confluent common utilities library containing metrics, config and utils"
+      version { base = '5.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/common/archive/"
+                archive = site }
+    }
+    'confluent-rest-utils' {
+      name    = "confluent-rest-utils"
+      relNotes = "Сonfluent rest utils is  Utilities and a small framework for building REST services with Jersey, Jackson, and Jetty"
+      version { base = '5.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/rest-utils/archive/"
+                archive = site }
+    }
+
+    'confluent-schema-registry' {
+      name    = "confluent-schema-registry"
+      relNotes = "Сonfluent RESTful Avro schema registry for Kafka"
+      version { base = '5.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+      source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/schema-registry/archive/"
+                archive = site }
+    }
+
+    'confluent-kafka-rest' {
+      name    = "confluent-kafka-rest"
+      relNotes = "Сonfluent A REST proxy for Kafka"
+      version { base = '5.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+      source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/kafka-rest/archive/"
+                archive = site }
+     }
+                
     'ycsb' {
       name    = 'ycsb'
       relNotes = 'Yahoo! Cloud Serving Benchmark'
