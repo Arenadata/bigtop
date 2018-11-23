@@ -1,0 +1,110 @@
+*** ./pom.xml.old	Tue Oct  2 20:06:47 2018
+--- ./pom.xml	Thu Nov 22 16:22:30 2018
+***************
+*** 888,909 ****
+              </configuration>
+            </execution>
+            <execution>
+-             <id>banned-jsr305</id>
+-             <goals>
+-               <goal>enforce</goal>
+-             </goals>
+-             <configuration>
+-               <rules>
+-                 <bannedDependencies>
+-                   <excludes>
+-                     <exclude>com.google.code.findbugs:jsr305</exclude>
+-                   </excludes>
+-                   <message>We don't allow the JSR305 jar from the Findbugs project, see HBASE-16321.</message>
+-                 </bannedDependencies>
+-               </rules>
+-             </configuration>
+-           </execution>
+-           <execution>
+              <id>check-aggregate-license</id>
+              <!-- must check after LICENSE is built at 'generate-resources' -->
+              <phase>process-resources</phase>
+--- 888,893 ----
+***************
+*** 1596,1607 ****
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>${guava.version}</version>
+-         <exclusions>
+-           <exclusion>
+-             <groupId>com.google.code.findbugs</groupId>
+-             <artifactId>jsr305</artifactId>
+-           </exclusion>
+-         </exclusions>
+        </dependency>
+        <dependency>
+          <groupId>commons-collections</groupId>
+--- 1580,1585 ----
+***************
+*** 2285,2295 ****
+                  <groupId>io.netty</groupId>
+                  <artifactId>netty</artifactId>
+                </exclusion>
+!               <exclusion>
+!                 <groupId>com.google.code.findbugs</groupId>
+!                 <artifactId>jsr305</artifactId>
+!               </exclusion>
+!             </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>org.apache.hadoop</groupId>
+--- 2263,2269 ----
+                  <groupId>io.netty</groupId>
+                  <artifactId>netty</artifactId>
+                </exclusion>
+!              </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>org.apache.hadoop</groupId>
+***************
+*** 2319,2329 ****
+                  <groupId>io.netty</groupId>
+                  <artifactId>netty</artifactId>
+                </exclusion>
+!               <exclusion>
+!                 <groupId>com.google.code.findbugs</groupId>
+!                 <artifactId>jsr305</artifactId>
+!               </exclusion>
+!             </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>org.apache.hadoop</groupId>
+--- 2293,2299 ----
+                  <groupId>io.netty</groupId>
+                  <artifactId>netty</artifactId>
+                </exclusion>
+!              </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>org.apache.hadoop</groupId>
+***************
+*** 2518,2527 ****
+                 <artifactId>netty</artifactId>
+               </exclusion>
+               <exclusion>
+-                <groupId>com.google.code.findbugs</groupId>
+-                <artifactId>jsr305</artifactId>
+-              </exclusion>
+-              <exclusion>
+                 <groupId>junit</groupId>
+                 <artifactId>junit</artifactId>
+               </exclusion>
+--- 2488,2493 ----
+***************
+*** 2576,2585 ****
+                 <groupId>io.netty</groupId>
+                 <artifactId>netty</artifactId>
+               </exclusion>
+-              <exclusion>
+-                <groupId>com.google.code.findbugs</groupId>
+-                <artifactId>jsr305</artifactId>
+-              </exclusion>
+             </exclusions>
+           </dependency>
+           <dependency>
+--- 2542,2547 ----
