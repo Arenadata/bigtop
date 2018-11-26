@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -15,14 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-set -x
+. `dirname $0`/bigtop.bom
 
-prefix=$1
-version=$2
+export MAVEN_OPTS="-Xmx512m"
 
+sleep 10
 
-install -d -m 0755 "${prefix}/usr/share/"
-
-cp -R package/target/common-package-${version}-package/share "${prefix}/usr/"
-
+mvn clean install -DskipTests
