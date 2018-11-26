@@ -110,8 +110,8 @@ bigtop {
       To build a component with its dependencies, run build with -Dbuildwithdeps=true
   */
   dependencies = [
-	'confluent-common':['confluent-rest-utils'],
-	'confluent-rest-utils':['confluent-schema-registry','confluent-kafka-rest']
+	'kafka-common-utils':['kafka-rest-utils'],
+	'kafka-rest-utils':['confluent-schema-registry','confluent-kafka-rest']
   ]
 
   components {
@@ -425,8 +425,8 @@ bigtop {
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
-    'confluent-common' {
-      name    = "confluent-common"
+    'kafka-common-utils' {
+      name    = "kafka-common-utils"
       relNotes = "Confluent common utilities library containing metrics, config and utils"
       version { base = '5.0.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
@@ -434,9 +434,9 @@ bigtop {
       url     { site = "https://github.com/confluentinc/common/archive/"
                 archive = site }
     }
-    'confluent-rest-utils' {
-      name    = "confluent-rest-utils"
-      relNotes = "Сonfluent rest utils is  Utilities and a small framework for building REST services with Jersey, Jackson, and Jetty"
+    'kafka-rest-utils' {
+      name    = "kafka-rest-utils"
+      relNotes = "Kafka rest utils is  Utilities and a small framework for building REST services with Jersey, Jackson, and Jetty"
       version { base = '5.0.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "v${version.base}.tar.gz" }
