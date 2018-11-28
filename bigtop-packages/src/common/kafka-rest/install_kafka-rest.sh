@@ -22,8 +22,16 @@ prefix=$1
 version=$2
 
 
+install -d -m 0755 "${prefix}/usr/lib/kafka-rest/"
+install -d -m 0755 "${prefix}/usr/lib/kafka-rest/libs/"
 install -d -m 0755 "${prefix}/usr/share/"
+install -d -m 0755 "${prefix}/etc/systemd/system/"
 
-cp -R kafka-rest/target/kafka-rest-${version}-package/share "${prefix}/usr/"
-cp -R kafka-rest/target/kafka-rest-${version}-package/bin "${prefix}/usr/"
+
+
+cp -R kafka-rest/target/kafka-rest-${version}-package/share/java/kafka-rest/*  "${prefix}/usr/lib/kafka-rest/libs/"
+cp -R kafka-rest/target/kafka-rest-${version}-package/share/doc "${prefix}/usr/share/"
+cp -R kafka-rest/target/kafka-rest-${version}-package/bin "${prefix}/usr/lib/kafka-rest/"
+rm "${prefix}/usr/lib/kafka-rest/bin/kafka-rest-stop-service"
 cp -R kafka-rest/target/kafka-rest-${version}-package/etc "${prefix}/"
+ln -nsf "/etc/kafka-rest" "${prefix}/usr/lib/kafka-rest/config"

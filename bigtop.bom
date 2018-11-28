@@ -111,7 +111,7 @@ bigtop {
   */
   dependencies = [
 	'kafka-common-utils':['kafka-rest-utils'],
-	'kafka-rest-utils':['confluent-schema-registry','confluent-kafka-rest']
+	'kafka-rest-utils':['confluent-schema-registry','kafka-rest']
   ]
 
   components {
@@ -427,7 +427,7 @@ bigtop {
     }
     'kafka-common-utils' {
       name    = "kafka-common-utils"
-      relNotes = "Confluent common utilities library containing metrics, config and utils"
+      relNotes = "kafka common utilities library containing metrics, config and utils"
       version { base = '5.0.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "v${version.base}.tar.gz" }
@@ -454,9 +454,9 @@ bigtop {
                 archive = site }
     }
 
-    'confluent-kafka-rest' {
-      name    = "confluent-kafka-rest"
-      relNotes = "Сonfluent A REST proxy for Kafka"
+    'kafka-rest' {
+      name    = "kafka-rest"
+      relNotes = " REST proxy for Kafka"
       version { base = '5.0.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
       source      = "v${version.base}.tar.gz" }
