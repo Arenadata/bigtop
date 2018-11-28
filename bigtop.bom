@@ -111,7 +111,7 @@ bigtop {
   */
   dependencies = [
 	'kafka-common-utils':['kafka-rest-utils'],
-	'kafka-rest-utils':['confluent-schema-registry','kafka-rest']
+	'kafka-rest-utils':['schema-registry','kafka-rest']
   ]
 
   components {
@@ -444,9 +444,9 @@ bigtop {
                 archive = site }
     }
 
-    'confluent-schema-registry' {
-      name    = "confluent-schema-registry"
-      relNotes = "Сonfluent RESTful Avro schema registry for Kafka"
+    'schema-registry' {
+      name    = "schema-registry"
+      relNotes = "RESTful Avro schema registry for Kafka"
       version { base = '5.0.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
       source      = "v${version.base}.tar.gz" }
