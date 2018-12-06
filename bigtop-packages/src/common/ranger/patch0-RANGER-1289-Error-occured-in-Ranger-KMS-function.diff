@@ -1,0 +1,29 @@
+From a595509fcd560abe19998a8ac4ee4ad3cddbda37 Mon Sep 17 00:00:00 2001
+From: zhangqiang2 <zhangqiang2@zte.com.cn>
+Date: Mon, 13 Feb 2017 10:15:30 +0800
+Subject: [PATCH 1/1] RANGER-1289:Error occured in Ranger KMS function
+
+---
+ pom.xml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index 19caacd..3c9836a 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -165,9 +165,9 @@
+         <hbase.version>1.1.3</hbase.version>
+         <hive.version>2.1.0</hive.version>
+         <htrace-core.version>3.1.0-incubating</htrace-core.version>
+-		<httpcomponents.httpclient.version>4.5.1</httpcomponents.httpclient.version>
+-		<httpcomponents.httpcore.version>4.4.4</httpcomponents.httpcore.version>
+-		<httpcomponents.httpmime.version>4.5.2</httpcomponents.httpmime.version>
++		<httpcomponents.httpclient.version>4.5.3</httpcomponents.httpclient.version>
++		<httpcomponents.httpcore.version>4.4.6</httpcomponents.httpcore.version>
++		<httpcomponents.httpmime.version>4.5.3</httpcomponents.httpmime.version>
+         <jackson.version>1.9.13</jackson.version>
+         <javassist.version>3.12.1.GA</javassist.version>
+         <javax.persistence.version>2.1.0</javax.persistence.version>
+-- 
+2.10.1.windows.1
+
