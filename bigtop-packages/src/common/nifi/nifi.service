@@ -1,0 +1,17 @@
+[Unit]
+Description=Apache NiFi
+After=syslog.target network.target
+
+[Service]
+User=nifi
+Type=forking
+PIDFile=/var/run/nifi/nifi.pid
+# Run ExecStartPre with root-permissions
+PermissionsStartOnly=true
+ExecStartPre=-/usr/bin/mkdir -p /var/run/nifi
+ExecStartPre=/usr/bin/chown -R nifi /var/run/nifi
+ExecStart=/usr/lib/nifi-server/bin/nifi.sh start
+ExecStop=/usr/lib/nifi-server/bin/nifi.sh stop
+
+[Install]
+WantedBy=multi-user.target

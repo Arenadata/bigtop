@@ -11,6 +11,7 @@ URL:		  http://nifi.incubator.apache.org/
 Source0:	nifi-%{nifi_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_nifi.sh
+Source3:  nifi.service
 #BIGTOP_PATCH_FILES
 
 BuildArch:  noarch
@@ -30,12 +31,20 @@ bash %{SOURCE1}
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
-
 /bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{nifi_version}
+cp -R  %{SOURCE3} $RPM_BUILD_ROOT/usr/lib/systemd/system/
+
+%pre
+getent group nifi >/dev/null || groupadd -r nifi
+getent passwd nifi >/dev/null || useradd -c "nifi" -s /sbin/nologin -g nifi -r nifi 2> /dev/null || :
+
+%post
+systemctl daemon-reload
 
 %files
-%config /etc/nifi
+%config %attr(0755,pxf,pxf) /etc/nifi
 %doc
-/usr/lib/nifi-server
+/usr/lib/systemd/system/*
+%attr(0755,pxf,pxf)/usr/lib/nifi-server
 
 %changelog

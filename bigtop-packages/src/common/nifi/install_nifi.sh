@@ -28,6 +28,7 @@ echo ${nifi_dir}
 install -d -m 0755 "${prefix}/usr/lib/"
 install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/var/log/nifi"
+install -d -m 0755 "${prefix}/usr/lib/systemd/system/"
 
 tar xf "nifi-assembly/target/nifi-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/nifi-${version}" "${nifi_dir}"
