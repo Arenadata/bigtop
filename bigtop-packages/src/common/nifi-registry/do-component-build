@@ -16,5 +16,5 @@
 
 . `dirname $0`/bigtop.bom
 
-export MAVEN_OPTS="-Xms1024m -Xmx3076m -XX:MaxPermSize=256m"
+export MAVEN_OPTS="-Xms1024m -Xmx3076m -XX:MaxPermSize=512m"
 mvn package -DskipTests

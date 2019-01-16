@@ -28,6 +28,7 @@ echo ${nifiregistry_dir}
 install -d -m 0755 "${prefix}/usr/lib/"
 install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/var/log/nifi-registry"
+install -d -m 0755 "${prefix}/usr/lib/systemd/system/"
 
 tar xf "nifi-registry-assembly/target/nifi-registry-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/nifi-registry-${version}" "${nifiregistry_dir}"
