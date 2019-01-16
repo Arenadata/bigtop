@@ -42,9 +42,9 @@ getent passwd nifi >/dev/null || useradd -c "nifi" -s /sbin/nologin -g nifi -r n
 systemctl daemon-reload
 
 %files
-%config %attr(0755,pxf,pxf) /etc/nifi
+%config %attr(0755,nifi,nifi) /etc/nifi
 %doc
 /usr/lib/systemd/system/*
-%attr(0755,pxf,pxf)/usr/lib/nifi-server
+%attr(0755,nifi,nifi)/usr/lib/nifi-server
 
 %changelog
