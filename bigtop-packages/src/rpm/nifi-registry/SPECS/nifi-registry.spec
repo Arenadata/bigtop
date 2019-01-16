@@ -11,6 +11,7 @@ URL:		  http://nifi-registry.incubator.apache.org/
 Source0:	nifi-registry-%{nifi_registry_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_nifi-registry.sh
+Source3:  nifi-registry.service
 #BIGTOP_PATCH_FILES
 
 BuildArch:  noarch
@@ -30,12 +31,20 @@ bash %{SOURCE1}
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
-
 /bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{nifi_registry_version}
+cp -R  %{SOURCE3} $RPM_BUILD_ROOT/usr/lib/systemd/system/
+
+%pre
+getent group nifi >/dev/null || groupadd -r nifi
+getent passwd nifi >/dev/null || useradd -c "nifi" -s /sbin/nologin -g nifi -r nifi 2> /dev/null || :
+
+%post
+systemctl daemon-reload
 
 %files
-%config /etc/nifi-registry
+%config %attr(0755,nifi,nifi)/etc/nifi-registry
 %doc
-/usr/lib/nifi-registry
+/usr/lib/systemd/system/*
+%attr(0755,nifi,nifi)/usr/lib/nifi-registry
 
 %changelog
