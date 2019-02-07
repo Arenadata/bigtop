@@ -456,11 +456,21 @@ bigtop {
 
     'kafka-rest' {
       name    = "kafka-rest"
-      relNotes = " REST proxy for Kafka"
+      relNotes = "REST proxy for Kafka"
       version { base = '5.1.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
       source      = "v${version.base}.tar.gz" }
       url     { site = "https://github.com/confluentinc/kafka-rest/archive/"
+                archive = site }
+     }
+
+    'ksql' {
+      name    = "ksql"
+      relNotes = "Streaming SQL for Apache Kafka"
+      version { base = '5.1.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+      source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/confluentinc/ksql/archive/"
                 archive = site }
      }
                 
