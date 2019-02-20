@@ -14,7 +14,7 @@ Source2:  install_ksql.sh
 
 
 BuildArch:  noarch
-Requires:	bash
+Requires:	bash, kafka-rest-utils
 Provides: 	ksql
 AutoReqProv: 	no
 
