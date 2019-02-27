@@ -25,7 +25,8 @@ version=$2
 install -d -m 0755 "${prefix}/usr/lib/ksql/"
 install -d -m 0755 "${prefix}/usr/lib/ksql/libs/"
 install -d -m 0755 "${prefix}/usr/share/"
-install -d -m 0755 "${prefix}/etc/systemd/system/"
+install -d -m 0755 "${prefix}/usr/lib/systemd/system/"
+install -d -m 0755 "${prefix}/usr/bin/"
 
 
 

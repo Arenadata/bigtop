@@ -1,0 +1,20 @@
+[Unit]
+Description=KSQL server for Arenadata Streaming platform
+After=network.target kafka.target 
+
+[Service]
+Type=forking
+WorkingDirectory=/usr/lib/ksql
+ExecStart=/usr/lib/ksql/bin/ksql-server-start /usr/lib/ksql/config/ksql-server.properties
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=60
+User=ksql
+Group=kafka
+ExecStartPre=/bin/mkdir -p /run/ksql
+ExecStartPre=/bin/chown ksql:kafka /run/ksql
+ExecStartPre=/bin/chmod 755 /run/ksql
+PermissionsStartOnly=true
+
+[Install]
+WantedBy=multi-user.target
