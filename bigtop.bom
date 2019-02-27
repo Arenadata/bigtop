@@ -44,6 +44,7 @@
      APACHE_MIRROR = "http://apache.osuosl.org"
      APACHE_ARCHIVE = "https://archive.apache.org/dist"
    }
+
    git { // *optional* This is a global setting to access protected git repositories, 
          //            can be specified per component as well
      user = "john_doe"
@@ -99,6 +100,9 @@ bigtop {
     APACHE_MIRROR = "https://www-us.apache.org/dist"
     APACHE_ARCHIVE = "https://archive.apache.org/dist"
   }
+  confluentinc {
+      version = '5.1.2'
+   }
 /** End of Base Configuration */
 
   /** Dependencies section defines the order in which packages should be built.
@@ -418,7 +422,7 @@ bigtop {
     'kafka' {
       name    = 'kafka'
       relNotes = 'Apache Kafka'
-      version { base = '2.1.0'; pkg = base; release = 1 }
+      version { base = '2.1.1'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "$name-${version.base}-src.tgz" }
       url     { download_path = "/$name/${version.base}/"
@@ -428,7 +432,7 @@ bigtop {
     'kafka-common-utils' {
       name    = "kafka-common-utils"
       relNotes = "kafka common utilities library containing metrics, config and utils"
-      version { base = '5.1.0'; pkg = base; release = 1 }
+      version { base = "${confluentinc.version}"; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "v${version.base}.tar.gz" }
       url     { site = "https://github.com/confluentinc/common/archive/"
@@ -437,7 +441,7 @@ bigtop {
     'kafka-rest-utils' {
       name    = "kafka-rest-utils"
       relNotes = "Kafka rest utils is  Utilities and a small framework for building REST services with Jersey, Jackson, and Jetty"
-      version { base = '5.1.0'; pkg = base; release = 1 }
+      version { base = "${confluentinc.version}"; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "v${version.base}.tar.gz" }
       url     { site = "https://github.com/confluentinc/rest-utils/archive/"
@@ -447,7 +451,7 @@ bigtop {
     'schema-registry' {
       name    = "schema-registry"
       relNotes = "RESTful Avro schema registry for Kafka"
-      version { base = '5.1.0'; pkg = base; release = 1 }
+      version { base = "${confluentinc.version}"; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
       source      = "v${version.base}.tar.gz" }
       url     { site = "https://github.com/confluentinc/schema-registry/archive/"
@@ -457,7 +461,7 @@ bigtop {
     'kafka-rest' {
       name    = "kafka-rest"
       relNotes = "REST proxy for Kafka"
-      version { base = '5.1.0'; pkg = base; release = 1 }
+      version { base = "${confluentinc.version}"; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
       source      = "v${version.base}.tar.gz" }
       url     { site = "https://github.com/confluentinc/kafka-rest/archive/"
@@ -467,7 +471,7 @@ bigtop {
     'ksql' {
       name    = "ksql"
       relNotes = "Streaming SQL for Apache Kafka"
-      version { base = '5.1.0'; pkg = base; release = 1 }
+      version { base = "${confluentinc.version}"; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
       source      = "v${version.base}.tar.gz" }
       url     { site = "https://github.com/confluentinc/ksql/archive/"
