@@ -541,7 +541,7 @@ bigtop {
 	'nifi' {
       name    = 'nifi'
       relNotes = 'Apache NiFi'
-      version { base = '1.8.0'; pkg = base; release = 1 }
+      version { base = '1.9.0'; pkg = base; release = 1 }
       tarball { source      = "$name-${version.base}-source-release.zip"
                 destination = "$name-${version.base}.tar.gz" }
       url     { download_path = "/$name/${version.base}/"
