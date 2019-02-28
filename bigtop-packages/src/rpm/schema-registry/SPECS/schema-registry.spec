@@ -39,11 +39,15 @@ cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/schema-registry/bin/
 cp -R  %{SOURCE5} $RPM_BUILD_ROOT/etc/systemd/system/
 cp -R  %{SOURCE6} $RPM_BUILD_ROOT/usr/lib/schema-registry/bin/
 
+%pre
+getent group kafka >/dev/null || groupadd -r kafka
+getent passwd schema-registry >/dev/null || useradd -c "schema-registry" -s /sbin/nologin -g kafka -r schema-registry 2> /dev/null || :
+
 
 %files
 %doc
-%attr(0755,kafka,kafka)/usr/share/doc/schema-registry
-%attr(0755,kafka,kafka)/usr/lib/schema-registry
+%attr(0755,schema-registry,kafka)/usr/share/doc/schema-registry
+%attr(0755,schema-registry,kafka)/usr/lib/schema-registry
 %attr(0664,root,root)/etc/systemd/system/*
 %config(noreplace)/etc/schema-registry
 

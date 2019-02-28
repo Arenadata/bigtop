@@ -6,19 +6,17 @@ After=kafka.service
 [Service]
 Type=forking
 WorkingDirectory=/usr/lib/schema-registry
-User=kafka
+User=schema-registry
 Group=kafka
 ExecStart=/usr/lib/schema-registry/bin/schema-registry-start /etc/schema-registry/schema-registry.properties
-ExecStop=/usr/lib/schema-registry/bin/schema-registry-stop
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStartPre=/bin/mkdir -p /var/log/schema-registry
-ExecStartPre=/bin/chown kafka:kafka /var/log/schema-registry
+ExecStartPre=/bin/chown schema-registry:kafka /var/log/schema-registry
 ExecStartPre=/bin/chmod 755 /var/log/schema-registry
 ExecStartPre=/bin/mkdir -p /run/schema-registry
-ExecStartPre=/bin/chown kafka:kafka /run/schema-registry
+ExecStartPre=/bin/chown schema-registry:kafka /run/schema-registry
 ExecStartPre=/bin/chmod 755 /run/schema-registry
-Restart=always
-RestartSec=60
+Restart=no
 PermissionsStartOnly=true
 
 [Install]
