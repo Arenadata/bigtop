@@ -15,6 +15,7 @@ Source3:  kafka-rest-env.sh
 Source4:  kafka-rest-run-class
 Source5:  kafka-rest.service
 Source6:  kafka-rest-stop
+Source7:  kafka-rest-start
 
 
 BuildArch:  noarch
@@ -39,12 +40,16 @@ cp -R  %{SOURCE3} $RPM_BUILD_ROOT/etc/kafka-rest/
 cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/kafka-rest/bin/
 cp -R  %{SOURCE5} $RPM_BUILD_ROOT/etc/systemd/system/
 cp -R  %{SOURCE6} $RPM_BUILD_ROOT/usr/lib/kafka-rest/bin/
+cp -R  %{SOURCE7} $RPM_BUILD_ROOT/usr/lib/kafka-rest/bin/
 
+%pre
+getent group kafka >/dev/null || groupadd -r kafka
+getent passwd kafka-rest >/dev/null || useradd -c "kafka-rest" -s /sbin/nologin -g kafka -r kafka-rest 2> /dev/null || :
 
 %files
 %doc
-%attr(0755,kafka,kafka)/usr/share/doc/kafka-rest
-%attr(0755,kafka,kafka)/usr/lib/kafka-rest
+%attr(0755,kafka-rest,kafka)/usr/share/doc/kafka-rest
+%attr(0755,kafka-rest,kafka)/usr/lib/kafka-rest
 %attr(0664,root,root)/etc/systemd/system/*
 %config(noreplace)/etc/kafka-rest
 
