@@ -16,7 +16,7 @@ Source4:  ksql-env.sh
 Source5:  ksql-run-class
 Source6:  ksql-server-start
 Source7:  ksql-stop
-Source8:  ksql-serve.service
+Source8:  ksql-server.service
 
 
 BuildArch:  noarch
