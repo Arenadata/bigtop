@@ -101,7 +101,7 @@ bigtop {
     APACHE_ARCHIVE = "https://archive.apache.org/dist"
   }
   confluentinc {
-      version = '5.1.2'
+      version = '5.2.1'
    }
 /** End of Base Configuration */
 
@@ -422,7 +422,7 @@ bigtop {
     'kafka' {
       name    = 'kafka'
       relNotes = 'Apache Kafka'
-      version { base = '2.1.1'; pkg = base; release = 1 }
+      version { base = '2.2.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "$name-${version.base}-src.tgz" }
       url     { download_path = "/$name/${version.base}/"
