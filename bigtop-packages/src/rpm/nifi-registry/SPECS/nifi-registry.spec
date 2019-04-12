@@ -12,6 +12,7 @@ Source0:	nifi-registry-%{nifi_registry_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_nifi-registry.sh
 Source3:  nifi-registry.service
+Source4: nifi-registry-env.sh
 #BIGTOP_PATCH_FILES
 
 BuildArch:  noarch
@@ -33,6 +34,8 @@ bash %{SOURCE1}
 %__rm -rf $RPM_BUILD_ROOT
 /bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{nifi_registry_version}
 cp -R  %{SOURCE3} $RPM_BUILD_ROOT/usr/lib/systemd/system/
+cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/nifi-registry/bin/
+
 
 %pre
 getent group nifi >/dev/null || groupadd -r nifi
@@ -46,5 +49,6 @@ systemctl daemon-reload
 %doc
 /usr/lib/systemd/system/*
 %attr(0755,nifi,nifi)/usr/lib/nifi-registry
+%attr(0755,nifi,nifi)/var/log/nifi-registry
 
 %changelog
