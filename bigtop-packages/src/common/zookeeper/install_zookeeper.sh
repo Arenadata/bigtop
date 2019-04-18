@@ -203,6 +203,7 @@ install -d ${PREFIX}/$SYSTEM_INCLUDE_DIR
 install -d ${PREFIX}/$SYSTEM_LIB_DIR
 install -d ${PREFIX}/${LIB_DIR}-native
 
+
 (cd ${BUILD_DIR}/.. && tar xzf zookeeper-*-lib.tar.gz)
 cp -R ${BUILD_DIR}/../usr/include/* ${PREFIX}/${SYSTEM_INCLUDE_DIR}/
 cp -R ${BUILD_DIR}/../usr/lib*/* ${PREFIX}/${SYSTEM_LIB_DIR}/
@@ -219,3 +220,4 @@ EOF
 done
 chmod 755 ${PREFIX}/${BIN_DIR}/* ${PREFIX}/${LIB_DIR}-native/*
 
+install -d -m 0755 "${PREFIX}/usr/lib/systemd/system/"
