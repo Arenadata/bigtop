@@ -472,14 +472,14 @@ bigtop {
     'gpdb' {
       name    = 'gpdb'
       relNotes = 'GreenPlum'
-      version { base = System.getenv('GPDB_VERSION') ?: '6.0.0_arenadata4'
+      version { base = System.getenv('GPDB_VERSION') ?: '6.0.0b2'
                pkg = base
                release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                source      = System.getenv('GPDB_BRANCH') ? System.getenv('GPDB_BRANCH') + ".tar.gz" : "${name}-${version.base}.tar.gz" }
 
       git 	  {repo  = "https://github.com/arenadata/gpdb.git"
-      		   ref   =  System.getenv('GPDB_BRANCH') ?: 'adb-5.x'
+      		   ref   =  System.getenv('GPDB_BRANCH') ?: 'adb-6.x'
       		   dir   = "${name}-${version.base}" }
     }
 
