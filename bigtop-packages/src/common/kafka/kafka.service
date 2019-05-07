@@ -1,0 +1,18 @@
+[Unit]
+Description=Apache Kafka
+Requires=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/usr/lib/kafka
+User=kafka
+Group=kafka
+ExecStart=/usr/lib/kafka/bin/kafka start
+ExecStop=/usr/lib/kafka/bin/kafka stop
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStartPre=/bin/mkdir -p /run/kafka
+ExecStartPre=/bin/chown kafka:kafka /run/kafka
+PermissionsStartOnly=true
+
+[Install]
+WantedBy=multi-user.target
