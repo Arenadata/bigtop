@@ -27,7 +27,6 @@
 %if  %{!?suse_version:1}0
 %define doc_kafka %{_docdir}/%{kafka_name}-%{kafka_version}
 %define alternatives_cmd alternatives
-%global initd_dir %{_sysconfdir}/rc.d/init.d
 
 %else
 
@@ -38,7 +37,6 @@
 
 %define alternatives_cmd update-alternatives
 %define doc_kafka %{_docdir}/%{kafka_name}-%{kafka_version}
-%global initd_dir %{_sysconfdir}/rc.d
 
 %define __os_install_post \
     %{suse_check} ; \
@@ -63,7 +61,7 @@ License: ASL 2.0
 Source0: %{kafka_name}-%{kafka_base_version}.tar.gz
 Source1: do-component-build
 Source2: install_%{kafka_name}.sh
-Source3: kafka-server.svc
+Source3: kafka.service
 Source4: init.d.tmpl
 Source6: kafka.default
 Source7: kafka
@@ -77,21 +75,6 @@ A single Kafka broker can handle hundreds of megabytes of reads and writes per s
 from thousands of clients. It can be elastically and transparently expanded without downtime.
 Data streams are partitioned and spread over a cluster of machines to allow data streams
 larger than the capability of any single machine and to allow clusters of co-ordinated consumers
-
-%package server
-Summary: Server for kafka
-Group: System/Daemons
-Requires: kafka = %{version}-%{release}
-
-# CentOS 5 does not have any dist macro
-# So I will suppose anything that is not Mageia or a SUSE will be a RHEL/CentOS/Fedora
-%if %{!?suse_version:1}0 && %{!?mgaversion:1}0
-# Required for init scripts
-Requires: redhat-lsb
-%endif
-
-%description server
-Bundles the init script for kafka server.
 
 %prep
 %setup -n %{kafka_name}-%{kafka_base_version}-src
@@ -108,11 +91,9 @@ bash $RPM_SOURCE_DIR/install_kafka.sh \
           --build-dir=`pwd`         \
           --source-dir=$RPM_SOURCE_DIR \
           --prefix=$RPM_BUILD_ROOT  \
-		  --doc-dir=%{doc_kafka} \
-
-# Generate the init script
-init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{kafka_name}-server
-bash $RPM_SOURCE_DIR/init.d.tmpl $RPM_SOURCE_DIR/%{kafka_name}-server.svc rpm $init_file
+		  --doc-dir=%{doc_kafka} 
+		  
+cp -R  %{SOURCE3} $RPM_BUILD_ROOT/usr/lib/systemd/system/
 
 
 #######################
@@ -124,6 +105,7 @@ getent passwd kafka >/dev/null || useradd -c "Kafka" -s /sbin/nologin -g kafka -
 
 %post
 %{alternatives_cmd} --install %{config_kafka} %{kafka_name}-conf %{config_kafka}.dist 30
+systemctl daemon-reload
 
 %preun
 if [ "$1" = 0 ]; then
@@ -135,29 +117,10 @@ if [ $? -eq 0 ]; then
   /sbin/service %{kafka_name}-server stop > /dev/null 2>&1
 fi
 
-#######################
-#### Kafka-server section ####
-#######################
-%post server
-chkconfig --add %{kafka_name}-server
-
-%preun server
-/sbin/service %{kafka_name}-server status > /dev/null 2>&1
-if [ $? -eq 0  ] ; then
-  service kafka-server stop > /dev/null 2>&1
-  chkconfig --del %{kafka_name}-server
-fi
-
-%postun server
-if [ $1 -ge 1 ]; then
-  service %{kafka_name}-server condrestart >/dev/null 2>&1
-fi
 
 #######################
 #### FILES SECTION ####
 #######################
-%files server
-%attr(0755,root,root) %{initd_dir}/%{kafka_name}-server
 
 %files
 %defattr(-,root,root,755)
@@ -169,4 +132,5 @@ fi
 %attr(0755,kafka,kafka) %{var_lib_kafka}
 %attr(0755,kafka,kafka) %{var_run_kafka}
 %attr(0755,kafka,kafka) %{var_log_kafka}
+%attr(0755,root,root) /usr/lib/systemd/system/
 %doc %{doc_kafka}
