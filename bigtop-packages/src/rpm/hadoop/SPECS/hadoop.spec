@@ -21,12 +21,18 @@
 # that would make newer RPM debuginfo generation scripts happy.
 %undefine _missing_build_ids_terminate_build
 
+%define cmake_package cmake3
+%define fuse_devel_package fuse-devel
 
 %if  %{?suse_version:1}0
 %define cmake_package cmake
-%else
-%define cmake_package cmake3
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define cmake_package cmake
+%define fuse_devel_package libfuse-devel
+%endif
+
 
 
 %define hadoop_name hadoop
@@ -117,11 +123,24 @@
     /usr/lib/rpm/brp-compress ; \
     %{nil}
 
+
 %define netcat_package netcat-openbsd
 %define doc_hadoop %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 %global initd_dir %{_sysconfdir}/rc.d
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define netcat_package netcat-openbsd
+%define doc_hadoop %{_docdir}/%{name}
+%define alternatives_cmd update-alternatives
+%global initd_dir %{_sysconfdir}/rc.d
+%endif
+
 
 %if  0%{?mgaversion}
 %define netcat_package netcat-openbsd
@@ -179,7 +198,7 @@ Source28: mapred.1
 Source29: hadoop-yarn-timelineserver.svc
 #BIGTOP_PATCH_FILES
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id} -u -n)
-BuildRequires: fuse-devel, fuse, %{cmake_package}
+BuildRequires: %{fuse_devel_package}, fuse, %{cmake_package}
 Requires: libisal-dev, coreutils, /usr/sbin/useradd, /usr/sbin/usermod, /sbin/chkconfig, /sbin/service, bigtop-utils >= 0.7
 Requires: psmisc, %{netcat_package}
 # Sadly, Sun/Oracle JDK in RPM form doesn't provide libjvm.so, which means we have
@@ -195,7 +214,7 @@ Requires: sh-utils, insserv
 
 # CentOS 5 does not have any dist macro
 # So I will suppose anything that is not Mageia or a SUSE will be a RHEL/CentOS/Fedora
-%if %{!?suse_version:1}0 && %{!?mgaversion:1}0
+%if %{!?suse_version:1}0 && %{!?mgaversion:1} && "%{_vendor}" != "alt"
 BuildRequires: pkgconfig, fuse-libs, redhat-rpm-config, lzo-devel, openssl-devel
 # Required for init scripts
 Requires: sh-utils, /lib/lsb/init-functions
@@ -205,6 +224,12 @@ Requires: sh-utils, /lib/lsb/init-functions
 BuildRequires: pkgconfig, libfuse-devel, libfuse2 , libopenssl-devel, gcc-c++, liblzo-devel, zlib-devel
 Requires: chkconfig, xinetd-simple-services, zlib, initscripts
 %endif
+
+%if  "%{_vendor}" == "alt"
+BuildRequires: pkgconfig, libfuse-devel, libfuse , openssl-devel, gcc4.9-c++, liblzo2-devel, zlib-devel
+Requires: chkconfig, xinetd-simple-services, zlib, initscripts
+%endif
+
 
 
 %description
@@ -596,12 +621,12 @@ fi
 
 
 %files yarn
-%defattr(-,root,root)
-%config(noreplace) %{etc_hadoop}/conf.empty/yarn-env.sh
-%config(noreplace) %{etc_hadoop}/conf.empty/yarn-site.xml
-%config(noreplace) %{etc_hadoop}/conf.empty/capacity-scheduler.xml
-%config(noreplace) %{etc_hadoop}/conf.empty/container-executor.cfg
-%config(noreplace) /etc/security/limits.d/yarn.conf
+%%defattr(-,root,root)
+%%config(noreplace) %{etc_hadoop}/conf.empty/yarn-env.sh
+%%config(noreplace) %{etc_hadoop}/conf.empty/yarn-site.xml
+%%config(noreplace) %{etc_hadoop}/conf.empty/capacity-scheduler.xml
+%%config(noreplace) %{etc_hadoop}/conf.empty/container-executor.cfg
+%%config(noreplace) /etc/security/limits.d/yarn.conf
 %{lib_hadoop}/libexec/yarn-config.sh
 %{lib_yarn}
 %attr(4754,root,yarn) %{lib_yarn}/bin/container-executor
@@ -612,9 +637,9 @@ fi
 %attr(1777,yarn,hadoop) %{state_yarn}/cache
 
 %files hdfs
-%defattr(-,root,root)
-%config(noreplace) %{etc_hadoop}/conf.empty/hdfs-site.xml
-%config(noreplace) /etc/security/limits.d/hdfs.conf
+%%defattr(-,root,root)
+%%config(noreplace) %{etc_hadoop}/conf.empty/hdfs-site.xml
+%%config(noreplace) /etc/security/limits.d/hdfs.conf
 %{lib_hdfs}
 %{lib_hadoop}/libexec/hdfs-config.sh
 %{bin_hadoop}/hdfs
@@ -627,12 +652,12 @@ fi
 %{lib_hadoop}/libexec/init-hcfs.groovy
 
 %files mapreduce
-%defattr(-,root,root)
-#%config(noreplace) %{etc_hadoop}/conf.empty/mapred-site.xml
-%config(noreplace) %{etc_hadoop}/conf.empty/mapred-env.sh
-%config(noreplace) %{etc_hadoop}/conf.empty/mapred-queues.xml.template
-%config(noreplace) %{etc_hadoop}/conf.empty/mapred-site.xml
-%config(noreplace) /etc/security/limits.d/mapreduce.conf
+%%defattr(-,root,root)
+#%%config(noreplace) %{etc_hadoop}/conf.empty/mapred-site.xml
+%%config(noreplace) %{etc_hadoop}/conf.empty/mapred-env.sh
+%%config(noreplace) %{etc_hadoop}/conf.empty/mapred-queues.xml.template
+%%config(noreplace) %{etc_hadoop}/conf.empty/mapred-site.xml
+%%config(noreplace) /etc/security/limits.d/mapreduce.conf
 %{lib_mapreduce}
 %{lib_hadoop}/libexec/mapred-config.sh
 %{bin_hadoop}/mapred
@@ -643,22 +668,22 @@ fi
 
 
 %files
-%defattr(-,root,root)
-%config(noreplace) %{etc_hadoop}/conf.empty/core-site.xml
-#%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics.properties
-%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics2.properties
-%config(noreplace) %{etc_hadoop}/conf.empty/log4j.properties
-#%config(noreplace) %{etc_hadoop}/conf.empty/slaves
-%config(noreplace) %{etc_hadoop}/conf.empty/ssl-client.xml.example
-%config(noreplace) %{etc_hadoop}/conf.empty/ssl-server.xml.example
-%config(noreplace) %{etc_hadoop}/conf.empty/configuration.xsl
-%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-env.sh
-%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-policy.xml
-%config(noreplace) %{etc_hadoop}/conf.empty/kms-acls.xml
-%config(noreplace) %{etc_hadoop}/conf.empty/kms-env.sh
-%config(noreplace) %{etc_hadoop}/conf.empty/kms-log4j.properties
-%config(noreplace) %{etc_hadoop}/conf.empty/kms-site.xml
-%config(noreplace) /etc/default/hadoop
+%%defattr(-,root,root)
+%%config(noreplace) %{etc_hadoop}/conf.empty/core-site.xml
+#%%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics.properties
+%%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics2.properties
+%%config(noreplace) %{etc_hadoop}/conf.empty/log4j.properties
+#%%config(noreplace) %{etc_hadoop}/conf.empty/slaves
+%%config(noreplace) %{etc_hadoop}/conf.empty/ssl-client.xml.example
+%%config(noreplace) %{etc_hadoop}/conf.empty/ssl-server.xml.example
+%%config(noreplace) %{etc_hadoop}/conf.empty/configuration.xsl
+%%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-env.sh
+%%config(noreplace) %{etc_hadoop}/conf.empty/hadoop-policy.xml
+%%config(noreplace) %{etc_hadoop}/conf.empty/kms-acls.xml
+%%config(noreplace) %{etc_hadoop}/conf.empty/kms-env.sh
+%%config(noreplace) %{etc_hadoop}/conf.empty/kms-log4j.properties
+%%config(noreplace) %{etc_hadoop}/conf.empty/kms-site.xml
+%%config(noreplace) /etc/default/hadoop
 /etc/bash_completion.d/hadoop
 %{lib_hadoop}/*.jar
 %{lib_hadoop}/lib
@@ -680,13 +705,13 @@ fi
 %exclude %{lib_hadoop}/bin/fuse_dfs
 
 %files doc
-%defattr(-,root,root)
+%%defattr(-,root,root)
 %doc %{doc_hadoop}
 
 %files httpfs
-%defattr(-,root,root)
-%config(noreplace) %{etc_httpfs}
-%config(noreplace) /etc/default/%{name}-httpfs
+%%defattr(-,root,root)
+%%config(noreplace) %{etc_httpfs}
+%%config(noreplace) /etc/default/%{name}-httpfs
 #%{lib_hadoop}/libexec/httpfs-config.sh
 %{initd_dir}/%{name}-httpfs
 %{lib_httpfs}
@@ -697,9 +722,9 @@ fi
 # Service file management RPMs
 %define service_macro() \
 %files %1 \
-%defattr(-,root,root) \
+%%defattr(-,root,root) \
 %{initd_dir}/%{name}-%1 \
-%config(noreplace) /etc/default/%{name}-%1 \
+%%config(noreplace) /etc/default/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \
@@ -734,15 +759,15 @@ if [ "$1" = 0 ]; then
 fi
 
 %files conf-pseudo
-%defattr(-,root,root)
-%config(noreplace) %attr(755,root,root) %{etc_hadoop}/conf.pseudo
+%%defattr(-,root,root)
+%%config(noreplace) %attr(755,root,root) %{etc_hadoop}/conf.pseudo
 
 %files client
-%defattr(-,root,root)
+%%defattr(-,root,root)
 %{lib_hadoop}/client
 
 %files libhdfs
-%defattr(-,root,root)
+%%defattr(-,root,root)
 %{_libdir}/libhdfs*
 
 %files libhdfs-devel
@@ -750,8 +775,8 @@ fi
 #%doc %{_docdir}/libhdfs-%{hadoop_version}
 
 %files hdfs-fuse
-%defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) /etc/default/hadoop-fuse
+%%defattr(-,root,root)
+%attr(0644,root,root) %%config(noreplace) /etc/default/hadoop-fuse
 %attr(0755,root,root) %{lib_hadoop}/bin/fuse_dfs
 %attr(0755,root,root) %{bin_hadoop}/hadoop-fuse-dfs
 
