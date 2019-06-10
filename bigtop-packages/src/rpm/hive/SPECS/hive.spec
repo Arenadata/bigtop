@@ -224,6 +224,13 @@ Requires: initscripts
 Requires: /lib/lsb/init-functions
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+%endif
+
+
 %description webhcat-server
 Init scripts for WebHcat server.
 
@@ -322,16 +329,16 @@ fi
 #### FILES SECTION ####
 #######################
 %files
-%attr(1777,hive,hive) %dir %{var_lib_hive}/metastore
+%%attr(1777,hive,hive) %dir %{var_lib_hive}/metastore
 %defattr(-,root,root,755)
-%config(noreplace) %{etc_hive}/conf.dist
+%%config(noreplace) %{etc_hive}/conf.dist
 %{usr_lib_hive}
 %{usr_bin}/hive
 %{usr_bin}/beeline
 %{usr_bin}/hiveserver2
-%attr(0755,hive,hive) %dir %{var_lib_hive}
-%attr(0755,hive,hive) %dir %{_localstatedir}/log/%{name}
-%attr(0755,hive,hive) %dir %{_localstatedir}/run/%{name}
+%%attr(0755,hive,hive) %dir %{var_lib_hive}
+%%attr(0755,hive,hive) %dir %{_localstatedir}/log/%{name}
+%%attr(0755,hive,hive) %dir %{_localstatedir}/run/%{name}
 %doc %{doc_hive}
 %{man_dir}/man1/hive.1.*
 %exclude %dir %{usr_lib_hive}
@@ -351,9 +358,9 @@ fi
 
 %files hcatalog
 %defattr(-,root,root,755)
-%config(noreplace) %attr(755,root,root) %{conf_hcatalog}.dist
-%attr(0775,hive,hive) %{var_lib_hcatalog}
-%attr(0775,hive,hive) %{var_log_hcatalog}
+%%config(noreplace) %attr(755,root,root) %{conf_hcatalog}.dist
+%%attr(0775,hive,hive) %{var_lib_hcatalog}
+%%attr(0775,hive,hive) %{var_log_hcatalog}
 %dir %{usr_lib_hcatalog}
 %{usr_lib_hcatalog}/bin
 %{usr_lib_hcatalog}/etc/hcatalog
@@ -366,15 +373,15 @@ fi
 
 %files webhcat
 %defattr(-,root,root,755)
-%config(noreplace) %attr(755,root,root) %{conf_webhcat}.dist
+%%config(noreplace) %%attr(755,root,root) %{conf_webhcat}.dist
 %{usr_lib_hcatalog}/share/webhcat
 %{usr_lib_hcatalog}/etc/webhcat
 %{usr_lib_hcatalog}/sbin/webhcat*
 
 %define service_macro() \
 %files %1 \
-%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
-%config(noreplace) /etc/default/%{name}-%1 \
+%%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
+%%config(noreplace) /etc/default/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \
