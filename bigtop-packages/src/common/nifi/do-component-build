@@ -17,4 +17,4 @@
 . `dirname $0`/bigtop.bom
 
 export MAVEN_OPTS="-Xms1024m -Xmx3076m -XX:MaxPermSize=256m"
-mvn package -DskipTests -Pinclude-grp
+mvn package -DskipTests -Pinclude-ranger -Pinclude-grp
