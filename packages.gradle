@@ -450,6 +450,7 @@ def genTasks = { target ->
 
     def command = [
         '--define', "_topdir $PKG_BUILD_DIR/rpm/",
+        '--define', "buildroot $PKG_BUILD_DIR/rpm/BUIDROOT",
         '--define', "${PKG_NAME_FOR_PKG}_base_version $BASE_VERSION",
         '--define', "hadoop_version ${HADOOP_VERSION}",
         '--define', "${PKG_NAME_FOR_PKG}_version ${PKG_VERSION}",
@@ -543,6 +544,7 @@ def genTasks = { target ->
 
     def command = [
         '--define', "_topdir $PKG_BUILD_DIR/rpm/",
+        '--define', "buildroot $PKG_BUILD_DIR/rpm/BUIDROOT",
         '--define', "${PKG_NAME_FOR_PKG}_base_version $BASE_VERSION",
         '--define', "${PKG_NAME_FOR_PKG}_version ${PKG_VERSION}",
         '--define', "${PKG_NAME_FOR_PKG}_release ${BIGTOP_BUILD_STAMP}%{?dist}",
