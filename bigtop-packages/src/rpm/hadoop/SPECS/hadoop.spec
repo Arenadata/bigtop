@@ -135,7 +135,7 @@
         /usr/lib/rpm/brp.d/032-compress.brp ; \
         %{nil}
 
-%define netcat_package netcat-openbsd
+%define netcat_package netcat
 %define doc_hadoop %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 %global initd_dir %{_sysconfdir}/rc.d
@@ -227,7 +227,7 @@ Requires: chkconfig, xinetd-simple-services, zlib, initscripts
 
 %if  "%{_vendor}" == "alt"
 BuildRequires: pkgconfig, libfuse-devel, libfuse , openssl-devel, gcc4.9-c++, liblzo2-devel, zlib-devel
-Requires: chkconfig, xinetd-simple-services, zlib, initscripts
+Requires: chkconfig, xinetd, zlib, initscripts
 %endif
 
 
