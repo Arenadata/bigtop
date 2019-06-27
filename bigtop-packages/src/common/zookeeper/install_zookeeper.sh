@@ -219,3 +219,8 @@ EOF
 done
 chmod 755 ${PREFIX}/${BIN_DIR}/* ${PREFIX}/${LIB_DIR}-native/*
 
+
+
+echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+echo ${PREFIX}
+echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

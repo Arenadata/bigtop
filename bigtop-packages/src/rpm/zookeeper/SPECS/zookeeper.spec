@@ -12,6 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
 %define etc_zookeeper /etc/%{name}
 %define bin_zookeeper %{_bindir}
 %define lib_zookeeper /usr/lib/%{name}
@@ -39,7 +41,6 @@
     /usr/lib/rpm/brp-compress ; \
     %{nil}
 
-
 %define doc_zookeeper %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 %define alternatives_dep update-alternatives
@@ -50,7 +51,7 @@
 %else
 
 %define doc_zookeeper %{_docdir}/%{name}-%{zookeeper_version}
-%define alternatives_cmd alternatives
+%define alternatives_cmd alternatives-update
 %define alternatives_dep chkconfig 
 %define chkconfig_dep    chkconfig
 %define service_dep      initscripts
@@ -84,6 +85,13 @@ Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
 Requires: bigtop-utils >= 0.7
+
+%if %{_vendor} == "alt"
+#%set_verify_elf_method textrel=relaxed
+%set_verify_elf_method skip
+AutoReq: no
+%endif
+
 
 %description 
 ZooKeeper is a centralized service for maintaining configuration information, 
