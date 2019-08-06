@@ -22,6 +22,16 @@ AutoReqProv: 	no
 %description
 Apache NiFi  is a software project designed to automate the flow of data between software systems.
 
+%package toolkit
+Summary: Apache NiFi Toolkit 
+Group: Application/Server
+Requires: bash
+AutoReq: no
+
+%description toolkit
+Apache NiFi Toolkit - command line utilities to setup and support NiFi in standalone and clustered environments
+
+
 %prep
 %setup -q -n nifi-%{nifi_version}
 #BIGTOP_PATCH_COMMANDS
@@ -46,5 +56,8 @@ systemctl daemon-reload
 %doc
 /usr/lib/systemd/system/*
 %attr(0755,nifi,nifi)/usr/lib/nifi-server
+
+%files toolkit
+%attr(0755,nifi,nifi)/usr/lib/nifi-toolkit
 
 %changelog

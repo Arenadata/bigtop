@@ -36,3 +36,8 @@ mv "${nifi_dir}/conf" "${etc_dir}/conf"
 cp -r "${etc_dir}/conf" "${etc_dir}/conf.dist"
 
 ln -nsf "/etc/nifi/conf" "${nifi_dir}/conf"
+
+
+tar xf "nifi-toolkit/nifi-toolkit-assembly/target/nifi-toolkit-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
+mv "${prefix}/usr/lib/nifi-toolkit-${version}" "${prefix}/usr/lib/nifi-toolkit"
+
