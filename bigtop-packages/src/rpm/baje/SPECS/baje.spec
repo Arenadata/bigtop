@@ -40,6 +40,6 @@ systemctl daemon-reload
 %files
 %config /etc/baje
 %attr(0664,root,root)/usr/lib/baje
-%attr(0664,root,root)/usr/lib/systemd/system
+%attr(0664,root,root)/usr/lib/systemd/system/*
 
 %changelog
