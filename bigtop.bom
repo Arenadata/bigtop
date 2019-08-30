@@ -341,7 +341,7 @@ bigtop {
     'baje' {
       name    = 'baje'
       relNotes = 'baje'
-      version { base = '1.0.0'; pkg = '1.0.0'; release = 1 }
+      version { base = '1.0.1'; pkg = base; release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                 source      = "${name}-${version.base}.tar.gz" }
       git     {repo  = "git@github.com:arenadata/baje.git"

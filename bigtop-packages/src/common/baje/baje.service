@@ -1,0 +1,13 @@
+[Unit]
+Description=Baje service (ch-proxy)
+After=rc-local.service
+
+[Service]
+Type=simple
+User=baje
+ExecStart=/usr/bin/java -jar -Dconfig.file=/etc/baje/application.conf /usr/lib/baje/baje.jar
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

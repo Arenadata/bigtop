@@ -30,10 +30,6 @@ install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/usr/lib/systemd/system"
 install -d -m 0755  "${prefix}/var/log/baje"
 
-ls
-pwd
-
-#tar xf "nifi-assembly/target/nifi-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 cp "target/baje-${version}.jar" "${baje_dir}/baje.jar"
 cp "src/main/resources/application.conf" "${etc_dir}/"
-cp "src/main/resources/baje.service" "${prefix}/usr/lib/systemd/system/"
+
