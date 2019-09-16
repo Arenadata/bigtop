@@ -1,0 +1,19 @@
+*** gpdb-6.0.0_arenadata4/gpMgmt/bin/Makefile	2019-09-16 09:57:10.000000000 +0000
+--- gpdb-6.0.0_arenadata4/gpMgmt/bin/Makefile	2019-09-16 14:49:21.872304162 +0000
+***************
+*** 79,85 ****
+  		unset LIBPATH; \
+  		./generate-greenplum-path.sh $(prefix) > $(DESTDIR)$(prefix)/greenplum_path.sh ; \
+  	fi
+! 	. $(prefix)/greenplum_path.sh && unset PYTHONHOME && \
+  	if [ "$(BLD_ARCH)" = 'aix7_ppc_64' ]; then \
+  	    unset PYTHONPATH && cd $(PYLIB_SRC)/$(PYGRESQL_DIR) && DESTDIR="$(DESTDIR)" CC="$(CC)" python_64 setup.py build; \
+  	elif [ `uname -s` = 'OpenBSD' ]; then \
+--- 79,85 ----
+  		unset LIBPATH; \
+  		./generate-greenplum-path.sh $(prefix) > $(DESTDIR)$(prefix)/greenplum_path.sh ; \
+  	fi
+! 	.  $(DESTDIR)$(prefix)/greenplum_path.sh && unset PYTHONHOME && \
+  	if [ "$(BLD_ARCH)" = 'aix7_ppc_64' ]; then \
+  	    unset PYTHONPATH && cd $(PYLIB_SRC)/$(PYGRESQL_DIR) && DESTDIR="$(DESTDIR)" CC="$(CC)" python_64 setup.py build; \
+  	elif [ `uname -s` = 'OpenBSD' ]; then \
