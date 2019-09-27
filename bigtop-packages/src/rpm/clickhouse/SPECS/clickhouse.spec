@@ -139,8 +139,8 @@ fi
 
 %files server
 /usr/bin/clickhouse-server
-/usr/bin/clickhouse-clang
-/usr/bin/clickhouse-lld
+#/usr/bin/clickhouse-clang
+#/usr/bin/clickhouse-lld
 /usr/bin/clickhouse-copier
 /usr/bin/clickhouse-odbc-bridge
 /usr/bin/clickhouse-report

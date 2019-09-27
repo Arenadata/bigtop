@@ -18,6 +18,6 @@
 
 mkdir build
 cd build
-scl enable devtoolset-7 "cmake3 .. -DCMAKE_INSTALL_PREFIX=/usr -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release"
-scl enable devtoolset-7 "make -j $(grep -c ^processor /proc/cpuinfo)"
+scl enable devtoolset-8 "cmake3 .. -DCMAKE_INSTALL_PREFIX=/usr -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release"
+scl enable devtoolset-8 "make -j $(grep -c ^processor /proc/cpuinfo)"
 
