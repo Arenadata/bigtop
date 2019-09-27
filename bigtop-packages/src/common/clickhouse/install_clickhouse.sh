@@ -24,7 +24,7 @@ version=$2
 cd build
 DAEMONS="clickhouse clickhouse-test clickhouse-compressor clickhouse-client clickhouse-server"
 for daemon in $DAEMONS; do \
-  scl enable devtoolset-7 "DESTDIR=${prefix} cmake3 -DCOMPONENT=$daemon -P cmake_install.cmake"; \
+  scl enable devtoolset-8 "DESTDIR=${prefix} cmake3 -DCOMPONENT=$daemon -P cmake_install.cmake"; \
 done
 cd ..
 
