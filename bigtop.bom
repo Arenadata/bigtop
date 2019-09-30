@@ -551,7 +551,7 @@ bigtop {
 	'nifi-registry' {
       name    = 'nifi-registry'
       relNotes = 'Apache NiFi Registry'
-      version { base = '0.3.0'; pkg = base; release = 1 }
+      version { base = '0.4.0'; pkg = base; release = 1 }
       tarball { source      = "$name-${version.base}-source-release.zip"
                 destination = "$name-${version.base}.tar.gz" }
       url     { download_path = "nifi/$name/$name-${version.base}/"
