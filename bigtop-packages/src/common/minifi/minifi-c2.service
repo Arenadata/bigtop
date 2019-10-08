@@ -1,0 +1,15 @@
+[Unit]
+Description=Apache MiNiFi C2 Server
+After=syslog.target network.target
+
+[Service]
+User=minifi
+Type=forking
+#Run ExecStartPre with root-permissions
+PermissionsStartOnly=true
+ExecStartPre=/usr/bin/mkdir -p /var/run/minifi-c2
+ExecStartPre=/usr/bin/chown -R minifi:minifi /var/run/minifi-c2
+ExecStart=/usr/lib/minifi-c2/bin/c2.sh
+
+[Install]
+WantedBy=multi-user.target

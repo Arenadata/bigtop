@@ -12,6 +12,8 @@ Source0:	minifi-%{minifi_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_minifi.sh
 Source3:  minifi.service
+Source4:  minifi-c2.service
+Source5:  c2.sh
 #BIGTOP_PATCH_FILES
 
 BuildArch:  noarch
@@ -53,6 +55,9 @@ bash %{SOURCE1}
 %__rm -rf $RPM_BUILD_ROOT
 /bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{minifi_version}
 cp -R  %{SOURCE3} $RPM_BUILD_ROOT/usr/lib/systemd/system/
+cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/systemd/system/
+cp -R  %{SOURCE5} $RPM_BUILD_ROOT/usr/lib/minifi-c2/bin
+
 
 %pre
 getent group minifi >/dev/null || groupadd -r minifi
@@ -61,16 +66,26 @@ getent passwd minifi >/dev/null || useradd -c "minifi" -s /sbin/nologin -g minif
 %post
 systemctl daemon-reload
 
+%pre c2
+getent group minifi >/dev/null || groupadd -r minifi
+getent passwd minifi >/dev/null || useradd -c "minifi" -s /sbin/nologin -g minifi -r minifi 2> /dev/null || :
+
+%post c2
+systemctl daemon-reload
+
+
 %files
 %config %attr(0755,minifi,minifi) /etc/minifi
 %doc
-/usr/lib/systemd/system/*
+/usr/lib/systemd/system/minifi.service
 %attr(0755,minifi,minifi)/usr/lib/minifi
 
 %files toolkit
 %attr(0755,minifi,minifi)/usr/lib/minifi-toolkit
 
 %files c2
+%config %attr(0755,minifi,minifi) /etc/minifi-c2
+/usr/lib/systemd/system/minifi-c2.service
 %attr(0755,minifi,minifi)/usr/lib/minifi-c2
 
 %changelog

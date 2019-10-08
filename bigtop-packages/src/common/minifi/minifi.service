@@ -5,10 +5,10 @@ After=syslog.target network.target
 [Service]
 User=minifi
 Type=forking
-# Run ExecStartPre with root-permissions
+#Run ExecStartPre with root-permissions
 PermissionsStartOnly=true
 ExecStartPre=/usr/bin/mkdir -p /var/run/minifi
-ExecStartPre=/usr/bin/chown -R nifi:nifi /var/run/minifi
+ExecStartPre=/usr/bin/chown -R minifi:minifi /var/run/minifi
 ExecStart=/usr/lib/minifi/bin/minifi.sh start
 ExecStop=/usr/lib/minifi/bin/minifi.sh stop
 
