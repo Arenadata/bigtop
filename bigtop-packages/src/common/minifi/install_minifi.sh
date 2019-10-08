@@ -22,13 +22,15 @@ prefix=$1
 version=$2
 
 minifi_dir="${prefix}/usr/lib/minifi"
+minifi_c2_dir="${prefix}/usr/lib/minifi-c2"
 etc_dir="${prefix}/etc/minifi"
-echo ${minifi_dir}
+c2_etc_dir="${prefix}/etc/minifi-c2"
 
 install -d -m 0755 "${prefix}/usr/lib/"
 install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/var/log/minifi"
 install -d -m 0755 "${prefix}/usr/lib/systemd/system/"
+install -d -m 0755 "${c2_etc_dir}"
 
 tar xf "minifi-assembly/target/minifi-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/minifi-${version}" "${minifi_dir}"
@@ -39,7 +41,11 @@ ln -nsf "/etc/minifi/conf" "${minifi_dir}/conf"
 
 
 tar xf "minifi-c2/minifi-c2-assembly/target//minifi-c2-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
-mv "${prefix}/usr/lib/minifi-c2-${version}" "${prefix}/usr/lib/minifi-c2"
+mv "${prefix}/usr/lib/minifi-c2-${version}" "${minifi_c2_dir}"
+mv "${minifi_c2_dir}/conf" "${c2_etc_dir}/conf"
+cp -r "${c2_etc_dir}/conf" "${c2_etc_dir}/conf.dist"
+
+
 
 tar xf "minifi-toolkit/minifi-toolkit-assembly/target/minifi-toolkit-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/minifi-toolkit-${version}" "${prefix}/usr/lib/minifi-toolkit"
