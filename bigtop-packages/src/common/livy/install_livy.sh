@@ -29,9 +29,9 @@ install -d -m 0755 "${prefix}/usr/lib/"
 install -d -m 0755 "${etc_dir}"
 install -d -m 0755 "${prefix}/var/log/livy"
 
-unzip "assembly/target/livy-server-${version}-incubating.zip" -d "${prefix}/usr/lib/"
+unzip "assembly/target/apache-livy-${version}-incubating-bin.zip" -d "${prefix}/usr/lib/"
 
-mv "${prefix}/usr/lib/livy-server-${version}-incubating" "${livy_dir}"
+mv "${prefix}/usr/lib/apache-livy-${version}-incubating-bin" "${livy_dir}"
 mv "${livy_dir}/conf" "${etc_dir}/conf"
 cp -r "${etc_dir}/conf" "${etc_dir}/conf.dist"
 
