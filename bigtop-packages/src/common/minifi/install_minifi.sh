@@ -45,7 +45,7 @@ mv "${prefix}/usr/lib/minifi-c2-${version}" "${minifi_c2_dir}"
 mv "${minifi_c2_dir}/conf" "${c2_etc_dir}/conf"
 cp -r "${c2_etc_dir}/conf" "${c2_etc_dir}/conf.dist"
 
-
+ln -nsf "/etc/minifi-c2/conf" "${minifi_c2_dir}/conf"
 
 tar xf "minifi-toolkit/minifi-toolkit-assembly/target/minifi-toolkit-${version}-bin.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/minifi-toolkit-${version}" "${prefix}/usr/lib/minifi-toolkit"
