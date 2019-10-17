@@ -1,0 +1,16 @@
+*** hadoop-2.8.5-src/pom.xml.old	2018-09-09 11:35:17.000000000 +0300
+--- hadoop-2.8.5-src/pom.xml	2019-10-17 14:15:59.196424823 +0300
+***************
+*** 53,58 ****
+--- 53,63 ----
+  
+    <repositories>
+      <repository>
++        <id>artifactory_apache</id>
++        <name>artifactory_apache</name>
++        <url>https://ci.arenadata.io/artifactory/maven-apache/</url>
++     </repository>
++     <repository>
+        <id>${distMgmtSnapshotsId}</id>
+        <name>${distMgmtSnapshotsName}</name>
+        <url>${distMgmtSnapshotsUrl}</url>
