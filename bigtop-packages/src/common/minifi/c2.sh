@@ -116,7 +116,7 @@ run() {
   if [ "$1" = "debug" ]; then
     "${JAVA}" -cp "${CLASSPATH}"  -Xms12m -Xmx24m -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 -Djava.net.preferIPv4Stack=true org.apache.nifi.minifi.c2.jetty.JettyServer $@
   else
-    "${JAVA}" -cp "${CLASSPATH}" -Xms12m -Xmx24m -Djava.net.preferIPv4Stack=true org.apache.nifi.minifi.c2.jetty.JettyServer $@ > "/var/log/minifi-c2" 2>&1 &
+    "${JAVA}" -cp "${CLASSPATH}" -Xms12m -Xmx24m -Djava.net.preferIPv4Stack=true org.apache.nifi.minifi.c2.jetty.JettyServer $@ > "/dev/null" 2>&1 &
   fi
    return $?
 }
