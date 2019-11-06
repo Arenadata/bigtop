@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2014 Confluent Inc.
+# Copyright 2018 Confluent Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,24 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-APP_NAME=kafka-rest
-
-KAFKAREST_HOME=/usr/lib/$APP_NAME
-
-# KAFKA REST Proxy env script
-. $KAFKAREST_HOME/config/kafka-rest-env.sh
-
-#PID & LOG DIRs
-
-[ -z $PID_DIR ] && PID_DIR="/var/run/$APP_NAME"
-[ -z $LOG_DIR ] && LOG_DIR="/var/log/$APP_NAME"
-
-#Name of PID file
-PID_FILE="$PID_DIR/$APP_NAME.pid"
-
-#Name of LOG ERR file
-ERR_FILE="$LOG_DIR/$APP_NAME.err"
+KAFKAREST_HOME=/usr/lib/kafka-rest
 
 CLASSPATH=$CLASSPATH:$KAFKAREST_HOME/libs/*
 
