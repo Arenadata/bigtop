@@ -3,32 +3,17 @@
 
 # Use shellcheck to lint this file
 
-APP_NAME=ksql
+base_dir=$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
 
-base_dir=/usr/lib/$APP_NAME
-
-#KSQL env script
-. $base_dir/config/ksql-env.sh
-
-#PID & LOG DIRs
-[ -z $PID_DIR ] && PID_DIR="/var/run/$APP_NAME"
-[ -z $LOG_DIR ] && LOG_DIR="/var/log/$APP_NAME"
-
-# create logs directory
-if [ ! -d "$PID_DIR" ]; then
-  mkdir -p "$PID_DIR"
+# Log directory to use
+if [ "x$LOG_DIR" = "x" ]; then
+  LOG_DIR="$base_dir/logs"
 fi
 
 # create logs directory
-if [ ! -d "$LOGi_DIR" ]; then
+if [ ! -d "$LOG_DIR" ]; then
   mkdir -p "$LOG_DIR"
 fi
-
-#Name of PID file
-PID_FILE="$PID_DIR/$APP_NAME.pid"
-
-#Name of LOG ERR file
-ERR_FILE="$LOG_DIR/$APP_NAME.err"
 
 : "${KSQL_CLASSPATH:=""}"
 : "${KSQL_LOG4J_OPTS:=""}"
@@ -176,5 +161,5 @@ if [ "x$DAEMON_MODE" = "xtrue" ]; then
   echo "Writing console output to $DAEMON_STDOUT_FILE"
   nohup "$JAVA" -cp "$KSQL_CLASSPATH" "${OPTIONS[@]}" "$MAIN" "$@" 2>&1 < /dev/null > "$DAEMON_STDOUT_FILE" &
 else
-  exec "$JAVA" -cp "$KSQL_CLASSPATH" "${OPTIONS[@]}" "$MAIN" "$@" 
+  exec "$JAVA" -cp "$KSQL_CLASSPATH" "${OPTIONS[@]}" "$MAIN" "$@"
 fi
