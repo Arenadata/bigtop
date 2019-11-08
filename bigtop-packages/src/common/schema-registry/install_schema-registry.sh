@@ -25,12 +25,14 @@ version=$2
 install -d -m 0755 "${prefix}/usr/lib/schema-registry/"
 install -d -m 0755 "${prefix}/usr/lib/schema-registry/libs/"
 install -d -m 0755 "${prefix}/usr/share/"
+install -d -m 0755 "${prefix}/usr/bin/"
 install -d -m 0755 "${prefix}/etc/systemd/system/"
 
 
 
 cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/share/java/schema-registry/* "${prefix}/usr/lib/schema-registry/libs/"
 cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/share/doc "${prefix}/usr/share"
+cp -R package-kafka-serde-tools/target/kafka-serde-tools-package-${version}-package/share/* "${prefix}/usr/share"
 cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/bin "${prefix}/usr/lib/schema-registry/"
 cp -R package-schema-registry/target/kafka-schema-registry-package-${version}-package/etc "${prefix}/"
 rm "${prefix}/usr/lib/schema-registry/bin/schema-registry-stop-service"

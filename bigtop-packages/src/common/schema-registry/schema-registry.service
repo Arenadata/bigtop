@@ -1,7 +1,6 @@
 [Unit]
 Description=schema-registry
 Requires=network.target
-After=kafka.service
 
 [Service]
 Type=forking
@@ -10,9 +9,6 @@ User=schema-registry
 Group=kafka
 ExecStart=/usr/lib/schema-registry/bin/schema-registry-start /etc/schema-registry/schema-registry.properties
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStartPre=/bin/mkdir -p /var/log/schema-registry
-ExecStartPre=/bin/chown schema-registry:kafka /var/log/schema-registry
-ExecStartPre=/bin/chmod 755 /var/log/schema-registry
 ExecStartPre=/bin/mkdir -p /run/schema-registry
 ExecStartPre=/bin/chown schema-registry:kafka /run/schema-registry
 ExecStartPre=/bin/chmod 755 /run/schema-registry
