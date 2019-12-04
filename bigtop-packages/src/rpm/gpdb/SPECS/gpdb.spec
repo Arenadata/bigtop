@@ -40,6 +40,13 @@ Source3: do-component-configure
 #BIGTOP_PATCH_FILES
 AutoReqProv: %{autorequire}
 
+%if %{_vendor} == "alt"   
+#%set_verify_elf_method textrel=relaxed
+%set_verify_elf_method skip
+AutoReq: no
+%endif
+
+
 %description
 gpdb
 
