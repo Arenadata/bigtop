@@ -6,7 +6,7 @@ Release: %{pgbouncer_release}
 Summary: Connection pool for Greenplum Database
 Group: Development/Tools
 
-Buildroot: %(mktemp -ud %{_tmppath}/%{pgbouncer_name}-%{version}-%{release}-XXXXXX)
+Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 License:  BSD License
 Source0: pgbouncer-%{pgbouncer_base_version}.tar.gz
 Source1: do-component-build 
@@ -30,7 +30,7 @@ bash $RPM_SOURCE_DIR/do-component-build
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
-/bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{pgbouncer_rest_version}
+/bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{pgbouncer_base_version}
 cp -R  %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/systemd/system/
 
 
