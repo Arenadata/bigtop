@@ -6,7 +6,7 @@ Release: %{pxf_release}
 Summary: Connection pool for Greenplum Database
 Group: Development/Tools
 
-Buildroot: %(mktemp -ud %{_tmppath}/%{pxf_name}-%{version}-%{release}-XXXXXX)
+Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 License:  BSD License
 Source0: pxf-%{pxf_base_version}.tar.gz
 Source1: do-component-build 
