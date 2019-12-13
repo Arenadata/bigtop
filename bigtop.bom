@@ -372,6 +372,16 @@ bigtop {
              ref   = "master"
              dir   = "${name}-${version.base}" }
     }
+    'clickhouse-jdbc-bridge' {
+      name    = 'clickhouse-jdbc-bridge'
+      relNotes = 'Clickhouse jdbc bridge'
+      version { base = '1.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "$name-${version.base}.tgz" }
+      git     {repo  = "https://github.com/ClickHouse/clickhouse-jdbc-bridge.git"
+             ref   = "master"
+             dir   = "${name}-${version.base}" }
+    }
     'clickhouse-odbc' {
       name    = 'clickhouse-odbc'
       relNotes = 'Clickhouse odbc'
