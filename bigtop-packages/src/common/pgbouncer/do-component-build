@@ -68,3 +68,4 @@ cd $CURDIR
 make
 make doc/pgbouncer.1 doc/pgbouncer.5
 make install
+

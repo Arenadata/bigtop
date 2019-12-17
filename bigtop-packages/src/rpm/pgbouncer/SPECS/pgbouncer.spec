@@ -51,3 +51,4 @@ getent passwd pgbouncer >/dev/null || useradd -c "pgbouncer" -s /sbin/nologin -g
 /usr/share/man/man5/*
 %attr(0755,pgbouncer,pgbouncer)/var/log/pgbouncer
 %attr(0755,pgbouncer,pgbouncer)/var/run/pgbouncer
+
