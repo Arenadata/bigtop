@@ -14,7 +14,7 @@ Source2: install_%{name}.sh
 Source3: bigtop.bom
 
 
-Requires: bash
+Requires: bash, gpdb
 Provides: diskquota
 AutoReqProv: no
 
