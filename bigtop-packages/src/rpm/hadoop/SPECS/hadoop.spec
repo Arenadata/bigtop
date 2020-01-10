@@ -226,7 +226,7 @@ Requires: chkconfig, xinetd-simple-services, zlib, initscripts
 %endif
 
 %if  "%{_vendor}" == "alt"
-BuildRequires: pkgconfig, libfuse-devel, libfuse , openssl-devel, gcc4.9-c++, liblzo2-devel, zlib-devel
+BuildRequires: pkgconfig, libfuse-devel, libfuse , openssl-devel, gcc5-c++, liblzo2-devel, zlib-devel
 Requires: chkconfig, xinetd, zlib, initscripts
 %endif
 

@@ -41,7 +41,7 @@
      'scala' { version = '2.10.4'; version_base = version }
    }
    apache { // *required* These shoudn't be modified unless ASF Infra demands changes
-     APACHE_MIRROR = "http://apache.osuosl.org"
+     APACHE_MIRROR = "https://www-eu.apache.org/dist"
      APACHE_ARCHIVE = "https://archive.apache.org/dist"
    }
    git { // *optional* This is a global setting to access protected git repositories, 
@@ -96,8 +96,8 @@ bigtop {
     'scala' { version = '2.11.8'; version_base = version }
   }
   apache {
-    APACHE_MIRROR = "https://www-us.apache.org/dist"
-    APACHE_ARCHIVE = "https://archive.apache.org/dist"
+    APACHE_MIRROR = "http://www-eu.apache.org/dist"
+    APACHE_ARCHIVE = "http://archive.apache.org/dist"
   }
 /** End of Base Configuration */
 
@@ -133,7 +133,7 @@ bigtop {
     'hadoop' {
       name    = 'hadoop'
       relNotes = 'Apache Hadoop'
-      version { base = '3.1.0'; pkg = base; release = 1 }
+      version { base = '3.1.2'; pkg = base; release = 1 }
       tarball { destination = "${name}-${version.base}.tar.gz"
                 source      = "${name}-${version.base}-src.tar.gz" }
       url     { download_path = "/$name/common/$name-${version.base}"
