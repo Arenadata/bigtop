@@ -27,6 +27,9 @@
 %define lib_hadoop_client /usr/lib/hadoop/client
 %define lib_hadoop_yarn /usr/lib/hadoop-yarn/
 
+#alt
+AutoReq: yes, noshell
+
 %if  %{?suse_version:1}0
 %define doc_spark %{_docdir}/spark
 %define alternatives_cmd update-alternatives
@@ -245,9 +248,9 @@ done
 %{lib_spark}/sbin
 %{lib_spark}/work
 %{etc_spark}
-%attr(0755,spark,spark) %{var_lib_spark}
-%attr(0755,spark,spark) %{var_run_spark}
-%attr(0755,spark,spark) %{var_log_spark}
+%%attr(0755,spark,spark) %{var_lib_spark}
+%%attr(0755,spark,spark) %{var_run_spark}
+%%attr(0755,spark,spark) %{var_log_spark}
 %{bin}/spark-*
 %{bin}/find-spark-home
 %exclude %{lib_spark}/R
@@ -256,8 +259,8 @@ done
 
 %files -n spark-python
 %defattr(-,root,root,755)
-%attr(0755,root,root) %{bin}/pyspark
-%attr(0755,root,root) %{lib_spark}/bin/pyspark
+%%attr(0755,root,root) %{bin}/pyspark
+%%attr(0755,root,root) %{lib_spark}/bin/pyspark
 %{lib_spark}/python
 
 %files -n spark-datanucleus
@@ -287,7 +290,7 @@ done
 
 %define service_macro() \
 %files -n %1 \
-%attr(0755,root,root)/%{initd_dir}/%1 \
+%%attr(0755,root,root)/%{initd_dir}/%1 \
 %post -n %1 \
 chkconfig --add %1 \
 \
