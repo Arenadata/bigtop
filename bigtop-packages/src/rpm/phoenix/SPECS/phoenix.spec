@@ -67,6 +67,15 @@
     %{nil}
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+        %define doc_phoenix %{_docdir}/%{name}
+        %define alternatives_cmd update-alternatives
+        %global initd_dir %{_sysconfdir}/rc.d
+%endif
+
 %define doc_phoenix %{_docdir}/%{name}-%{phoenix_version}
 %define alternatives_cmd alternatives
 %global initd_dir %{_sysconfdir}/rc.d/init.d
