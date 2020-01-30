@@ -559,6 +559,15 @@ bigtop {
       url     { site = "https://github.com/01org/isa-l/archive/"
                 archive = site }
     }
+    'bc' {
+      name    = 'bc'
+      relNotes = 'GNU's bc (a numeric processing language) and dc (a calculator)'
+      version { base = '1.06.95'; pkg = base; release = 1 }
+      tarball { destination = "bc-${version.base}.tar.bz2"
+                source      = destination }
+      url     { site = "ftp://alpha.gnu.org/pub/gnu/bc/"
+                archive = site }
+    }
     'ambari' {
       name    = 'ambari'
       relNotes = 'Apache Ambari'

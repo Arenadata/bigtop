@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -ex
+
+echo "$@"
+
+. "$(dirname $0)"/bigtop.bom
+
+%configure --with-readline
+make %{?_smp_mflags}
