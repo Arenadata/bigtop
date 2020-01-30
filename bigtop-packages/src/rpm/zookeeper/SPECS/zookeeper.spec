@@ -82,6 +82,11 @@ Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
 #Requires: bigtop-utils >= 0.7
 
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+AutoReq: no	
+%endif
+
 %description 
 ZooKeeper is a centralized service for maintaining configuration information, 
 naming, providing distributed synchronization, and providing group services. 
