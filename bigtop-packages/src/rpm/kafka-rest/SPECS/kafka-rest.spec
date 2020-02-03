@@ -19,7 +19,7 @@ Source7:  kafka-rest-start
 
 
 BuildArch:  noarch
-Requires:	bash, kafka-rest-utils
+Requires:	bash, kafka-rest-utils = %{kafka_rest_version}
 Provides: 	kafka-rest
 AutoReqProv: 	no
 

@@ -20,7 +20,7 @@ Source8:  kafka-avro-console-producer
 Source9:  schema-registry-start
 
 BuildArch:  noarch
-Requires:	bash, kafka-rest-utils, schema-registry-kafka-serde-tools
+Requires:	bash, kafka-rest-utils = %{schema_registry_version}, schema-registry-kafka-serde-tools = %{schema_registry_version}
 Provides: 	schema-registry
 AutoReqProv: 	no
 
