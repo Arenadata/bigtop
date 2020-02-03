@@ -20,7 +20,7 @@ Source8:  ksql-server.service
 
 
 BuildArch:  noarch
-Requires:	bash, kafka-rest-utils
+Requires:	bash, kafka-rest-utils = %{ksql_version}
 Provides: 	ksql
 AutoReqProv: 	no
 

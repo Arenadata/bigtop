@@ -13,7 +13,7 @@ Source1:  do-component-build
 Source2:  install_kafka-rest-utils.sh
 
 BuildArch:  noarch
-Requires:	bash, kafka-common-utils
+Requires:	bash, kafka-common-utils = %{kafka_rest_utils_version}
 Provides: 	kafka-rest-utils
 AutoReqProv: 	no
 
