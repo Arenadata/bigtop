@@ -1,0 +1,25 @@
+*** zeppelin-0.8.1/spark/pom.xml	2020-01-30 08:17:00.198316603 +0000
+--- zeppelin-0.8.1/spark/pom.xml	2020-01-30 09:18:57.655723165 +0000
+***************
+*** 50,59 ****
+  
+          <spark.archive>spark-${spark.version}</spark.archive>
+          <spark.src.download.url>
+!             https://archive.apache.org/dist/spark/${spark.archive}/${spark.archive}.tgz
+          </spark.src.download.url>
+          <spark.bin.download.url>
+!             https://archive.apache.org/dist/spark/${spark.archive}/${spark.archive}-bin-without-hadoop.tgz
+          </spark.bin.download.url>
+      </properties>
+  
+--- 50,59 ----
+  
+          <spark.archive>spark-${spark.version}</spark.archive>
+          <spark.src.download.url>
+!             http://archive.apache.org/dist/spark/${spark.archive}/${spark.archive}.tgz
+          </spark.src.download.url>
+          <spark.bin.download.url>
+!             http://archive.apache.org/dist/spark/${spark.archive}/${spark.archive}-bin-without-hadoop.tgz
+          </spark.bin.download.url>
+      </properties>
+  
