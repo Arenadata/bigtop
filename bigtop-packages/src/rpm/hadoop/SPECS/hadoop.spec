@@ -227,7 +227,9 @@ Requires: chkconfig, xinetd-simple-services, zlib, initscripts
 
 %if  "%{_vendor}" == "alt"
 BuildRequires: pkgconfig, libfuse-devel, libfuse , openssl-devel, gcc5-c++, liblzo2-devel, zlib-devel
-Requires: chkconfig, xinetd, zlib, initscripts
+Requires: chkconfig, xinetd, zlib, initscripts,  update-alternatives
+%set_verify_elf_method skip	
+AutoReq: no	
 %endif
 
 
@@ -268,6 +270,11 @@ computations.
 Summary: The Hadoop NextGen MapReduce (YARN)
 Group: System/Daemons
 Requires: %{name} = %{version}-%{release}
+
+%if  "%{_vendor}" == "alt"
+%set_verify_elf_method skip	
+AutoReq: no	
+%endif
 
 %description yarn
 YARN (Hadoop NextGen MapReduce) is a general purpose data-computation framework.
