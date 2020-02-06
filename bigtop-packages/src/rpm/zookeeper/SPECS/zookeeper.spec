@@ -65,9 +65,9 @@ Release: %{zookeeper_release}
 Summary: A high-performance coordination service for distributed applications.
 URL: http://zookeeper.apache.org/
 Group: Development/Libraries
-Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
+Buildroot: %{_topdir}/INSTALL/apache-%{name}-%{version}
 License: ASL 2.0
-Source0: %{name}-%{zookeeper_base_version}.tar.gz
+Source0: apache-%{name}-%{zookeeper_base_version}.tar.gz
 Source1: do-component-build
 Source2: install_zookeeper.sh
 Source3: zookeeper.1
@@ -80,7 +80,7 @@ BuildRequires: autoconf, automake, cppunit-devel
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
-Requires: bigtop-utils >= 0.7
+#Requires: bigtop-utils >= 0.7
 
 %description 
 ZooKeeper is a centralized service for maintaining configuration information, 
@@ -100,7 +100,7 @@ Group: Development/Libraries
 Provides native libraries and development headers for C / C++ ZooKeeper clients. Consists of both single-threaded and multi-threaded implementations.
 
 %prep
-%setup -n %{name}-%{zookeeper_base_version}
+%setup -n apache-%{name}-%{zookeeper_base_version}
 
 #BIGTOP_PATCH_COMMANDS
 

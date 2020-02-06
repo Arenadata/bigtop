@@ -205,9 +205,9 @@ install -d ${PREFIX}/${LIB_DIR}-native
 
 
 (cd ${BUILD_DIR}/.. && tar xzf zookeeper-*-lib.tar.gz)
-cp -R ${BUILD_DIR}/../usr/include/* ${PREFIX}/${SYSTEM_INCLUDE_DIR}/
-cp -R ${BUILD_DIR}/../usr/lib*/* ${PREFIX}/${SYSTEM_LIB_DIR}/
-cp -R ${BUILD_DIR}/../usr/bin/* ${PREFIX}/${LIB_DIR}-native/
+cp -R ${BUILD_DIR}/../include/* ${PREFIX}/${SYSTEM_INCLUDE_DIR}/
+cp -R ${BUILD_DIR}/../lib*/* ${PREFIX}/${SYSTEM_LIB_DIR}/
+cp -R ${BUILD_DIR}/../bin/* ${PREFIX}/${LIB_DIR}-native/
 for binary in ${PREFIX}/${LIB_DIR}-native/*; do
   cat > ${PREFIX}/${BIN_DIR}/`basename ${binary}` <<EOF
 #!/bin/bash
