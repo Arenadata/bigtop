@@ -28,7 +28,7 @@
 %define lib_hadoop_yarn /usr/lib/hadoop-yarn/
 
 #alt
-AutoReq: yes, noshell
+AutoReq: no
 
 %if  %{?suse_version:1}0
 %define doc_spark %{_docdir}/spark
@@ -106,6 +106,7 @@ Server for Spark worker
 Summary: Python client for Spark
 Group: Development/Libraries
 Requires: spark-core = %{version}-%{release}, python
+AutoReq: no
 
 %description -n spark-python
 Includes PySpark, an interactive Python shell for Spark, and related libraries
