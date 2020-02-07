@@ -98,6 +98,12 @@ Requires: insserv
 Requires: /lib/lsb/init-functions
 %endif
 
+%if %{_vendor} == "alt" 
+AutoReq: no     
+%endif
+
+
+
 %package server2
 Summary: Provides a Hive Thrift service with improved concurrency support.
 Group: System/Daemons
