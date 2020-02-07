@@ -1,0 +1,27 @@
+diff --git a/pom.xml b/pom.xml
+index d6ae2d7..5f81a0c 100755
+--- a/pom.xml
++++ b/pom.xml
+@@ -991,22 +991,6 @@
+               </rules>
+             </configuration>
+           </execution>
+-          <execution>
+-            <id>banned-jsr305</id>
+-            <goals>
+-              <goal>enforce</goal>
+-            </goals>
+-            <configuration>
+-              <rules>
+-                <bannedDependencies>
+-                  <excludes>
+-                    <exclude>com.google.code.findbugs:jsr305</exclude>
+-                  </excludes>
+-                  <message>We don't allow the JSR305 jar from the Findbugs project, see HBASE-16321.</message>
+-                </bannedDependencies>
+-              </rules>
+-            </configuration>
+-          </execution>
+           <execution>
+             <id>check-aggregate-license</id>
+             <!-- must check after LICENSE is built at 'generate-resources' -->
