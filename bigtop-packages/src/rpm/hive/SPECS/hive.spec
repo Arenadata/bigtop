@@ -143,6 +143,10 @@ Summary: Provides integration between Apache HBase and Apache Hive
 Group: Development/Libraries
 Requires: hive = %{version}-%{release}, hbase
 
+%if %{_vendor} == "alt" 
+AutoReq: no     
+%endif
+
 %description hbase
 This optional package provides integration between Apache HBase and Apache Hive
 
@@ -159,6 +163,10 @@ Summary: Apache Hcatalog is a data warehouse infrastructure built on top of Hado
 Group: Development/Libraries
 Requires: hadoop, hive, bigtop-utils >= 0.7
 
+%if %{_vendor} == "alt" 
+AutoReq: no     
+%endif
+
 %description hcatalog
 Apache HCatalog is a table and storage management service for data created using Apache Hadoop.
 This includes:
@@ -171,6 +179,10 @@ This includes:
 Summary: WebHcat provides a REST-like web API for HCatalog and related Hadoop components.
 Group: Development/Libraries
 Requires: %{name}-hcatalog = %{version}-%{release}
+
+%if %{_vendor} == "alt" 
+AutoReq: no     
+%endif
 
 %description webhcat
 WebHcat provides a REST-like web API for HCatalog and related Hadoop components.
