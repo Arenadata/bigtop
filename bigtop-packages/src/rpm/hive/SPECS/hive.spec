@@ -87,8 +87,6 @@ Requires: hadoop-client, bigtop-utils >= 0.7, zookeeper, hive-jdbc = %{version}-
 Conflicts: hadoop-hive
 Obsoletes: %{name}-webinterface
 
-%description 
-Hive is a data warehouse infrastructure built on top of Hadoop that provides tools to enable easy data summarization, adhoc querying and analysis of large datasets data stored in Hadoop files. It provides a mechanism to put structure on this data and it also provides a simple query language called Hive QL which is based on SQL and which enables users familiar with SQL to query this data. At the same time, this language also allows traditional map/reduce programmers to be able to plug in their custom mappers and reducers to do more sophisticated analysis which may not be supported by the built-in capabilities of the language.
 
 %if  %{?suse_version:1}0
 # Required for init scripts
@@ -102,6 +100,8 @@ Requires: /lib/lsb/init-functions
 AutoReq: no     
 %endif
 
+%description 
+Hive is a data warehouse infrastructure built on top of Hadoop that provides tools to enable easy data summarization, adhoc querying and analysis of large datasets data stored in Hadoop files. It provides a mechanism to put structure on this data and it also provides a simple query language called Hive QL which is based on SQL and which enables users familiar with SQL to query this data. At the same time, this language also allows traditional map/reduce programmers to be able to plug in their custom mappers and reducers to do more sophisticated analysis which may not be supported by the built-in capabilities of the language.
 
 
 %package server2
