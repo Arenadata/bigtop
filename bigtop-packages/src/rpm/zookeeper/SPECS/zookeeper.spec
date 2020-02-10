@@ -110,6 +110,11 @@ difficult to manage. Even when done correctly, different implementations of thes
 Summary: C bindings for ZooKeeper clients
 Group: Development/Libraries
 
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+AutoReq: no	
+%endif
+
 %description native
 Provides native libraries and development headers for C / C++ ZooKeeper clients. Consists of both single-threaded and multi-threaded implementations.
 
