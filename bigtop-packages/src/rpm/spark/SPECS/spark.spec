@@ -27,8 +27,6 @@
 %define lib_hadoop_client /usr/lib/hadoop/client
 %define lib_hadoop_yarn /usr/lib/hadoop-yarn/
 
-#alt
-AutoReq: no
 
 %if  %{?suse_version:1}0
 %define doc_spark %{_docdir}/spark
@@ -37,6 +35,15 @@ AutoReq: no
 %define doc_spark %{_docdir}/spark-%{spark_version}
 %define alternatives_cmd alternatives
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
+
 
 # disable repacking jars
 %define __os_install_post %{nil}
@@ -77,6 +84,12 @@ Requires: /lib/lsb/init-functions
 
 %global initd_dir %{_sysconfdir}/rc.d/init.d
 
+%endif
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
 %endif
 
 %description 
