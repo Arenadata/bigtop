@@ -138,7 +138,7 @@
 %define netcat_package netcat
 %define doc_hadoop %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
-%global initd_dir %{_sysconfdir}/rc.d
+%global initd_dir %{_sysconfdir}/rc.d/init.d
 %endif
 
 
