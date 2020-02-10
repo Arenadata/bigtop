@@ -153,6 +153,8 @@ Group: Development/Libraries
 Requires: hive = %{version}-%{release}, hbase
 
 %if %{_vendor} == "alt" 
+%set_verify_elf_method skip	
+Requires: update-alternatives
 AutoReq: no     
 %endif
 
