@@ -58,6 +58,14 @@
 %endif
 
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
+
 
 Name: zookeeper
 Version: %{zookeeper_version}
@@ -84,6 +92,7 @@ Requires(preun): %{alternatives_dep}
 
 %if %{_vendor} == "alt"	
 %set_verify_elf_method skip	
+Requires: update-alternatives
 AutoReq: no	
 %endif
 
