@@ -67,6 +67,12 @@
     %{nil}
 %endif
 
+%define doc_hbase %{_docdir}/%{name}-%{hbase_version}
+%global initd_dir %{_sysconfdir}/rc.d/init.d
+%define alternatives_cmd alternatives
+
+%endif
+
 
 %if  "%{_vendor}" == "alt"
 %define __os_install_post \
@@ -77,14 +83,6 @@
 %define doc_hadoop %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 %global initd_dir %{_sysconfdir}/rc.d
-%endif
-
-
-
-%define doc_hbase %{_docdir}/%{name}-%{hbase_version}
-%global initd_dir %{_sysconfdir}/rc.d/init.d
-%define alternatives_cmd alternatives
-
 %endif
 
 
@@ -116,6 +114,8 @@ Requires: sh-utils
 %endif
 
 %if %{_vendor} == "alt" 
+%set_verify_elf_method skip	
+Requires: update-alternatives
 AutoReq: no     
 %endif
 
