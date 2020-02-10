@@ -55,6 +55,13 @@
 
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
 
 Name: hive
 Version: %{hive_version}
@@ -96,8 +103,10 @@ Requires: insserv
 Requires: /lib/lsb/init-functions
 %endif
 
-%if %{_vendor} == "alt" 
-AutoReq: no     
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
 %endif
 
 %description 
@@ -163,8 +172,10 @@ Summary: Apache Hcatalog is a data warehouse infrastructure built on top of Hado
 Group: Development/Libraries
 Requires: hadoop, hive, bigtop-utils >= 0.7
 
-%if %{_vendor} == "alt" 
-AutoReq: no     
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
 %endif
 
 %description hcatalog
@@ -180,8 +191,10 @@ Summary: WebHcat provides a REST-like web API for HCatalog and related Hadoop co
 Group: Development/Libraries
 Requires: %{name}-hcatalog = %{version}-%{release}
 
-%if %{_vendor} == "alt" 
-AutoReq: no     
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
 %endif
 
 %description webhcat
