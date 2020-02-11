@@ -45,6 +45,14 @@
 
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
+
 
 # disable repacking jars
 %define __os_install_post %{nil}
@@ -68,6 +76,12 @@ Source7: kafka
 Requires: zookeeper
 Requires: bigtop-utils >= 0.7
 Requires(preun): /sbin/service
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
 
 %description
 Apache Kafka is publish-subscribe messaging rethought as a distributed commit log.
