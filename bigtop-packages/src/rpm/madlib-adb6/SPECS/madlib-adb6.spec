@@ -12,7 +12,7 @@ Source0: madlib-adb6-%{madlib_adb6_base_version}.tar.gz
 Source1: do-component-build 
 Source2: install_%{name}.sh
 Source3: bigtop.bom
-
+#BIGTOP_PATCH_FILES
 
 Requires: bash, python >= 2.6, m4 >= 1.4
 Provides: madlib-adb6
@@ -33,7 +33,7 @@ https://cwiki.apache.org/confluence/display/MADLIB
 
 %prep
 %setup -q -n  madlib-rel-v%{madlib_adb6_base_version}
-
+#BIGTOP_PATCH_COMMANDS
 %build
 bash $RPM_SOURCE_DIR/do-component-build
 
