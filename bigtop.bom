@@ -353,11 +353,11 @@ bigtop {
     'clickhouse' {
       name    = 'clickhouse'
       relNotes = 'ClickHouse'
-      version { base = '19.17.5.18'; pkg = base; release = 1 }
+      version { base = '19.14.10.16'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "$name-${version.base}.tgz" }
       git     {repo  = "https://github.com/yandex/ClickHouse.git"
-             ref   = "v${version.base}-stable"
+             ref   = "v${version.base}-lts"
              dir   = "${name}-${version.base}" }
 
 
