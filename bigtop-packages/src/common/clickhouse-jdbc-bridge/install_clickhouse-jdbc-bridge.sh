@@ -19,7 +19,8 @@ set -e
 set -x
 
 prefix=$1
-version=$2
+#version=$2
+version=1.0
 
 install -d -m 0755 ${prefix}/usr/share/clickhouse-jdbc-bridge
 install -d -m 0755 ${prefix}/var/cache/clickhouse-jdbc-bridge
