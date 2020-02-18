@@ -365,17 +365,17 @@ bigtop {
     'clickhouse-jdbc' {
       name    = 'clickhouse-jdbc'
       relNotes = 'Clickhouse jdbc'
-      version { base = '0.1.52'; pkg = base; release = 1 }
+      version { base = '0.2.4'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "$name-${version.base}.tgz" }
       git     {repo  = "https://github.com/yandex/clickhouse-jdbc.git"
-             ref   = "master"
+             ref   = "release_${version.base}"
              dir   = "${name}-${version.base}" }
     }
     'clickhouse-jdbc-bridge' {
       name    = 'clickhouse-jdbc-bridge'
       relNotes = 'Clickhouse jdbc bridge'
-      version { base = '1.0'; pkg = base; release = 1 }
+      version { base = '1.0a'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "$name-${version.base}.tgz" }
       git     {repo  = "https://github.com/ClickHouse/clickhouse-jdbc-bridge.git"
