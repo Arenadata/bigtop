@@ -13,6 +13,10 @@ Url: https://clickhouse.yandex/
 Source0:	clickhouse-%{clickhouse_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_clickhouse.sh
+#BuildRequires: custom-gcc7-c++
+#%define psuffix -7
+#%define __cc %_bindir/gcc%psuffix
+#%define __cxx %_bindir/g++%psuffix
 #BIGTOP_PATCH_FILES
 
 %description
@@ -24,6 +28,7 @@ system that allows generating analytical data reports in real time.
 #
 %package client
 Summary: %{name} client binary
+Group:		Applications/Databases
 Requires: %{name}-server = %{version}-%{release}
 
 %description client
@@ -34,6 +39,7 @@ This package contains client binary for ClickHouse DBMS.
 #
 %package common-static
 Summary: %{name} common static binaries
+Group:		Applications/Databases
 
 %description common-static
 This package contains static binaries for ClickHouse DBMS
@@ -43,6 +49,7 @@ This package contains static binaries for ClickHouse DBMS
 #
 %package server-common
 Summary: Common configuration files for %{name}
+Group:		Applications/Databases
 
 %description server-common
 This package contains common configuration files for ClickHouse DBMS.
@@ -53,8 +60,15 @@ This package contains common configuration files for ClickHouse DBMS.
 %package server
 
 Summary: Server files for %{name}
+Group:		Applications/Databases
 Requires: %{name}-common-static = %{version}-%{release}
 Requires: %{name}-server-common = %{version}-%{release}
+
+%if %{_vendor} == "alt" 
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no     
+%endif
 
 %description server
 This package contains server files for ClickHouse DBMS.
@@ -64,6 +78,7 @@ This package contains server files for ClickHouse DBMS.
 #
 %package test
 Summary: %{name} test suite
+Group:		Applications/Databases
 Requires: %{name}-server = %{version}-%{release}
 
 %description test
