@@ -504,6 +504,16 @@ bigtop {
                 archive = site }
     }
 
+    'madlib-adb6' {
+      name    = 'madlib-adb6'
+      relNotes = 'madlib-adb6 Greenplum DB'
+      version { base = '1.16'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/apache/madlib/archive/rel/"
+                archive = site }  
+    }
+
     'sigar' {
       name    = 'sigar'
       relNotes = 'sigar'
