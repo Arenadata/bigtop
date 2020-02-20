@@ -6,7 +6,7 @@ Release: %{gptkh_adb6_release}
 Summary: Connection pool for Greenplum Database
 Group: Development/Tools
 
-Buildroot: %(mktemp -ud %{_tmppath}/%{gptkh-adb6_name}-%{version}-%{release}-XXXXXX)
+Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 License:  Arenadata License
 Source0: gptkh-adb6-%{gptkh_adb6_base_version}.tar.gz
 Source1: do-component-build 
