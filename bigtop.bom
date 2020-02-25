@@ -504,6 +504,17 @@ bigtop {
                 archive = site }
     }
 
+    'diskquota' {
+      name    = 'diskquota'
+      relNotes = 'Diskquota is an extension that provides disk usage enforcement for database objects in Greenplum DB'
+      version { base = '1.0.1'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "${version.base}.tar.gz" }
+      url     { site = "https://github.com/greenplum-db/diskquota/archive"
+                archive = site }
+    }
+
+
     'madlib-adb6' {
       name    = 'madlib-adb6'
       relNotes = 'madlib-adb6 Greenplum DB'
