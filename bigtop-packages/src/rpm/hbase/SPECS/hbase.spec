@@ -67,11 +67,22 @@
     %{nil}
 %endif
 
-
 %define doc_hbase %{_docdir}/%{name}-%{hbase_version}
 %global initd_dir %{_sysconfdir}/rc.d/init.d
 %define alternatives_cmd alternatives
 
+%endif
+
+
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define netcat_package netcat
+%define doc_hadoop %{_docdir}/%{name}
+%define alternatives_cmd update-alternatives
+%global initd_dir %{_sysconfdir}/rc.d
 %endif
 
 
@@ -101,6 +112,13 @@ Requires: bsh-utils
 %else
 Requires: sh-utils
 %endif
+
+%if %{_vendor} == "alt" 
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no     
+%endif
+
 
 
 %description 
@@ -371,7 +389,7 @@ fi
 
 %define service_macro() \
 %files %1 \
-%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
+%%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \

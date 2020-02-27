@@ -27,6 +27,7 @@
 %define lib_hadoop_client /usr/lib/hadoop/client
 %define lib_hadoop_yarn /usr/lib/hadoop-yarn/
 
+
 %if  %{?suse_version:1}0
 %define doc_spark %{_docdir}/spark
 %define alternatives_cmd update-alternatives
@@ -34,6 +35,15 @@
 %define doc_spark %{_docdir}/spark-%{spark_version}
 %define alternatives_cmd alternatives
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
+
 
 # disable repacking jars
 %define __os_install_post %{nil}
@@ -76,6 +86,12 @@ Requires: /lib/lsb/init-functions
 
 %endif
 
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
+
 %description 
 Spark is a MapReduce-like cluster computing framework designed to support
 low-latency iterative jobs and interactive use from an interpreter. It is
@@ -103,6 +119,7 @@ Server for Spark worker
 Summary: Python client for Spark
 Group: Development/Libraries
 Requires: spark-core = %{version}-%{release}, python
+AutoReq: no
 
 %description -n spark-python
 Includes PySpark, an interactive Python shell for Spark, and related libraries
@@ -287,7 +304,7 @@ done
 
 %define service_macro() \
 %files -n %1 \
-%attr(0755,root,root)/%{initd_dir}/%1 \
+%%attr(0755,root,root)/%{initd_dir}/%1 \
 %post -n %1 \
 chkconfig --add %1 \
 \

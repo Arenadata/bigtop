@@ -58,6 +58,14 @@
 %endif
 
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
+
 
 Name: zookeeper
 Version: %{zookeeper_version}
@@ -82,6 +90,12 @@ Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
 #Requires: bigtop-utils >= 0.7
 
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
+
 %description 
 ZooKeeper is a centralized service for maintaining configuration information, 
 naming, providing distributed synchronization, and providing group services. 
@@ -95,6 +109,11 @@ difficult to manage. Even when done correctly, different implementations of thes
 %package native
 Summary: C bindings for ZooKeeper clients
 Group: Development/Libraries
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+AutoReq: no	
+%endif
 
 %description native
 Provides native libraries and development headers for C / C++ ZooKeeper clients. Consists of both single-threaded and multi-threaded implementations.

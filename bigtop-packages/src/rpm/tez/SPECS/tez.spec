@@ -47,6 +47,12 @@
 
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+%endif
+
 Name: tez
 Version: %{tez_version}
 Release: %{tez_release}
@@ -94,7 +100,7 @@ sh %{SOURCE2} \
 	--build-dir=. \
         --doc-dir=%{doc_tez} \
         --libexec-dir=%{libexec_tez} \
-	--prefix=$RPM_BUILD_ROOT
+    --prefix=$RPM_BUILD_ROOT
 
 %__rm -f $RPM_BUILD_ROOT/%{lib_tez}/slf4j-log4j12-*.jar
 %__ln_s -f /usr/lib/hadoop/hadoop-annotations.jar $RPM_BUILD_ROOT/%{lib_tez}/hadoop-annotations.jar

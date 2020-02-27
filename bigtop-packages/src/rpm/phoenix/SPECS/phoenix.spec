@@ -67,6 +67,15 @@
     %{nil}
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+        %define doc_phoenix %{_docdir}/%{name}
+        %define alternatives_cmd update-alternatives
+        %global initd_dir %{_sysconfdir}/rc.d
+%endif
+
 %define doc_phoenix %{_docdir}/%{name}-%{phoenix_version}
 %define alternatives_cmd alternatives
 %global initd_dir %{_sysconfdir}/rc.d/init.d
@@ -97,6 +106,12 @@ Requires: bsh-utils
 Requires: sh-utils
 %endif
 
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
+
 %description
 Phoenix is a SQL skin over HBase, delivered as a client-embedded JDBC driver.
 The Phoenix query engine transforms an SQL query into one or more HBase scans,
@@ -110,6 +125,12 @@ standard JDBC interface; all the usual interfaces are supported.
 Summary: A stand-alone server that exposes Phoenix to thin clients
 Group: Development/Libraries
 Requires: phoenix = %{version}-%{release}
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
 
 %description queryserver
 The Phoenix Query Server provides an alternative means for interaction 

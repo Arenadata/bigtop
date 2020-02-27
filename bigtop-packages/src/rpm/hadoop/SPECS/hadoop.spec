@@ -21,12 +21,18 @@
 # that would make newer RPM debuginfo generation scripts happy.
 %undefine _missing_build_ids_terminate_build
 
+%define cmake_package cmake3
+%define fuse_devel_package fuse-devel
 
 %if  %{?suse_version:1}0
 %define cmake_package cmake
-%else
-%define cmake_package cmake3
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define cmake_package cmake
+%define fuse_devel_package libfuse-devel
+%endif
+
 
 
 %define hadoop_name hadoop
@@ -69,7 +75,7 @@
 %define hdfs_services hdfs-namenode hdfs-secondarynamenode hdfs-datanode hdfs-zkfc hdfs-journalnode
 %define yarn_services yarn-resourcemanager yarn-nodemanager yarn-proxyserver yarn-timelineserver
 %define hadoop_services %{hdfs_services} %{mapreduce_services} %{yarn_services} %{httpfs_services}
-# Hadoop outputs built binaries into %{hadoop_build}
+# Hadoop outputs built binaries into {hadoop_build}
 %define hadoop_build_path build
 %define static_images_dir src/webapps/static/images
 %define libexecdir /usr/lib
@@ -117,11 +123,24 @@
     /usr/lib/rpm/brp-compress ; \
     %{nil}
 
+
 %define netcat_package netcat-openbsd
 %define doc_hadoop %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 %global initd_dir %{_sysconfdir}/rc.d
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define netcat_package netcat
+%define doc_hadoop %{_docdir}/%{name}
+%define alternatives_cmd update-alternatives
+%global initd_dir %{_sysconfdir}/rc.d/init.d
+%endif
+
 
 %if  0%{?mgaversion}
 %define netcat_package netcat-openbsd
@@ -179,7 +198,7 @@ Source28: mapred.1
 Source29: hadoop-yarn-timelineserver.svc
 #BIGTOP_PATCH_FILES
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id} -u -n)
-BuildRequires: fuse-devel, fuse, %{cmake_package}
+BuildRequires: %{fuse_devel_package}, fuse, %{cmake_package}
 Requires: libisal-dev, coreutils, /usr/sbin/useradd, /usr/sbin/usermod, /sbin/chkconfig, /sbin/service, bigtop-utils >= 0.7
 Requires: psmisc, %{netcat_package}
 # Sadly, Sun/Oracle JDK in RPM form doesn't provide libjvm.so, which means we have
@@ -195,7 +214,7 @@ Requires: sh-utils, insserv
 
 # CentOS 5 does not have any dist macro
 # So I will suppose anything that is not Mageia or a SUSE will be a RHEL/CentOS/Fedora
-%if %{!?suse_version:1}0 && %{!?mgaversion:1}0
+%if %{!?suse_version:1}0 && %{!?mgaversion:1} && "%{_vendor}" != "alt"
 BuildRequires: pkgconfig, fuse-libs, redhat-rpm-config, lzo-devel, openssl-devel
 # Required for init scripts
 Requires: sh-utils, /lib/lsb/init-functions
@@ -205,6 +224,14 @@ Requires: sh-utils, /lib/lsb/init-functions
 BuildRequires: pkgconfig, libfuse-devel, libfuse2 , libopenssl-devel, gcc-c++, liblzo-devel, zlib-devel
 Requires: chkconfig, xinetd-simple-services, zlib, initscripts
 %endif
+
+%if  "%{_vendor}" == "alt"
+BuildRequires: pkgconfig, libfuse-devel, libfuse , openssl-devel, gcc5-c++, liblzo2-devel, zlib-devel
+Requires: chkconfig, xinetd, zlib, initscripts,  update-alternatives
+%set_verify_elf_method skip	
+AutoReq: no	
+%endif
+
 
 
 %description
@@ -243,6 +270,11 @@ computations.
 Summary: The Hadoop NextGen MapReduce (YARN)
 Group: System/Daemons
 Requires: %{name} = %{version}-%{release}
+
+%if  "%{_vendor}" == "alt"
+%set_verify_elf_method skip	
+AutoReq: no	
+%endif
 
 %description yarn
 YARN (Hadoop NextGen MapReduce) is a general purpose data-computation framework.
@@ -697,9 +729,9 @@ fi
 # Service file management RPMs
 %define service_macro() \
 %files %1 \
-%defattr(-,root,root) \
+%%defattr(-,root,root) \
 %{initd_dir}/%{name}-%1 \
-%config(noreplace) /etc/default/%{name}-%1 \
+%%config(noreplace) /etc/default/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \
