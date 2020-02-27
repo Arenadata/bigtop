@@ -97,8 +97,8 @@ bigtop {
     'scala' { version = '2.11.8'; version_base = version }
   }
   apache {
-    APACHE_MIRROR = "http://archive.apache.org/dist"
-    APACHE_ARCHIVE = "https://downloads.apache.org/dist"
+    APACHE_MIRROR  = "https://downloads.apache.org"
+    APACHE_ARCHIVE = "http://archive.apache.org/dist"
   }
 /** End of Base Configuration */
 
@@ -190,7 +190,7 @@ bigtop {
       version { base = '0.9.2'; pkg = base; release = 1 }
       tarball { destination = "apache-${name}-${version.base}-src.tar.gz"
                 source      = destination }
-      url     { download_path = "/$name/${version.base}/"
+      url     { download_path = "$name/${version.base}"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
