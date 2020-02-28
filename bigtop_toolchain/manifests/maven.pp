@@ -14,7 +14,7 @@
 # limitations under the License.
 
 class bigtop_toolchain::maven {
-  $mvnversion = latest_maven_binary("3.5.[0-9]*")
+  $mvnversion = latest_maven_binary("3.5.")
   $mvn = "apache-maven-$mvnversion"
 
   $apache_prefix = nearest_apache_mirror()

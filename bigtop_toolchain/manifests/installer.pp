@@ -14,6 +14,14 @@
 # limitations under the License.
 
 class bigtop_toolchain::installer {
+
+  if versioncmp($::puppetversion,'3.6.1') >= 0 {
+    $allow_virtual_packages = hiera('allow_virtual_packages',false)
+    Package {
+      allow_virtual => $allow_virtual_packages,
+    }
+  }
+
   include bigtop_toolchain::jdk
   include bigtop_toolchain::maven
   include bigtop_toolchain::ant
@@ -30,3 +38,4 @@ class bigtop_toolchain::installer {
   }
   class { 'bigtop_toolchain::cleanup': stage => 'last' }
 }
+
