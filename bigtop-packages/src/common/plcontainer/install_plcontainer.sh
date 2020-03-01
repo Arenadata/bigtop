@@ -85,7 +85,9 @@ done
 
 . $(dirname ${0})/bigtop.bom
 
-mkdir -p ${PREFIX}/share/postgresql/extension
-make install DESTDIR=${PREFIX} bindir=/bin libdir=/lib/postgresql pkglibdir=/lib/postgresql datadir=/share/postgresql
-cp -d /lib64/libjson-c.so* ${PREFIX}/lib/
-find /usr/local/lib -xtype f -name "libcurl.so*" | xargs -I{} cp -d {} ${PREFIX}/lib/ || exit 1
+export PATH="$LIB_DIR"/usr/local/bin:$PATH
+
+mkdir -p $PREFIX/share/postgresql/extension
+make install DESTDIR=$PREFIX bindir=/bin libdir=/lib/postgresql pkglibdir=/lib/postgresql datadir=/share/postgresql
+cp -d /lib64/libjson-c.so* $PREFIX/lib/
+find $LIB_DIR/usr/local/lib -xtype f -name "libcurl.so*" | xargs -I{} cp -d {} $PREFIX/lib/ || exit 1

@@ -18,6 +18,18 @@ set -ex
 
 . $(dirname ${0})/bigtop.bom
 
+CURLLOCDIR="${CURL%.tar.gz}"
+CURLSITEDIR="${CURLLOCDIR//./_}"
+
+wget https://github.com/curl/curl/releases/download/"$CURLSITEDIR"/"$CURL"
+tar -xvzf "$CURL"
+cd "$CURLLOCDIR"
+./configure
+make 
+make install DESTDIR="$PREFIX"
+export PATH="$PREFIX"/usr/local/bin:$PATH
+cd ..
+
 make clean
 make build-clients
 make CFLAGS="-Wno-unused-variable -Wno-unused-parameter  -Wno-unused-function -Wno-unused-but-set-variable"

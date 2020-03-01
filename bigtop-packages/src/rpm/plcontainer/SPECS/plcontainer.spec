@@ -1,4 +1,5 @@
 %define         gphome /usr/lib/gpdb
+%define         curl curl-7.43.0.tar.gz
 
 Summary:        PL/Container for Greenplum database 
 License:        Apache License, Version 2.0
@@ -21,7 +22,7 @@ Provides PL/Container procedural language implementation for the Greenplum Datab
 %setup
 
 %build
-bash %{SOURCE1}
+CURL=%{curl} PREFIX=%{_builddir} /bin/bash %{SOURCE1}
 #make clean
 #make build-clients
 #make PYTHON_VERSION=3 build-clients # this is for building py3client but it needs python37 to be installed
@@ -29,10 +30,11 @@ bash %{SOURCE1}
 
 %install
 
-bash %{SOURCE2} \
+/bin/bash %{SOURCE2} \
           --build-dir=.         \
           --version=%{plcontainer_version} \
-          --prefix=%{buildroot}%{gphome}
+          --prefix=%{buildroot}%{gphome} \
+          --lib-dir=%{_builddir}
 
             
 #mkdir -p %{buildroot}%{gphome}/share/postgresql/extension
