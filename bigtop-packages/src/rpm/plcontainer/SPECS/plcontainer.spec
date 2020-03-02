@@ -22,7 +22,7 @@ Provides PL/Container procedural language implementation for the Greenplum Datab
 %setup
 
 %build
-CURL=%{curl} PREFIX=%{_builddir} /bin/bash %{SOURCE1}
+CURL=%{curl} PATH=%{gphome}/bin:$PATH PREFIX=%{_builddir} /bin/bash %{SOURCE1}
 #make clean
 #make build-clients
 #make PYTHON_VERSION=3 build-clients # this is for building py3client but it needs python37 to be installed
@@ -30,7 +30,7 @@ CURL=%{curl} PREFIX=%{_builddir} /bin/bash %{SOURCE1}
 
 %install
 
-/bin/bash %{SOURCE2} \
+PATH=%{gphome}/bin:$PATH /bin/bash %{SOURCE2} \
           --build-dir=.         \
           --version=%{plcontainer_version} \
           --prefix=%{buildroot}%{gphome} \
