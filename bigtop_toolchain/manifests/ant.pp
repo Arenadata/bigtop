@@ -14,8 +14,8 @@
 # limitations under the License.
 
 class bigtop_toolchain::ant {
-  $ant =  'apache-ant-1.9.13'
-
+  # Ant version restricted to 1.9 because 1.10 supports Java>=8 only.
+  $ant =  latest_ant_binary("1.9.")
   $apache_prefix = nearest_apache_mirror()
 
   exec {"/usr/bin/wget $apache_prefix/ant/binaries/$ant-bin.tar.gz":
