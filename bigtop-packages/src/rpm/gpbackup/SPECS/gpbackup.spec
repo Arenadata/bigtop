@@ -16,7 +16,7 @@ Source3: bigtop.bom
 Source4: gpbackup.sh
 
 Provides: gpbackup
-Obsoletes: gptkh
+
 AutoReqProv: no
 
 %description 
