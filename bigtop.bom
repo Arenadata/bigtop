@@ -550,16 +550,16 @@ bigtop {
              ref   =  "${version.base}"
              dir   = "${name}-${version.base}" }
     }
-    
-    'gptkh-adb6' {
-      name    = 'gptkh-adb6'
-      relNotes = 'gptkh'
-      version { base = '0.4'; pkg = base; release = 1 }
-      tarball { destination = "${name}-${version.base}.tar.gz"
-                source      = "${name}-${version.base}.tar.gz" }
-      git     {repo  = "git@github.com:arenadata/gptkh.git"
-             ref   =  "${version.base}"
-             dir   = "${name}-${version.base}" }
+
+    'plcontainer' {
+      name    = 'plcontainer'
+      relNotes = 'PL/Container for Greenplum database'
+      version { base = '2.1.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "${version.base}.tar.gz" }
+      git     { repo = "https://github.com/greenplum-db/plcontainer/"
+                ref = "${version.base}"
+                dir = null }
     }
 
     'postgis-adb6' {
