@@ -560,6 +560,17 @@ bigtop {
              dir   = "${name}-${version.base}" }
     }
 
+    'plcontainer' {
+      name    = 'plcontainer'
+      relNotes = 'PL/Container for Greenplum database'
+      version { base = '2.1.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "${version.base}.tar.gz" }
+      git     { repo = "https://github.com/greenplum-db/plcontainer/"
+                ref = "${version.base}"
+                dir = null }
+    }
+
     'postgis-adb6' {
       name    = 'postgis-adb6'
       relNotes = 'Geospatial extensions for Greenplum Database'
