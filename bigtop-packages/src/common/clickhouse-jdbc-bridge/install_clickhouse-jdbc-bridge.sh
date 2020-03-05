@@ -31,7 +31,8 @@ install -d -m 0755 ${prefix}/etc/init.d
 
 cp target/clickhouse-jdbc-bridge-${version}.jar ${prefix}/usr/share/clickhouse-jdbc-bridge/clickhouse-jdbc-bridge-${version}.jar
 cp src/debian/etc/* ${prefix}/etc/clickhouse-jdbc-bridge/ 
-cp src/debian/init.d/clickhouse-jdbc-bridge ${prefix}/etc/init.d/clickhouse-jdbc-bridge
+#cp src/debian/init.d/clickhouse-jdbc-bridge ${prefix}/etc/init.d/clickhouse-jdbc-bridge
+cp $RPM_SOURCE_DIR/clickhouse-jdbc-bridge ${prefix}/etc/init.d/clickhouse-jdbc-bridge
 #cp AUTHORS CHANGELOG README.md ${prefix}/usr/share/doc/clickhouse-jdbc
 #cp LICENSE ${prefix}/usr/share/licenses/clickhouse-jdbc
 
