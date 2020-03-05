@@ -36,7 +36,7 @@ bash %{SOURCE1} %{clickhouse_jdbc_bridge_version}
 /bin/bash %{SOURCE2} %{buildroot} %{clickhouse_jdbc_bridge_version}
 
 %post
-getent group clickhouse-jdbc-bridge >/dev/null || groupadd -r clickhouse-jdbc-bridg
+getent group clickhouse-jdbc-bridge >/dev/null || groupadd -r clickhouse-jdbc-bridge
 getent passwd clickhouse-jdbc-bridge >/dev/null || useradd -c "clickhouse-jdbc-bridge" -d /usr/share/clickhouse-jdbc-bridge -r -M clickhouse-jdbc-bridge 2> /dev/null || :
 
 %files
