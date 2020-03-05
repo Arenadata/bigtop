@@ -30,7 +30,7 @@ make install DESTDIR="$PREFIX"
 export PATH="$PREFIX"/usr/local/bin:$PATH
 cd ..
 
-make clean
-make build-clients
-make CFLAGS="-Wno-unused-variable -Wno-unused-parameter  -Wno-unused-function -Wno-unused-but-set-variable"
+make clean PLCONTAINER_VERSION=${PLCONTAINER_VERSION}
+make build-clients PLCONTAINER_VERSION=${PLCONTAINER_VERSION}
+make CFLAGS="-Wno-unused-variable -Wno-unused-parameter  -Wno-unused-function -Wno-unused-but-set-variable" PLCONTAINER_VERSION=${PLCONTAINER_VERSION}
 
