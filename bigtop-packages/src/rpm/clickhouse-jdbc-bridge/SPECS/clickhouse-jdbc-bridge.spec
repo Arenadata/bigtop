@@ -13,9 +13,11 @@ License:	Apache License, Version 2.0
 Vendor: Yandex
 Packager: ArenaData
 Url: https://clickhouse.yandex/
+BuildArch:      noarch
 Source0:	clickhouse-jdbc-bridge-%{clickhouse_jdbc_bridge_version}.tar.gz
-Source1:  do-component-build
-Source2:  install_clickhouse-jdbc-bridge.sh
+Source1:        do-component-build
+Source2:        install_clickhouse-jdbc-bridge.sh
+Source3:        clickhouse-jdbc-bridge
 #BIGTOP_PATCH_FILES
 
 %description
@@ -31,11 +33,11 @@ bash %{SOURCE1} %{clickhouse_jdbc_bridge_version}
 %install
 %__rm -rf $RPM_BUILD_ROOT 
 
-/bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{clickhouse_jdbc_bridge_version}
+/bin/bash %{SOURCE2} %{buildroot} %{clickhouse_jdbc_bridge_version}
 
-%post 
-getent group clickhouse-jdbc-bridge >/dev/null || groupadd -r clickhouse
-getent passwd clickhouse-jdbc-bridge >/dev/null || useradd -c "clickhouse-jdbc-bridge" -s /sbin/nologin -g clickhouse-jdbc-bridge  -r -M  clickhouse-jdbc-bridge 2> /dev/null || :
+%post
+getent group clickhouse-jdbc-bridge >/dev/null || groupadd -r clickhouse-jdbc-bridge
+getent passwd clickhouse-jdbc-bridge >/dev/null || useradd -c "clickhouse-jdbc-bridge" -d /usr/share/clickhouse-jdbc-bridge -r -M clickhouse-jdbc-bridge 2> /dev/null || :
 
 %files
 # just include the whole directory
