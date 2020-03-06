@@ -439,8 +439,8 @@ def genTasks = { target ->
     }
     def final PKG_BUILD_DIR = config.bigtop.components[target].builddir
     def final NAME = config.bigtop.components[target].name
-    def final PKG_NAME_FOR_PKG = NAME.replaceAll("-", "_")
     def final PKG_NAME = config.bigtop.components[target].pkg
+    def final PKG_NAME_FOR_PKG = NAME.replaceAll("-", "_")
     def final PKG_OUTPUT_DIR = config.bigtop.components[target].outputdir
     def final PKG_VERSION = config.bigtop.components[target].version.pkg
     def final BASE_VERSION = config.bigtop.components[target].version.base
@@ -450,7 +450,6 @@ def genTasks = { target ->
 
     def command = [
         '--define', "_topdir $PKG_BUILD_DIR/rpm/",
-        '--define', "buildroot $PKG_BUILD_DIR/rpm/BUIDROOT",
         '--define', "${PKG_NAME_FOR_PKG}_base_version $BASE_VERSION",
         '--define', "hadoop_version ${HADOOP_VERSION}",
         '--define', "${PKG_NAME_FOR_PKG}_version ${PKG_VERSION}",
@@ -544,7 +543,6 @@ def genTasks = { target ->
 
     def command = [
         '--define', "_topdir $PKG_BUILD_DIR/rpm/",
-        '--define', "buildroot $PKG_BUILD_DIR/rpm/BUIDROOT",
         '--define', "${PKG_NAME_FOR_PKG}_base_version $BASE_VERSION",
         '--define', "${PKG_NAME_FOR_PKG}_version ${PKG_VERSION}",
         '--define', "${PKG_NAME_FOR_PKG}_release ${BIGTOP_BUILD_STAMP}%{?dist}",
