@@ -1,10 +1,10 @@
 %define         postgishome /usr/lib/gpdb
 %define         postgis_dir %{_builddir}/%{name}-%{postgis_adb6_version}/postgis/build/postgis-%{postgis_adb6_version}
-#%define         postgis_rel %{getenv:project_id}
-%define         geos_ver 3.4.2
-%define         proj_ver 4.8.0
-%define         json_ver 0.11
-%define         gdal_ver 1.11.4
+
+%if 0%{?suse_version} >= 1500
+  %define copt_flags COPT="-Wno-error=maybe-uninitialized -Wno-error=implicit-fallthrough"
+%endif
+
 
 Summary:        Geospatial extensions for Greenplum Database
 License:        GPLv2
@@ -16,16 +16,37 @@ AutoReq:        no
 AutoProv:       no
 Provides:       postgis = %{postgis_adb6_version}
 Obsoletes:      postgis
-Requires:       geos = %{geos_ver}, proj = %{proj_ver}, json-c = %{json_ver}, gdal = %{gdal_ver}
+%if %{_vendor} == "alt"
+BuildRequires:  libgeos-devel, libproj-devel, libjson-c-devel, libgdal-devel
+Requires:       libgeos, libproj, libjson-c, libgdal
+%endif
+
+%if %{?suse_version:1}0
+BuildRequires:  geos-devel, libproj-devel, libjson-c-devel, gdal-devel, libxml2-devel
+Requires:       geos, proj, libjson-c3, gdal, libxml2
+%endif
+
+%if %{_vendor} == "redhat"
+BuildRequires:  geos-devel, json-c-devel, proj-devel, gdal-devel
+Requires:       geos, json-c, proj, gdal
+%endif
+
 Source0:        %{name}-%{postgis_adb6_version}.tar.gz
 #Source1:        do-component-build
 #Source2:        install_postgis.sh
+#BIGTOP_PATCH_FILES
 
 %description
 The PostGIS module provides geospatial extensions for Greenplum Database.
 
 %prep
 %setup -q -n %{name}-%{postgis_adb6_version}
+
+%if 0%{?suse_version} >= 1500
+#BIGTOP_PATCH_COMMANDS
+%endif
+
+
 
 %build
 cd %{postgis_dir}
@@ -44,7 +65,7 @@ mkdir -p %{buildroot}%{postgishome}/bin \
          %{buildroot}%{postgishome}/share/postgresql/extension \
          %{buildroot}%{postgishome}/share/postgresql/contrib/postgis-2.1/{install,upgrade,uninstall}/
 
-make %{?_smp_mflags} -C %{postgis_dir} BLD_TOP=%{bld_top} all install DESTDIR=%{buildroot}
+make %{?copt_flags} %{?_smp_mflags} -C %{postgis_dir} BLD_TOP=%{bld_top} all install DESTDIR=%{buildroot}
 
 cp %{postgis_dir}/extensions/postgis/postgis.control                               %{buildroot}%{postgishome}/share/postgresql/extension/postgis.control
 cp %{postgis_dir}/extensions/postgis_topology/postgis_topology.control             %{buildroot}%{postgishome}/share/postgresql/extension/postgis_topology.control
