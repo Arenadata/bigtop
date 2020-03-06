@@ -19,13 +19,18 @@ Obsoletes:      postgis
 %if %{_vendor} == "alt"
 BuildRequires:  libgeos-devel, libproj-devel, libjson-c-devel, libgdal-devel
 Requires:       libgeos, libproj, libjson-c, libgdal
-%elif %{?suse_version:1}0
+%endif
+
+%if %{?suse_version:1}0
 BuildRequires:  geos-devel, libproj-devel, libjson-c-devel, gdal-devel, libxml2-devel
 Requires:       geos, proj, libjson-c3, gdal, libxml2
-%else
+%endif
+
+%if %{_vendor} == "redhat"
 BuildRequires:  geos-devel, json-c-devel, proj-devel, gdal-devel
 Requires:       geos, json-c, proj, gdal
 %endif
+
 Source0:        %{name}-%{postgis_adb6_version}.tar.gz
 #Source1:        do-component-build
 #Source2:        install_postgis.sh
