@@ -6,7 +6,6 @@ Release: %{madlib_adb6_release}
 Summary: Apache MADlib for adb 6 is an Open-Source Library for Scalable in-Database Analytics
 Group: Development/Libraries
 
-Buildroot: %(mktemp -ud %{_tmppath}/%{madlib_adb6_name}-%{version}-%{release}-XXXXXX)
 License: ASL 2.0
 Source0: madlib-adb6-%{madlib_adb6_base_version}.tar.gz
 Source1: do-component-build 
