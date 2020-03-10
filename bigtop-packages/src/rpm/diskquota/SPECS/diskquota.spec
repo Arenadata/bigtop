@@ -6,7 +6,7 @@ Release: %{diskquota_release}
 Summary: Extension that provides disk usage enforcement for database objects in Greenplum DB
 Group: Development/Tools
 
-Buildroot: %(mktemp -ud %{_tmppath}/%{diskquota_name}-%{version}-%{release}-XXXXXX)
+Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 License: PostgreSQL license
 Source0: diskquota-%{diskquota_base_version}.tar.gz
 Source1: do-component-build 
