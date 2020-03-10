@@ -89,5 +89,5 @@ export PATH="$LIB_DIR"/usr/local/bin:$PATH
 
 mkdir -p $PREFIX/share/postgresql/extension
 make install DESTDIR=$PREFIX bindir=/bin libdir=/lib/postgresql pkglibdir=/lib/postgresql datadir=/share/postgresql PLCONTAINER_VERSION=${PLCONTAINER_VERSION}
-cp -d /lib64/libjson-c.so* $PREFIX/lib/
+find /lib /lib64 /usr/lib /usr/lib64 -xtype f -name "libjson-c.so*" | xargs -I{} cp -d {} $PREFIX/lib/ || exit 1
 find $LIB_DIR/usr/local/lib -xtype f -name "libcurl.so*" | xargs -I{} cp -d {} $PREFIX/lib/ || exit 1
