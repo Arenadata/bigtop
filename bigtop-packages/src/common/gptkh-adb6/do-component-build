@@ -21,6 +21,9 @@ set -ex
 CURDIR=$(pwd)
 DEPSRC=$CURDIR/sources
 PREFIX=$CURDIR/install
-#export GPHOME=/usr/lib/gpdb
-#export POSTGISHOME=/usr/lib/postgis
+PATH=$PATH:/usr/lib/gpdb/bin
+export PATH
+export GPHOME=/usr/lib/gpdb
+export POSTGISHOME=/usr/lib/postgis
+
 make
