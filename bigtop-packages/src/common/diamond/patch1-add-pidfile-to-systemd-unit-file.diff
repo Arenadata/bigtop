@@ -1,0 +1,13 @@
+diff --git a/rpm/systemd/diamond.service b/rpm/systemd/diamond.service
+index ad4eddf..c900179 100644
+--- a/rpm/systemd/diamond.service
++++ b/rpm/systemd/diamond.service
+@@ -2,7 +2,7 @@
+ Description=diamond - A system statistics collector for graphite
+ 
+ [Service]
+-ExecStart=/usr/bin/python /usr/bin/diamond
++ExecStart=/usr/bin/python /usr/bin/diamond --pidfile=/var/run/diamond.pid
+ Type=forking
+ #If not using default pid, make sure you change PIDFile setting
+ PIDFile=/var/run/diamond.pid
