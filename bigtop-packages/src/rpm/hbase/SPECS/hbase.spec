@@ -26,6 +26,7 @@
 %define hbase_services master regionserver thrift thrift2 rest
 %define hadoop_home /usr/lib/hadoop
 %define zookeeper_home /usr/lib/zookeeper
+%define _localstatedir /var
 
 %if  %{?suse_version:1}0
 
