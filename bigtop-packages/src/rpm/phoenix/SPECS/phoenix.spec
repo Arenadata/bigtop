@@ -184,22 +184,21 @@ fi
 %config(noreplace) %{etc_phoenix_conf_dist}
 %config(noreplace) %{_sysconfdir}/default/phoenix
 
-%define service_macro() \
-%files %1 \
-%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
-%attr(0775,phoenix,phoenix) %{var_lib_phoenix} \
-%attr(0775,phoenix,phoenix) %{var_log_phoenix} \
-%config(noreplace) /etc/default/%{name}-%1 \
-%post %1 \
-chkconfig --add %{name}-%1 \
-\
-%preun %1 \
-if [ "$1" = 0 ] ; then \
-        service %{name}-%1 stop > /dev/null \
-        chkconfig --del %{name}-%1 \
-fi \
-%postun %1 \
-if [ $1 -ge 1 ]; then \
-   service %{name}-%1 condrestart >/dev/null 2>&1 || : \
+
+%files queryserver 
+%attr(0755,root,root)/%{initd_dir}/%{name}-queryserver 
+%attr(0775,phoenix,phoenix) %{var_lib_phoenix} 
+%attr(0775,phoenix,phoenix) %{var_log_phoenix} 
+%config(noreplace) /etc/default/%{name}-queryserver 
+%post queryserver 
+chkconfig --add %{name}-queryserver 
+
+%preun queryserver 
+if [ "$1" = 0 ] ; then 
+        service %{name}-queryserver stop > /dev/null 
+        chkconfig --del %{name}-queryserver 
+fi 
+%postun queryserver 
+if [ $1 -ge 1 ]; then 
+   service %{name}-queryserver condrestart >/dev/null 2>&1 || : 
 fi
-%service_macro queryserver
