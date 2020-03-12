@@ -1,0 +1,13 @@
+diff --git a/setup.py b/setup.py
+index dcdd724..ba0c633 100755
+--- a/setup.py
++++ b/setup.py
+@@ -72,7 +72,7 @@ else:
+             else:
+                 data_files.append(('/etc/init',
+                                    ['debian/diamond.upstart']))
+-        if distro in ['centos', 'redhat', 'debian', 'fedora', 'oracle']:
++        if distro in ['centos', 'redhat', 'debian', 'fedora', 'oracle', 'altlinux']:
+             data_files.append(('/etc/init.d',
+                                ['bin/init.d/diamond']))
+             if distro_major_version >= 7 and not distro == 'debian':

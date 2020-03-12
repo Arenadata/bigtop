@@ -601,6 +601,16 @@ bigtop {
       git     { repo  = "https://github.com/jmxtrans/jmxtrans.git"
                 ref   = "jmxtrans-parent-${version.base}" }
     }
+
+    'diamond' {
+      name    = 'diamond'
+      relNotes = 'Smart data producer for graphite graphing package'
+      version { base = '4.0.515'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "$name-${version.base}.tar.gz" }
+      git     { repo  = "https://github.com/python-diamond/Diamond.git"
+                ref   = "master" }
+    }
     
     'gpbackup-s3-plugin' {
       name    = 'gpbackup-s3-plugin'
