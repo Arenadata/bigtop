@@ -70,6 +70,15 @@
 %endif
 
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
+
+
 Name: livy
 Version: %{livy_version}
 Release: %{livy_release}
@@ -85,6 +94,12 @@ Source2: install_livy.sh
 Source3: bigtop.bom
 #BIGTOP_PATCH_FILES
 Requires: bigtop-utils >= 0.7
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
 
 %description 
 Apache Livy is a service that enables easy interaction with a Spark cluster over a REST interface. It enables easy submission of Spark jobs or snippets of Spark code, synchronous or asynchronous result retrieval, as well as Spark Context management, all via a simple REST interface or an RPC client library. Apache Livy also simplifies the interaction between Spark and application servers, thus enabling the use of Spark for interactive web/mobile applications. Additional features include:
