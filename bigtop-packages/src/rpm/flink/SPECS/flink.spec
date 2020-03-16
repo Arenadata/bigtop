@@ -79,6 +79,13 @@ Summary: Provides the Apache Flink Job Manager service.
 Group: System/Daemons
 Requires: %{name} = %{version}-%{release}
 Requires(pre): %{name} = %{version}-%{release}
+%if %{_vendor} == "redhat"
+Requires(pre): redhat-lsb-core
+%endif
+%if %{_vendor} == "alt"
+AutoReq: no
+Requires(pre): lsb-core
+%endif
 
 %description jobmanager
 Apache Flink Job Manager service.
@@ -96,6 +103,13 @@ Summary: Provides the Apache Flink Task Manager service.
 Group: System/Daemons
 Requires: %{name} = %{version}-%{release}
 Requires(pre): %{name} = %{version}-%{release}
+%if %{_vendor} == "redhat"
+Requires(pre): redhat-lsb-core
+%endif
+%if %{_vendor} == "alt"
+AutoReq: no
+Requires(pre): lsb-core
+%endif
 
 %description taskmanager
 Apache Flink Task Manager service.
