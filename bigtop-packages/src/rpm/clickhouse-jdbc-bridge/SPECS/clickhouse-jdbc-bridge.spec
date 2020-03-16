@@ -14,10 +14,18 @@ Vendor: Yandex
 Packager: ArenaData
 Url: https://clickhouse.yandex/
 BuildArch:      noarch
+%if %{_vendor} == "alt"
+AutoReq: no
+Requires(pre): lsb-core
+%endif
+%if %{_vendor} == "redhat"
+Requires(pre): redhat-lsb-core
+%endif
 Source0:	clickhouse-jdbc-bridge-%{clickhouse_jdbc_bridge_version}.tar.gz
 Source1:        do-component-build
 Source2:        install_clickhouse-jdbc-bridge.sh
 Source3:        clickhouse-jdbc-bridge
+
 #BIGTOP_PATCH_FILES
 
 %description
@@ -36,8 +44,10 @@ bash %{SOURCE1} %{clickhouse_jdbc_bridge_version}
 /bin/bash %{SOURCE2} %{buildroot} %{clickhouse_jdbc_bridge_version}
 
 %post
-getent group clickhouse-jdbc-bridge >/dev/null || groupadd -r clickhouse-jdbc-bridge
-getent passwd clickhouse-jdbc-bridge >/dev/null || useradd -c "clickhouse-jdbc-bridge" -d /usr/share/clickhouse-jdbc-bridge -r -M clickhouse-jdbc-bridge 2> /dev/null || :
+CHJBUSER="clickhouse-jdbc-bridge"
+CHJBGROUP="clickhouse-jdbc-bridge"
+getent group "$CHJBGROUP" >/dev/null || groupadd -r "$CHJBGROUP"
+getent passwd "$CHJBUSER" >/dev/null || useradd -g "$CHJBGROUP" -c "$CHJBUSER" -s /sbin/nologin -d /usr/share/clickhouse-jdbc-bridge -r -M "$CHJBUSER" 2> /dev/null || :
 
 %files
 # just include the whole directory

@@ -208,7 +208,7 @@ case "$1" in
 
 		BRIDGE_CMD="$JAVA $JAVA_OPTIONS -jar $START_JAR $BRIDGE_ARGS"
 
-		su "$BRIDGE_USER" -c "$BRIDGE_CMD" &
+		su -s /bin/bash "$BRIDGE_USER" -c "$BRIDGE_CMD" &
 		echo "$!" > "$PIDFILE"
 
 		sleep 2
@@ -223,7 +223,7 @@ case "$1" in
   stop)
 	
 	if pidofproc -p "$PIDFILE" >/dev/null 2>&1; then
-		killproc -p "$PIDFILE" -d 10 &&
+		killproc -p "$PIDFILE" &&
 		rm -f "$PIDFILE" &&
 		rm -rf "$JVM_TMP" &&
 		rm -rf "$BRIDGE_TMP/*"
