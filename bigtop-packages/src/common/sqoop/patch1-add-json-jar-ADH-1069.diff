@@ -1,0 +1,33 @@
+diff --git a/ivy.xml b/ivy.xml
+index e4b45bf..f416f52 100644
+--- a/ivy.xml
++++ b/ivy.xml
+@@ -61,6 +61,7 @@ under the License.
+     <artifact conf="master"/>
+   </publications>
+   <dependencies>
++
+     <!-- Dependencies for Hadoop 2.6.0 -->
+     <dependency org="org.apache.hadoop" name="hadoop-common"
+       rev="${hadoop.version}" conf="common->default">
+@@ -205,6 +206,11 @@ under the License.
+       <artifact name="zookeeper" type="jar" />
+     </dependency>
+ 
++    <dependency org="org.json" name="json" rev="${json.version}" 
++      conf="runtime->default;redist->default">
++      <artifact name="json" type="jar" />
++    </dependency>
++
+     <dependency org="org.apache.avro" name="avro" rev="${avro.version}"
+       conf="runtime->default;redist->default">
+       <exclude org="org.slf4j" module="slf4j-api"/>
+diff --git a/ivy/libraries.properties b/ivy/libraries.properties
+index 2ef04f4..c82d9d7 100644
+--- a/ivy/libraries.properties
++++ b/ivy/libraries.properties
+@@ -57,3 +57,4 @@ slf4j.version=1.7.7
+ hadoop.version=2.6.0
+ hbase.version=1.2.4
+ hcatalog.version=1.2.1
++json.version=20190722
