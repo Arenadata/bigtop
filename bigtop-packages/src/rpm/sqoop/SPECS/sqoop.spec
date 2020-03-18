@@ -15,6 +15,7 @@
 %define lib_sqoop /usr/lib/sqoop
 %define conf_sqoop %{_sysconfdir}/%{name}/conf
 %define conf_sqoop_dist %{conf_sqoop}.dist
+%define run_sqoop %{_var}/run/%{name}
 
 
 %if  %{?suse_version:1}0
@@ -127,7 +128,8 @@ init_file=$RPM_BUILD_ROOT/%{initd_dir}/sqoop-metastore
 %__cp $orig_init_file $init_file
 chmod 0755 $init_file
 
-%__install -d  -m 0755 $RPM_BUILD_ROOT/var/log/sqoop
+%__install -d -m 0755 $RPM_BUILD_ROOT/var/log/sqoop
+%__install -d -m 0755 %{buildroot}/%{run_sqoop}
 
 %pre
 getent group sqoop >/dev/null || groupadd -r sqoop
@@ -160,6 +162,7 @@ fi
 %attr(0755,root,root) %{initd_dir}/sqoop-metastore
 %attr(0755,sqoop,sqoop) /var/lib/sqoop
 %attr(0755,sqoop,sqoop) /var/log/sqoop
+%attr(0755,sqoop,sqoop) %{_var}/run/%{name}
 
 # Files for main package
 %files 
