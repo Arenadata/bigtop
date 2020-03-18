@@ -7,6 +7,7 @@ Group: Development/Libraries
 BuildArch: noarch
 Vendor: The Diamond Team <diamond@librelist.com>
 Provides: diamond
+AutoReq: no
 Url: https://github.com/python-diamond/Diamond
 
 %if %{_vendor} == "alt"
