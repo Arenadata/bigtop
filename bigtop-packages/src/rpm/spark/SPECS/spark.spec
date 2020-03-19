@@ -321,3 +321,4 @@ fi
 %service_macro spark-worker
 %service_macro spark-history-server
 %service_macro spark-thriftserver
+
