@@ -96,8 +96,8 @@ bigtop {
     'scala' { version = '2.11.8'; version_base = version }
   }
   apache {
-    APACHE_MIRROR = "https://www-us.apache.org/dist"
-    APACHE_ARCHIVE = "https://archive.apache.org/dist"
+    APACHE_MIRROR = "https://downloads.apache.org"
+    APACHE_ARCHIVE = "http://archive.apache.org/dist"
   }
 /** End of Base Configuration */
 
@@ -566,6 +566,17 @@ bigtop {
       tarball { destination = "apache-$name-${version.base}-src.tar.gz"
                 source      = destination }
       url     { download_path = "/$name/$name-${version.base}/"
+                site = "${apache.APACHE_MIRROR}/${download_path}"
+                archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+    }
+
+    'airflow' {
+      name    = 'airflow'
+      relNotes = 'Apache Airflow'
+      version { base = '1.10.9'; pkg = '1.10.9'; release = 1 }
+      tarball { destination = "apache-$name-${version.base}-bin.tar.gz"
+                source      = destination }
+      url     { download_path = "$name/${version.base}"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
