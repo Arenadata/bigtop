@@ -1,6 +1,10 @@
 %define _binaries_in_noarch_packages_terminate_build 0
 %define __jar_repack 0
 
+# This patch should be applied this way only. 
+# It can't be applied by common way because pathced file does not exist at prep stage
+%define patch0 patch0-change-su-parameters-MON-32.diff
+
 Name: jmxtrans
 Version: %{jmxtrans_version}
 Release: %{jmxtrans_release}
@@ -33,6 +37,7 @@ or other packaging.
 
 %build
 /bin/bash %{SOURCE1}
+patch -p1 < %{_sourcedir}/%patch0
 
 %install
 /bin/bash %{SOURCE2} --version=%{jmxtrans_version} --prefix=%{buildroot} --build-dir=%{_builddir}
