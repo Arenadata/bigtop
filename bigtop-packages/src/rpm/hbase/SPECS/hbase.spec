@@ -83,7 +83,7 @@
 %define netcat_package netcat
 %define doc_hadoop %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
-%global initd_dir %{_sysconfdir}/rc.d
+%global initd_dir %{_sysconfdir}/rc.d/init.d
 %endif
 
 
@@ -408,3 +408,4 @@ fi
 %service_macro thrift2
 %service_macro regionserver
 %service_macro rest
+
