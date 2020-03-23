@@ -28,6 +28,7 @@
 %define hive_services hive-metastore hive-server2 hive-hcatalog-server hive-webhcat-server
 # After we run "ant package" we'll find the distribution here
 %define hive_dist build/dist
+%define _localstatedir /var
 
 %if  %{!?suse_version:1}0
 
