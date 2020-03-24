@@ -15,7 +15,6 @@ Source1:  do-component-build
 Source2:  install_libisal.sh
 #BIGTOP_PATCH_FILES
 
-BuildArch:  noarch
 Requires:	bash, glibc-devel
 Provides: 	libisal
 AutoReqProv: 	no
