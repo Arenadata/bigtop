@@ -56,6 +56,13 @@
 
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+
+%define alternatives_cmd update-alternatives
+%endif
 
 Name: hive
 Version: %{hive_version}
@@ -88,8 +95,6 @@ Requires: hadoop-client, bigtop-utils >= 0.7, zookeeper, hive-jdbc = %{version}-
 Conflicts: hadoop-hive
 Obsoletes: %{name}-webinterface
 
-%description 
-Hive is a data warehouse infrastructure built on top of Hadoop that provides tools to enable easy data summarization, adhoc querying and analysis of large datasets data stored in Hadoop files. It provides a mechanism to put structure on this data and it also provides a simple query language called Hive QL which is based on SQL and which enables users familiar with SQL to query this data. At the same time, this language also allows traditional map/reduce programmers to be able to plug in their custom mappers and reducers to do more sophisticated analysis which may not be supported by the built-in capabilities of the language.
 
 %if  %{?suse_version:1}0
 # Required for init scripts
@@ -98,6 +103,16 @@ Requires: insserv
 # Required for init scripts
 Requires: /lib/lsb/init-functions
 %endif
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
+
+%description 
+Hive is a data warehouse infrastructure built on top of Hadoop that provides tools to enable easy data summarization, adhoc querying and analysis of large datasets data stored in Hadoop files. It provides a mechanism to put structure on this data and it also provides a simple query language called Hive QL which is based on SQL and which enables users familiar with SQL to query this data. At the same time, this language also allows traditional map/reduce programmers to be able to plug in their custom mappers and reducers to do more sophisticated analysis which may not be supported by the built-in capabilities of the language.
+
 
 %package server2
 Summary: Provides a Hive Thrift service with improved concurrency support.
@@ -138,6 +153,12 @@ Summary: Provides integration between Apache HBase and Apache Hive
 Group: Development/Libraries
 Requires: hive = %{version}-%{release}, hbase
 
+%if %{_vendor} == "alt" 
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no     
+%endif
+
 %description hbase
 This optional package provides integration between Apache HBase and Apache Hive
 
@@ -154,6 +175,12 @@ Summary: Apache Hcatalog is a data warehouse infrastructure built on top of Hado
 Group: Development/Libraries
 Requires: hadoop, hive, bigtop-utils >= 0.7
 
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
+
 %description hcatalog
 Apache HCatalog is a table and storage management service for data created using Apache Hadoop.
 This includes:
@@ -166,6 +193,12 @@ This includes:
 Summary: WebHcat provides a REST-like web API for HCatalog and related Hadoop components.
 Group: Development/Libraries
 Requires: %{name}-hcatalog = %{version}-%{release}
+
+%if %{_vendor} == "alt"	
+%set_verify_elf_method skip	
+Requires: update-alternatives
+AutoReq: no	
+%endif
 
 %description webhcat
 WebHcat provides a REST-like web API for HCatalog and related Hadoop components.
@@ -224,6 +257,13 @@ Requires: initscripts
 # Required for init scripts
 Requires: /lib/lsb/init-functions
 %endif
+
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+%endif
+
 
 %description webhcat-server
 Init scripts for WebHcat server.
@@ -374,8 +414,8 @@ fi
 
 %define service_macro() \
 %files %1 \
-%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
-%config(noreplace) /etc/default/%{name}-%1 \
+%%attr(0755,root,root) %{initd_dir}/%{name}-%1 \
+%%config(noreplace) /etc/default/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \
@@ -392,3 +432,4 @@ fi
 %service_macro metastore
 %service_macro hcatalog-server
 %service_macro webhcat-server
+
