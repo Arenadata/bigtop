@@ -47,6 +47,12 @@
 
 %endif
 
+%if  "%{_vendor}" == "alt"
+%define __os_install_post \
+        /usr/lib/rpm/brp.d/032-compress.brp ; \
+        %{nil}
+%endif
+
 Name: tez
 Version: %{tez_version}
 Release: %{tez_release}
