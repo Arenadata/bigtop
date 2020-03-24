@@ -730,9 +730,9 @@ fi
 # Service file management RPMs
 %define service_macro() \
 %files %1 \
-%defattr(-,root,root) \
+%%defattr(-,root,root) \
 %{initd_dir}/%{name}-%1 \
-%config(noreplace) /etc/default/%{name}-%1 \
+%%config(noreplace) /etc/default/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \
