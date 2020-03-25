@@ -23,8 +23,12 @@ version=$2
 
 cd build
 DAEMONS="clickhouse clickhouse-test clickhouse-compressor clickhouse-client clickhouse-server"
-for daemon in $DAEMONS; do \
-  scl enable devtoolset-8 "DESTDIR=${prefix} cmake3 -DCOMPONENT=$daemon -P cmake_install.cmake"; \
+for daemon in $DAEMONS; do
+  if [ "$(rpmbuild --eval "%{_vendor}")" == "alt" ]; then
+    DESTDIR=${prefix} cmake -DCOMPONENT=$daemon -P cmake_install.cmake
+  elif [ "$(rpmbuild --eval "%{_vendor}")" == "redhat" ]; then
+    scl enable devtoolset-8 "DESTDIR=${prefix} cmake3 -DCOMPONENT=$daemon -P cmake_install.cmake"
+  fi
 done
 cd ..
 
