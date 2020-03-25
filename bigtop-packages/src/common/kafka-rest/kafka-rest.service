@@ -10,12 +10,10 @@ User=kafka-rest
 Group=kafka
 ExecStart=/usr/lib/kafka-rest/bin/kafka-rest-start /etc/kafka-rest/kafka-rest.properties
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStartPre=/bin/mkdir -p /var/log/kafka-rest
-ExecStartPre=/bin/chown kafka-rest:kafka /var/log/kafka-rest
-ExecStartPre=/bin/chmod 755 /var/log/kafka-rest
 ExecStartPre=/bin/mkdir -p /run/kafka-rest
 ExecStartPre=/bin/chown kafka-rest:kafka /run/kafka-rest
 ExecStartPre=/bin/chmod 755 /run/kafka-rest
+TimeoutStopSec=180
 Restart=no
 PermissionsStartOnly=true
 

@@ -7,8 +7,8 @@ User=minifi
 Type=forking
 #Run ExecStartPre with root-permissions
 PermissionsStartOnly=true
-ExecStartPre=/usr/bin/mkdir -p /var/run/minifi-c2
-ExecStartPre=/usr/bin/chown -R minifi:minifi /var/run/minifi-c2
+ExecStartPre=/bin/mkdir -p /var/run/minifi-c2
+ExecStartPre=/bin/chown -R minifi:minifi /var/run/minifi-c2
 ExecStart=/usr/lib/minifi-c2/bin/c2.sh
 
 [Install]
