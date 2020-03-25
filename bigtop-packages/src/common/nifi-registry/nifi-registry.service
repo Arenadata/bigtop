@@ -7,8 +7,8 @@ User=nifi
 Type=forking
 # Run ExecStartPre with root-permissions
 PermissionsStartOnly=true
-ExecStartPre=/usr/bin/mkdir -p /var/run/nifi-registry
-ExecStartPre=/usr/bin/chown -R nifi:nifi /var/run/nifi-registry
+ExecStartPre=/bin/mkdir -p /var/run/nifi-registry
+ExecStartPre=/bin/chown -R nifi:nifi /var/run/nifi-registry
 ExecStart=/usr/lib/nifi-registry/bin/nifi-registry.sh start
 ExecStop=/usr/lib/nifi-registry/bin/nifi-registry.sh stop
 
