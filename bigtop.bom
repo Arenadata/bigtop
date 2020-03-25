@@ -42,8 +42,8 @@
    }
    apache { // *required* These shoudn't be modified unless ASF Infra demands changes
      APACHE_MIRROR = "http://apache.osuosl.org"
-     APACHE_ARCHIVE = "http
-
+       APACHE_ARCHIVE = "https://archive.apache.org/dist"
+   }
    git { // *optional* This is a global setting to access protected git repositories, 
          //            can be specified per component as well
      user = "john_doe"
@@ -96,7 +96,7 @@ bigtop {
     'scala' { version = '2.11.8'; version_base = version }
   }
   apache {
-    APACHE_MIRROR = "http://www-us.apache.org/dist"
+    APACHE_MIRROR = "https://downloads.apache.org"
     APACHE_ARCHIVE = "http://archive.apache.org/dist"
   }
   confluentinc {
