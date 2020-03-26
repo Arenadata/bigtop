@@ -18,6 +18,11 @@
 
 mkdir build
 cd build
-scl enable devtoolset-8 "cmake3 .. -DCMAKE_INSTALL_PREFIX=/usr -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release"
-scl enable devtoolset-8 "make -j $(grep -c ^processor /proc/cpuinfo)"
+if [ "$(rpmbuild --eval "%{_vendor}")" == "alt" ]; then
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release
+  make -j $(grep -c ^processor /proc/cpuinfo)
+elif [ "$(rpmbuild --eval "%{_vendor}")" == "redhat" ]; then
+  scl enable devtoolset-8 "cmake3 .. -DCMAKE_INSTALL_PREFIX=/usr -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release"
+  scl enable devtoolset-8 "make -j $(grep -c ^processor /proc/cpuinfo)"
+fi
 

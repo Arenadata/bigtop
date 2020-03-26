@@ -16,6 +16,7 @@ Url: https://clickhouse.yandex/
 Source0:	clickhouse-jdbc-%{clickhouse_jdbc_version}.tar.gz
 Source1:  do-component-build
 Source2:  install_clickhouse-jdbc.sh
+BuildArch: noarch
 #BIGTOP_PATCH_FILES
 
 %description

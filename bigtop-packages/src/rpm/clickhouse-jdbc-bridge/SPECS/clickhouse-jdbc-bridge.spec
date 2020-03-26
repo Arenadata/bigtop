@@ -14,9 +14,10 @@ Vendor: Yandex
 Packager: ArenaData
 Url: https://clickhouse.yandex/
 BuildArch:      noarch
+
 %if %{_vendor} == "alt"
 AutoReq: no
-Requires(pre): lsb-core
+Requires(pre): lsb-init
 %endif
 %if %{_vendor} == "redhat"
 Requires(pre): redhat-lsb-core
