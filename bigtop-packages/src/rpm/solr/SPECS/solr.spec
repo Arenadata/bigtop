@@ -156,6 +156,7 @@ fi
 %config(noreplace) /etc/default/solr 
 %{lib_solr}
 %{bin_solr}/solrctl
+%attr(0755,root,root) %{lib_solr}/server/scripts/cloud-scripts
 %defattr(-,solr,solr,755)
 /var/lib/solr
 /var/run/solr
