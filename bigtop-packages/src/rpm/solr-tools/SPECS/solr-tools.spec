@@ -43,13 +43,12 @@ mvn package
 
 
 %files 
-%defattr(-,root,root,755)
-%{_datarootdir}/%{name}/%{name}-%{solr_tools_base_version}.jar
+%attr(0644,root,root) %{_datarootdir}/%{name}/%{name}-%{solr_tools_base_version}.jar
 
 %post
 echo ""
-echo "#################################################################"
-echo "# Usage: java -jar target/solr-tools-1.0-SNAPSHOT.jar admin 123 #"
-echo "# HZtl83vopLyZfOpGedEQveAwvVdAQ1Ukr6dDJPEfs/w= MTIz             #"              
-echo "#################################################################"
+echo "#########################################################################"
+echo "# Usage: java -jar %{_datarootdir}/%{name}/%{name}-%{solr_tools_base_version}.jar admin 123 #"
+echo "# HZtl83vopLyZfOpGedEQveAwvVdAQ1Ukr6dDJPEfs/w= MTIz                     #"              
+echo "#########################################################################"
 echo ""
