@@ -315,6 +315,18 @@ bigtop {
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
+
+    'solr-tools' {
+      name    = 'solr-tools'
+      relNotes = 'Apache Solr-Tools'
+      version { base = '1.0.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}-src.tgz"
+                source      = destination }
+      git     { repo = "https://github.com/arenadata/solr-tools"
+                ref = 'master'
+                dir = "${name}-${version.base}" }
+    }
+
     'crunch' {
       name    = 'crunch'
       relNotes = 'Apache Crunch'
