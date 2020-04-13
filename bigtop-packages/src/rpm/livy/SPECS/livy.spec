@@ -23,6 +23,7 @@
 %define hive_home /usr/lib/hive
 %define zookeeper_home /usr/lib/zookeeper
 %define hbase_home /usr/lib/hbase
+%define var_lib_livy /var/lib/%{name}
 #BIGTOP_PATCH_FILES
 
 # CentOS 5 does not have any dist macro
@@ -92,6 +93,7 @@ Source0: livy-%{livy_base_version}.tar.gz
 Source1: do-component-build
 Source2: install_livy.sh
 Source3: bigtop.bom
+Source4: livy-server.service
 #BIGTOP_PATCH_FILES
 Requires: bigtop-utils >= 0.7
 
@@ -121,9 +123,15 @@ env livyOD_BASE_VERSION=%{livy_base_version} bash %{SOURCE1}
 #### INSTALL SECTION ####
 #########################
 %install
-%__rm -rf $RPM_BUILD_ROOT
+%__rm -rf %{buildroot}
 
-/bin/bash %{SOURCE2} $RPM_BUILD_ROOT %{livy_version}
+/bin/bash %{SOURCE2} %{buildroot} %{livy_version}
+%__install -d -m 755 %{buildroot}%{_unitdir}
+%__install -m 644 %{SOURCE4} %{buildroot}%{_unitdir}/
+
+%pre
+getent group livy >/dev/null || groupadd -r livy
+getent passwd livy >/dev/null || useradd -c "Livy" -s /sbin/nologin -g livy -m -r -d %{var_lib_livy} livy 2> /dev/null || :
 
 #######################
 #### FILES SECTION ####
@@ -132,3 +140,5 @@ env livyOD_BASE_VERSION=%{livy_base_version} bash %{SOURCE1}
 %config /etc/livy
 %doc
 /usr/lib/livy
+%attr(0644,root,root) %{_unitdir}/livy-server.service
+%attr(0755,livy,livy) %{log_livy}
