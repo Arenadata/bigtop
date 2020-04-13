@@ -1,0 +1,31 @@
+[Unit]
+Description=Livy Server
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+
+User=livy
+Group=livy
+
+Environment=SPARK_HOME=/usr/lib/spark
+Environment=HADOOP_CONF_DIR=/etc/hadoop/conf
+Environment=LIVY_PID_DIR=/var/run/livy
+Environment=LIVY_LOG_DIR=/var/log/livy
+Environment=CONF_DIR="/etc/livy/conf"
+
+PermissionsStartOnly=true
+
+ExecStartPre=/bin/install -d -m 755 -o livy -g livy /var/run/livy
+ExecStartPre=/bin/install -d -m 755 -o livy -g livy /var/log/livy
+
+ExecStart=/usr/lib/livy/bin/livy-server start
+ExecStop=/usr/lib/livy/bin/livy-server stop
+
+PIDFile=/var/run/livy/livy-livy-server.pid
+
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
