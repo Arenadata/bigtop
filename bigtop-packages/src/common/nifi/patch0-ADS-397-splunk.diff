@@ -1,0 +1,19 @@
+*** nifi-1.10.0/nifi-nar-bundles/nifi-splunk-bundle/pom.xml	2020-04-18 23:54:37.578245950 +0300
+--- nifi-1.10.0/nifi-nar-bundles/nifi-splunk-bundle/pom.xml	2020-04-18 23:55:31.610793974 +0300
+***************
+*** 36,42 ****
+          <repository>
+              <id>splunk</id>
+              <name>Splunk Artifactory</name>
+!             <url>https://splunk.artifactoryonline.com/splunk/ext-releases-local/</url>
+              <releases>
+                  <enabled>true</enabled>
+              </releases>
+--- 36,42 ----
+          <repository>
+              <id>splunk</id>
+              <name>Splunk Artifactory</name>
+!             <url>https://splunk.artifactoryonline.com/artifactory/ext-releases-local/</url>
+              <releases>
+                  <enabled>true</enabled>
+              </releases>
