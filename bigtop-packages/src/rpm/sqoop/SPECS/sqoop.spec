@@ -48,6 +48,12 @@
 %endif
 
 
+%if  "%{_vendor}" == "alt"
+AutoReq: no
+%define alternatives_cmd update-alternatives
+%endif
+
+
 Name: sqoop
 Version: %{sqoop_version}
 Release: %{sqoop_release}
@@ -65,6 +71,9 @@ Source4: sqoop-metastore.sh.suse
 Buildarch: noarch
 BuildRequires: asciidoc, xmlto
 Requires: hadoop-client, bigtop-utils >= 0.7
+%if %{_vendor} == "alt"
+Requires: update-alternatives
+%endif
 
 %description 
 Sqoop allows easy imports and exports of data sets between databases and the Hadoop Distributed File System (HDFS).
@@ -93,6 +102,9 @@ Requires: initscripts
 Requires: redhat-lsb
 %endif
 
+%if %{_vendor} == "alt"
+Requires(pre): lsb-core
+%endif
 
 %description metastore
 Shared metadata repository for Sqoop. This optional package hosts a metadata

@@ -35,6 +35,10 @@
 %global initd_dir %{_sysconfdir}/rc.d
 %endif
 
+%if %{_vendor} == "alt"
+AutoReq: no
+%endif
+
 Name: %{flink_name}
 Version: %{flink_version}
 Release: %{flink_release}
@@ -73,6 +77,10 @@ Some of the key features of Apache Flink includes.
     * Complete Event Processing (CEP)
     * Fault-tolerance via Lightweight Distributed Snapshots
     * Hadoop-native YARN & HDFS implementation
+
+%if %{_vendor} == "alt"
+Requires: update-alternatives
+%endif
 
 %package jobmanager
 Summary: Provides the Apache Flink Job Manager service.
@@ -170,7 +178,7 @@ getent passwd flink >/dev/null || useradd -c "Flink" -s /sbin/nologin -g flink -
 
 %define service_macro() \
 %files %1 \
-%config(noreplace) %{initd_dir}/%{name}-%1 \
+%%config(noreplace) %{initd_dir}/%{name}-%1 \
 %post %1 \
 chkconfig --add %{name}-%1 \
 %preun %1 \
@@ -185,3 +193,5 @@ if [ "$?" -ge 1 ]; then \
 fi
 %service_macro jobmanager 
 %service_macro taskmanager
+
+
