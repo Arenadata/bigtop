@@ -38,6 +38,12 @@
 %global initd_dir %{_sysconfdir}/rc.d/init.d
 %endif
 
+%if  "%{_vendor}" == "alt"
+AutoReq: no
+%define alternatives_cmd update-alternatives
+%endif
+
+
 # disable repacking jars
 %define __os_install_post %{nil}
 
@@ -63,6 +69,11 @@ Requires: bigtop-utils >= 0.7
 %if %{!?suse_version:1}0 && %{!?mgaversion:1}0
 # Required for init scripts
 Requires: /lib/lsb/init-functions
+%endif
+
+
+%if %{_vendor} == "alt"
+Requires: update-alternatives
 %endif
 
 %description 
