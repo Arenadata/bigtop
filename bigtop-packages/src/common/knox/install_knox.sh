@@ -37,6 +37,9 @@ tar xf "target/${version}/knoxshell-${version}.tar.gz" -C "${prefix}/usr/lib/"
 mv "${prefix}/usr/lib/knox-${version}" "${knox_dir}"
 mv "${prefix}/usr/lib/knoxshell-${version}" "${knoxshell_dir}"
 
+find ${knox_dir} -type d -exec chmod 755 {} \;
+find ${knoxshell_dir} -type d -exec chmod 755 {} \;
+
 mv "${knox_dir}/conf" "${etc_dir}/conf"
 cp -r "${etc_dir}/conf" "${etc_dir}/conf.dist"
 mv "${knoxshell_dir}/conf" "${etc_knoxshell_dir}/conf"
