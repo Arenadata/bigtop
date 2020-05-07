@@ -225,7 +225,7 @@ def genTasks = { target ->
       }
       exec {
         workingDir "$DL_DIR/${dir}"
-        commandLine "git submodule update --init".split()
+        commandLine "git submodule update --init --recursive".split()
         errorOutput devNull
         standardOutput devNull
       }
