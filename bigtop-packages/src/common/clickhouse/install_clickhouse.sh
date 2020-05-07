@@ -27,7 +27,7 @@ for daemon in $DAEMONS; do
   if [ "$(rpmbuild --eval "%{_vendor}")" == "alt" ]; then
     DESTDIR=${prefix} cmake -DCOMPONENT=$daemon -P cmake_install.cmake
   elif [ "$(rpmbuild --eval "%{_vendor}")" == "redhat" ]; then
-    scl enable devtoolset-8 "DESTDIR=${prefix} cmake3 -DCOMPONENT=$daemon -P cmake_install.cmake"
+    scl enable devtoolset-9 "DESTDIR=${prefix} cmake3 -DCOMPONENT=$daemon -P cmake_install.cmake"
   fi
 done
 cd ..
