@@ -60,6 +60,10 @@ Source6: bigtop.bom
 #BIGTOP_PATCH_FILES
 Requires: bigtop-utils >= 0.7
 Requires(preun): /sbin/service
+%if %{_vendor} == "alt"
+Requires: update-alternatives
+%endif
+
 
 %description
 Apache Flink is an open source platform for distributed stream and batch data processing.
@@ -80,9 +84,6 @@ Some of the key features of Apache Flink includes.
     * Fault-tolerance via Lightweight Distributed Snapshots
     * Hadoop-native YARN & HDFS implementation
 
-%if %{_vendor} == "alt"
-Requires: update-alternatives
-%endif
 
 %package jobmanager
 Summary: Provides the Apache Flink Job Manager service.
