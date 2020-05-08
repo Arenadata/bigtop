@@ -36,6 +36,8 @@
 %endif
 
 %if %{_vendor} == "alt"
+%define alternatives_cmd update-alternatives
+%global initd_dir %{_sysconfdir}/rc.d/init.d
 AutoReq: no
 %endif
 
