@@ -24,7 +24,7 @@ if [ "$(rpmbuild --eval "%{_vendor}")" == "alt" ]; then
   make -j $(grep -c ^processor /proc/cpuinfo)
   make install
 elif [ "$(rpmbuild --eval "%{_vendor}")" == "redhat" ]; then
-  scl enable devtoolset-8 "cmake3 .. -DCMAKE_INSTALL_PREFIX=../tmpdirname/usr/local/ -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release"
-  scl enable devtoolset-8 "make -j $(grep -c ^processor /proc/cpuinfo)"
-  scl enable devtoolset-8 "make install"
+  scl enable devtoolset-9 "cmake3 .. -DCMAKE_INSTALL_PREFIX=../tmpdirname/usr/local/ -DGLIBC_COMPATIBILITY=0 -DCMAKE_BUILD_TYPE:STRING=Release"
+  scl enable devtoolset-9 "make -j $(grep -c ^processor /proc/cpuinfo)"
+  scl enable devtoolset-9 "make install"
 fi
