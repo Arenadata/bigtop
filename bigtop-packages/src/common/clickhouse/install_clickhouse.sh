@@ -49,5 +49,5 @@ mkdir -p ${prefix}/usr/share/clickhouse/headers
 cp debian/clickhouse-server.init   ${prefix}/etc/init.d/clickhouse-server
 cp debian/clickhouse-server.cron.d ${prefix}/etc/cron.d/clickhouse-server
 cp debian/clickhouse.limits        ${prefix}/etc/security/limits.d/clickhouse.conf
-cp dbms/programs/server/config.xml ${prefix}/etc/clickhouse-server/
-cp dbms/programs/server/users.xml  ${prefix}/etc/clickhouse-server/
+cp programs/server/config.xml ${prefix}/etc/clickhouse-server/
+cp programs/server/users.xml  ${prefix}/etc/clickhouse-server/
