@@ -486,7 +486,7 @@ bigtop {
     'pgbouncer' {
       name    = 'pgbouncer'
       relNotes = 'Connection pool for Greenplum Database'
-      version { base = '1.12.0'; pkg = base; release = 1 }
+      version { base = '1.13.0'; pkg = base; release = 1 }
       tarball { destination = "$name-${version.base}.tar.gz"
                 source      = "$name-${version.base}.tar.gz" }
       url     { site = "https://www.pgbouncer.org/downloads/files/${version.base}/"
