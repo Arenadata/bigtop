@@ -503,6 +503,17 @@ bigtop {
                 archive = site }
     }
 
+    'postgis' {
+      name    = 'postgis'
+      relNotes = 'Geospatial extensions for Greenplum Database'
+      version { base = '2.1.5'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "$name-${version.base}.tar.gz" }
+      git     { repo  = "https://github.com/arenadata/geospatial/"
+                ref   = 'v2.1.5+pivotal.2'
+                dir   =  null }
+    }
+
     'sigar' {
       name    = 'sigar'
       relNotes = 'sigar'
