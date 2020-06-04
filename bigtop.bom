@@ -536,6 +536,15 @@ bigtop {
                 ref   = "${version.base}" }
     }
 
+    'madlib' {
+      name    = 'madlib'
+      relNotes = 'madlib Greenplum DB'
+      version { base = '1.17.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "v${version.base}.tar.gz" }
+      url     { site = "https://github.com/apache/madlib/archive/rel/"
+                archive = site }
+    }
     'sigar' {
       name    = 'sigar'
       relNotes = 'sigar'
