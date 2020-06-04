@@ -503,6 +503,18 @@ bigtop {
                 archive = site }
     }
 
+    'plcontainer' {
+      name    = 'plcontainer'
+      relNotes = 'PL/Container for Greenplum database'
+      version { base = '1.6.0'; pkg = base; release = 1 }
+      tarball { destination = "$name-${version.base}.tar.gz"
+                source      = "${version.base}.tar.gz" }
+      git     { repo = "https://github.com/greenplum-db/plcontainer/"
+                ref = "${version.base}"
+                dir = null }
+    }
+
+
     'postgis' {
       name    = 'postgis'
       relNotes = 'Geospatial extensions for Greenplum Database'
