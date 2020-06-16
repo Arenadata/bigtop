@@ -17,5 +17,5 @@
 . `dirname $0`/bigtop.bom
 
 export MAVEN_OPTS="-Xmx1512M"
-mvn package -DskipTests clean compile package assembly:assembly install
+mvn -Dhbase.version=$HBASE_VERSION  -Dzookeeper.version=$ZOOKEEPER_VERSION -Dhadoop.version=$HADOOP_VERSION package -DskipTests clean compile package assembly:assembly install
 
