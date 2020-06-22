@@ -1,0 +1,34 @@
+diff --git a/zeppelin-zengine/pom.xml b/zeppelin-zengine/pom.xml
+index 59332af4d..def9ff147 100644
+--- a/zeppelin-zengine/pom.xml
++++ b/zeppelin-zengine/pom.xml
+@@ -738,6 +738,14 @@
+               <groupId>org.apache.commons</groupId>
+               <artifactId>commons-compress</artifactId>
+             </exclusion>
++            <exclusion>
++              <groupId>org.apache.commons</groupId>
++              <artifactId>commons-lang3</artifactId>
++            </exclusion>
++            <exclusion>
++              <groupId>org.eclipse.jetty</groupId>
++              <artifactId>jetty-xml</artifactId>
++            </exclusion>
+           </exclusions>
+         </dependency>
+         <dependency>
+@@ -862,6 +870,14 @@
+               <groupId>com.sun.jersey</groupId>
+               <artifactId>jersey-core</artifactId>
+             </exclusion>
++            <exclusion>
++              <groupId>org.apache.commons</groupId>
++              <artifactId>commons-lang3</artifactId>
++            </exclusion>
++            <exclusion>
++              <groupId>org.eclipse.jetty</groupId>
++              <artifactId>jetty-xml</artifactId>
++            </exclusion>
+           </exclusions>
+         </dependency>
+         <dependency>

@@ -1,0 +1,72 @@
+diff --git a/zeppelin-server/pom.xml b/zeppelin-server/pom.xml
+index 79ea56e5b..d79c12947 100644
+--- a/zeppelin-server/pom.xml
++++ b/zeppelin-server/pom.xml
+@@ -89,6 +89,18 @@
+       <artifactId>zeppelin-zengine</artifactId>
+       <version>${project.version}</version>
+       <exclusions>
++        <exclusion>
++          <groupId>org.eclipse.jetty</groupId>
++          <artifactId>jetty-util</artifactId>
++        </exclusion>
++        <exclusion>
++          <groupId>org.eclipse.jetty</groupId>
++          <artifactId>jetty-webapp</artifactId>
++        </exclusion>
++        <exclusion>
++          <groupId>org.eclipse.jetty</groupId>
++          <artifactId>jetty-servlet</artifactId>
++        </exclusion>
+         <exclusion>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-databind</artifactId>
+@@ -105,6 +117,26 @@
+           <groupId>com.sun.jersey</groupId>
+           <artifactId>jersey-server</artifactId>
+         </exclusion>
++        <exclusion>
++          <groupId>org.apache.commons</groupId>
++          <artifactId>commons-lang3</artifactId>
++        </exclusion>
++      	<exclusion>
++          <groupId>com.fasterxml.jackson.core</groupId>
++          <artifactId>jackson-core</artifactId>
++        </exclusion>
++        <exclusion>
++          <groupId>com.fasterxml.jackson.core</groupId>
++          <artifactId>jackson-annotations</artifactId>
++        </exclusion>
++        <exclusion>
++          <groupId>com.nimbusds</groupId>
++          <artifactId>nimbus-jose-jwt</artifactId>
++        </exclusion>
++        <exclusion>
++          <groupId>com.fasterxml.jackson.module</groupId>
++          <artifactId>jackson-module-jaxb-annotations</artifactId>
++        </exclusion>
+       </exclusions>
+     </dependency>
+ 
+@@ -189,7 +221,7 @@
+     <dependency>
+       <groupId>commons-beanutils</groupId>
+       <artifactId>commons-beanutils</artifactId>
+-      <version>1.9.2</version>
++      <version>1.9.3</version>
+     </dependency>
+ 
+     <dependency>
+@@ -231,6 +263,12 @@
+       <groupId>org.eclipse.jetty.websocket</groupId>
+       <artifactId>websocket-server</artifactId>
+       <version>${jetty.version}</version>
++      <exclusions>
++        <exclusion>
++          <groupId>org.eclipse.jetty</groupId>
++          <artifactId>jetty-servlet</artifactId>
++        </exclusion>
++      </exclusions>
+     </dependency>
+ 
+     <dependency>
