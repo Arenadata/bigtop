@@ -382,7 +382,7 @@ bigtop {
        * HBase version in the BOM.
        */
       phoenix.hbase ='HBase-1.3'
-      version { base = "4.14.0-${phoenix.hbase}"; pkg = '4.14.0'; release = 1 }
+      version { base = "4.14.3-${phoenix.hbase}"; pkg = '4.15.0'; release = 1 }
       tarball { destination = "$name-${version.base}-src.tar.gz"
                 source      = "apache-$name-${version.base}-src.tar.gz" }
       url     { download_path = "/$name/apache-$name-${version.base}/src"
@@ -476,7 +476,7 @@ bigtop {
     'zeppelin' {
       name    = 'zeppelin'
       relNotes = 'Apache Zeppelin'
-      version { base = '0.8.0'; pkg = base; release = 1 }
+      version { base = '0.8.2'; pkg = base; release = 1 }
       tarball { source      = "$name-${version.base}.tgz"
                 destination = "$name-${version.base}.tar.gz" }
       url     { download_path = "/$name/$name-${version.base}/"

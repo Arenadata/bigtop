@@ -37,6 +37,7 @@ License: ASL 2.0
 Source0: %{datafu_name}-%{datafu_base_version}.tar.gz
 Source1: do-component-build 
 Source2: install_%{datafu_name}.sh
+#BIGTOP_PATCH_FILES
 Requires: hadoop-client, bigtop-utils >= 0.7
 
 
@@ -54,6 +55,7 @@ and more...
 
 %prep
 %setup -n apache-%{datafu_name}-incubating-sources-%{datafu_base_version}
+#BIGTOP_PATCH_COMMANDS
 
 %build
 bash $RPM_SOURCE_DIR/do-component-build

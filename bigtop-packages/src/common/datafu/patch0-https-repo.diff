@@ -1,0 +1,13 @@
+diff --git a/gradle/buildscript.gradle b/gradle/buildscript.gradle
+index 10b8ca4..8e24a02 100644
+--- a/gradle/buildscript.gradle
++++ b/gradle/buildscript.gradle
+@@ -21,7 +21,7 @@ repositories {
+   repositories {
+     maven {
+       // For gradle-nexus-plugin
+-      url 'http://jcenter.bintray.com/'
++      url 'https://jcenter.bintray.com/'
+     }
+   }
+ }
