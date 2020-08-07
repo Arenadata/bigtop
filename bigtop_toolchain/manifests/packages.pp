@@ -73,6 +73,8 @@ class bigtop_toolchain::packages {
       ]
     }
     /(?i:(SLES|opensuse))/: { $pkgs = [
+       "yasm",
+        "nasm",
         "unzip",
         "curl",
         "wget",
@@ -94,7 +96,8 @@ class bigtop_toolchain::packages {
         "pkg-config",
         "gmp-devel",
         "python-devel",
-        "python-setuptools",
+        "python2-setuptools",
+        "python3-setuptools",
         "libxml2-devel",
         "libxslt-devel",
         "cyrus-sasl-devel",
@@ -104,9 +107,7 @@ class bigtop_toolchain::packages {
         "krb5-devel",
         "asciidoc",
         "xmlto",
-        "libmysqlclient-devel",
         "snappy-devel",
-        "boost-devel",
         "xfsprogs-devel",
         "libuuid-devel",
         "libbz2-devel",
@@ -114,24 +115,12 @@ class bigtop_toolchain::packages {
         "libevent-devel",
         "bison",
         "flex",
-        "libffi48-devel"
+        "libffi-devel",
+        "ninja",
+        "perl-ExtUtils-MakeMaker",
+        "vim",
+        "apr-util-devel"
       ]
-      # fix package dependencies: BIGTOP-2120 and BIGTOP-2152 and BIGTOP-2471
-      exec { '/usr/bin/zypper -n install  --force-resolution krb5 libopenssl-devel':
-      } -> Package <| |>
-      # fix package libapr1
-      exec { 'suse_12.3_repo':
-        command => '/usr/bin/zypper ar --no-gpgcheck http://download.opensuse.org/distribution/12.3/repo/oss/suse/ libapr1',
-        unless => "/usr/bin/zypper lr | grep -q libapr1",
-      }
-      package { 'libapr1':
-        ensure => '1.4.6',
-        require => [Exec['suse_12.3_repo']]
-      }
-      package { 'libapr1-devel':
-        ensure => '1.4.6',
-        require => [Package['libapr1']]
-      }
     }
     /Amazon/: { $pkgs = [
       "unzip",
