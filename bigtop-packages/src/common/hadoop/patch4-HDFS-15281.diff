@@ -1,0 +1,66 @@
+diff --git a/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/ha/ZKFailoverController.java b/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/ha/ZKFailoverController.java
+index 943d53dd3a8..3718b7cdb0c 100644
+--- a/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/ha/ZKFailoverController.java
++++ b/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/ha/ZKFailoverController.java
+@@ -318,9 +318,10 @@ private void initHM() {
+     healthMonitor.addServiceStateCallback(new ServiceStateCallBacks());
+     healthMonitor.start();
+   }
+-  
++
+   protected void initRPC() throws IOException {
+     InetSocketAddress bindAddr = getRpcAddressToBindTo();
++    LOG.info("ZKFC RpcServer binding to {}", bindAddr);
+     rpcServer = new ZKFCRpcServer(conf, bindAddr, this, getPolicyProvider());
+   }
+ 
+diff --git a/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/tools/DFSZKFailoverController.java b/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/tools/DFSZKFailoverController.java
+index 281d1be31eb..1736e422325 100644
+--- a/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/tools/DFSZKFailoverController.java
++++ b/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/tools/DFSZKFailoverController.java
+@@ -111,21 +111,39 @@ protected HAServiceTarget dataToTarget(byte[] data) {
+   @Override
+   protected InetSocketAddress getRpcAddressToBindTo() {
+     int zkfcPort = getZkfcPort(conf);
+-    return new InetSocketAddress(localTarget.getAddress().getAddress(),
+-          zkfcPort);
++    String zkfcBindAddr = getZkfcServerBindHost(conf);
++    if (zkfcBindAddr == null || zkfcBindAddr.isEmpty()) {
++      zkfcBindAddr = localTarget.getAddress().getAddress().getHostAddress();
++    }
++    return new InetSocketAddress(zkfcBindAddr, zkfcPort);
+   }
+-  
+ 
+   @Override
+   protected PolicyProvider getPolicyProvider() {
+     return new HDFSPolicyProvider();
+   }
+-  
++
+   static int getZkfcPort(Configuration conf) {
+     return conf.getInt(DFSConfigKeys.DFS_HA_ZKFC_PORT_KEY,
+         DFSConfigKeys.DFS_HA_ZKFC_PORT_DEFAULT);
+   }
+-  
++
++  /**
++   * Given a configuration get the bind host that could be used by ZKFC.
++   * We derive it from NN service rpc bind host or NN rpc bind host.
++   *
++   * @param conf input configuration
++   * @return the bind host address found in conf
++   */
++  private static String getZkfcServerBindHost(Configuration conf) {
++    String addr = conf.getTrimmed(
++        DFSConfigKeys.DFS_NAMENODE_SERVICE_RPC_BIND_HOST_KEY);
++    if (addr == null || addr.isEmpty()) {
++      addr = conf.getTrimmed(DFSConfigKeys.DFS_NAMENODE_RPC_BIND_HOST_KEY);
++    }
++    return addr;
++  }
++
+   public static DFSZKFailoverController create(Configuration conf) {
+     Configuration localNNConf = DFSHAAdmin.addSecurityConfiguration(conf);
+     String nsId = DFSUtil.getNamenodeNameServiceId(conf);
+     
