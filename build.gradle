@@ -312,10 +312,7 @@ task installiTest(dependsOn: installTopLevel, type:Exec) {
   workingDir "."
   commandLine 'mvn clean install -f bigtop-test-framework/pom.xml -DskipTests'.split(" ")
 }
-task installTestArtifacts(dependsOn: installiTest, type:Exec) {
-  workingDir "."
-  commandLine 'mvn clean install -f bigtop-tests/test-artifacts/pom.xml'.split(" ")
-}
+
 task installConf(type:Exec) {
   workingDir "."
   commandLine 'mvn clean install -f bigtop-tests/test-execution/conf/pom.xml'.split(" ")
@@ -424,13 +421,13 @@ task "bigtop-slaves"(type:Exec,
   workingDir '.'
   commandLine command
 }
-
+/**
 project.afterEvaluate {
   checkClusterTestProjects("smoke.tests")
   artifactToInstall(dependsOn: [installTopLevel, installCommon, installConf, installiTest])
 }
-
-installAllLocalArtifacts.dependsOn installTopLevel, installCommon, installConf, installiTest, installTestArtifacts
+*/
+// installAllLocalArtifacts.dependsOn installTopLevel, installCommon, installConf, installiTest, installTestArtifacts
 
 help.doFirst {
   println ASCII_bigtop
